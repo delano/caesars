@@ -1,5 +1,11 @@
-CAESAR, CHANGES
+CAESAR -- CHANGES
 
+
+#### 0.3.1 (2009-03-04) ###############################
+
+* NEW: Accept instances without a name
+* CHANGE: Updated examples. 
+* NEW: More rdocs. 
 
 
 #### 0.3 (2009-03-04) ###############################

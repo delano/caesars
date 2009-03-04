@@ -10,11 +10,35 @@ $:.unshift(File.join(File.join(File.dirname(__FILE__), '..'), 'lib')) # Make sur
 
 require 'caesar'
 
-# Subclass Caesar, then tell it which attributes have children using
-# Caesar.bloody and which have blocks that you want to execute later
-# using Caesar.virgin. That's it! Just start drinking! I mean, start 
-# writing your domain specific language!
+# ------------------------------------------------------------------
+#   EXAMPLE 1 -- Flavour
+# 
 
+class Flavour < Caesar  # Subclass Caesar. 
+end
+
+extend Flavour::DSL     # Bring the DSL into the current namespace. 
+                        # This module is created dynamically based
+                        # on the name of the subclass.
+                             
+flavour do              # Start drinking! I mean, start writing your
+  spicy true            # domain specific language! 
+  clamy true            # Use any attribute name you want.
+  salty true
+  vodka :very_true      # And any value you want. 
+end
+
+p @flavour              # => #<Flavour:0x3f56b0 ...>
+p @flavour.spicy        # => true
+
+
+
+# ------------------------------------------------------------------
+# EXAMPLE 2 -- KitchenStaff
+#
+
+# Tell Caesar which attributes have children using Caesar#bloody and 
+# which have blocks that you want to execute later using Caesar#virgin.
 class KitchenStaff < Caesar #:nodoc:
   bloody :location
   bloody :person
@@ -23,8 +47,11 @@ end
 
 extend KitchenStaff::DSL
 
+# In this example, the top level method is "staff" and we pass it an 
+# name so the instance variable will be called @staff_fte. Had we used 
+# "team :sad", it would have been called @team_sad.
 staff :fte do
-  holidays 0
+  desc 'Our hard-working, "full-time" staff'
   location :splashdown do
     town :tsawwassen
     person :steve, :sheila do
@@ -41,7 +68,7 @@ staff :fte do
       hours rand(20)
       rate "9.35/h"
       calculate :salary do |gumption|
-        "%.2f" % [gumption * self.splashdown.sheila.rate.to_f]
+        ("%.2f" % [gumption * self.splashdown.sheila.rate.to_f]).to_f
       end
     end
     person :delano do
@@ -56,17 +83,25 @@ staff :fte do
   end
 end
 
-# The instance you create with the DSL becomes available via an instance variable
-# in the same namespace. In this example we used "staff :fte" so the variable will be 
-# called @staff_fte. Had we used "team :awesome", it would have been @team_awesome.
+p @staff_fte                    # => #<KitchenStaff: ...>
+p @staff_fte.desc               # => Our hard-working, "full-time" staff
 
-p @staff_fte.holidays           # => 0
+# Deeper attributes are also available via instance methods
 p @staff_fte.splashdown.delano  # => {:role=>:cook, :rate=>"$8.35/h", :satisfaction=>:low}
 p @staff_fte.splashdown.sheila  # => {:role=>:manager, :catchphrase=>"This gravy tastes like food I ate in a Mexican prison."}
 p @staff_fte.splashdown.steve   # => {:role=>[:manager, :cook], :anger=>:high, :catchphrase=>"Rah! [strokes goatee]"}
+p @staff_fte.splashdown.delano.satisfaction   # => :low
+
+# You can also access them using hash syntax
+p @staff_fte.splashdown[:steve][:role]  # => [:manager, :cook]
+
+# The "bloody" attributes keep track of all values that are used. These are available as arrays
+# via "NAME_values" methods. The goes for the virgin ones. 
 p @staff_fte.location_values    # => [:splashdown]
-p @staff_fte.calculate_values   # => [:salary, :salary]
 p @staff_fte.person_values.uniq # => [:steve, :sheila, :delano, :angela]
-p @staff_fte.splashdown.delano.satisfaction            # => :low
+p @staff_fte.calculate_values   # => [:salary, :salary]
+
+# The "virgin" methods store their blocks as Procs and are not executed automatically. 
+# You can call them manually and send arguments like you normally would. 
 p @staff_fte.splashdown.delano.salary.call             # => 475.95
 p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77

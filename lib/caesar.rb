@@ -2,70 +2,14 @@
 # Caesar -- A simple class for rapid DSL prototyping.
 #
 # Subclass Caesar, then tell it which attributes have children using
-# Caesar.complex and which have blocks that you want to execute later.
-# That's it! Just start drinking! I mean, start writing your domain 
-# specific language!
+# Caesar.bloody and which have blocks that you want to execute later
+# using Caesar.virgin. That's it! Just start drinking! I mean, start 
+# writing your domain specific language!
 #
-# Usage:
-#
-#     class KitchenStaff < Caesar #:nodoc:
-#       bloody :location				 # Has children
-#       bloody :person           # This too
-#       virgin :calculate        # Will store its block as a Proc
-#     end
-#     
-#     extend KitchenStaff::DSL
-#     
-#     staff :fte do
-#       holidays 0
-#       location :splashdown do
-#         town :tsawwassen
-#         person :steve, :sheila do
-#           role :manager
-#         end
-#         person :steve do
-#           role :cook
-#           anger :high
-#           hours 25
-#           catchphrase "Rah! [strokes goatee]"
-#         end
-#         person :sheila do
-#           catchphrase "This gravy tastes like food I ate in a Mexican prison."
-#           hours rand(20)
-#           rate "9.35/h"
-#           calculate :salary do |gumption|
-#             "%.2f" % [gumption * self.splashdown.sheila.rate.to_f]
-#           end
-#         end
-#         person :delano do
-#           role :cook
-#           rate "8.35/h"
-#           hours 57
-#           satisfaction :low
-#           calculate :salary do 
-#             self.splashdown.delano.rate.to_f * self.splashdown.delano.hours
-#           end
-#         end
-#       end
-#     end
-#     
-#     # The instance you create with the DSL becomes available via an instance variable
-#     # in the same namespace. In this example we used "staff :fte" so the variable will be 
-#     # called @staff_fte. Had we used "team :awesome", it would have been @team_awesome.
-#
-#     p @staff_fte.holidays           # => 0
-#     p @staff_fte.splashdown.delano  # => {:role=>:cook, :rate=>"$8.35/h", :satisfaction=>:low}
-#     p @staff_fte.splashdown.sheila  # => {:role=>:manager, :catchphrase=>"This gravy tastes like food I ate in a Mexican prison."}
-#     p @staff_fte.splashdown.steve   # => {:role=>[:manager, :cook], :anger=>:high, :catchphrase=>"Rah! [strokes goatee]"}
-#     p @staff_fte.location_values    # => [:splashdown]
-#     p @staff_fte.calculate_values   # => [:salary, :salary]
-#     p @staff_fte.person_values.uniq # => [:steve, :sheila, :delano, :angela]
-#     p @staff_fte.splashdown.delano.satisfaction            # => :low
-#     p @staff_fte.splashdown.delano.salary.call             # => 475.95
-#     p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
+# See README.rdoc for a usage example.
 #
 class Caesar
-  VERSION = 0.3
+  VERSION = "0.3.1"
   # A subclass of ::Hash that provides method names for hash parameters.
   # It's like a lightweight OpenStruct. 
   #     ch = Caesar::Hash[:tabasco => :lots!]
@@ -78,11 +22,14 @@ class Caesar
   end
     # An instance of Caesar::Hash which contains the data specified by your DSL
   attr_accessor :caesar_properties
-  def initialize(name)
-    @caesar_name = name
+  # Creates an instance of Caesar. 
+  # +name+ is . 
+  def initialize(name=nil)
+    @caesar_name = name if name
     @caesar_properties = Caesar::Hash.new
     @caesar_pointer = @caesar_properties
   end
+  # This method handles all of the attributes that do not contain blocks. 
   def method_missing(name, *args, &b)
     return @caesar_properties[name] if @caesar_properties.has_key?(name) && args.empty? && b.nil?
     if @caesar_pointer[name]
@@ -92,9 +39,11 @@ class Caesar
       @caesar_pointer[name] = args.size == 1 ? args.first : args
     end
   end
+  # see bin/example for usage.
   def self.virgin(meth)
     self.bloody(meth, false)
   end
+  # see bin/example for usage.
   def self.bloody(meth, execute=true)
     define_method(meth) do |*names,&b|  # |*names,&b| syntax does not parse in Ruby 1.8
       all = instance_variable_get("@" << meth.to_s) || []
@@ -119,13 +68,19 @@ class Caesar
       instance_variable_get("@" << meth.to_s) || []
     end
   end
+  # Executes automatically when Caesar is subclassed. This creates the
+  # YourClass::DSL module which contains a single method: method_missing. 
+  # This is used to catch the top level DSL method. That's why you can 
+  # used any method name you like. 
   def self.inherited(modname)
     module_eval %Q{
       module #{modname}::DSL
         def method_missing(meth, *args, &b)
-          raise NameError.new("undefined local variable or method \#{meth} in #{modname}") if args.empty? || b.nil?
-          name = args.first
-          i = instance_variable_set("@\#{meth.to_s}_\#{name}", #{modname.to_s}.new(name.to_s))
+          raise NameError.new("undefined local variable or method \#{meth} in #{modname}") if args.empty? && b.nil?
+          name = !args.empty? ? args.first.to_s : nil
+          varname = "@\#{meth.to_s}"
+          varname << "_\#{name}" if name
+          i = instance_variable_set(varname, #{modname.to_s}.new(name))
           i.instance_eval(&b) if b
           i
         end
