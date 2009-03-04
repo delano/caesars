@@ -34,22 +34,23 @@ p @flavour.spicy        # => true
 
 
 # ------------------------------------------------------------------
-# EXAMPLE 2 -- KitchenStaff
+# EXAMPLE 2 -- Staff
 #
 
 # Tell Caesar which attributes have children using Caesar#bloody and 
 # which have blocks that you want to execute later using Caesar#virgin.
-class KitchenStaff < Caesar #:nodoc:
+class Staff < Caesar 
   bloody :location
   bloody :person
   virgin :calculate
 end
 
-extend KitchenStaff::DSL
+extend Staff::DSL
 
-# In this example, the top level method is "staff" and we pass it an 
-# name so the instance variable will be called @staff_fte. Had we used 
-# "team :sad", it would have been called @team_sad.
+# The top level method is the lower case name of the class. For deeper
+# names like Class::SecondLevel it will use the final name 
+# (i.e. secondlevel). You can supply an optional modifier name which 
+# will be included in the instance variable (@staff_fte).
 staff :fte do
   desc 'Our hard-working, "full-time" staff'
   location :splashdown do

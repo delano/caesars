@@ -19,11 +19,11 @@ Or for GitHub fans:
 		
 == Usage
          
+
      # ------------------------------------------------------------------
      #   EXAMPLE 1 -- Flavour
      # 
-     require 'caesar'
-
+     
      class Flavour < Caesar  # Subclass Caesar. 
      end
      
@@ -44,23 +44,23 @@ Or for GitHub fans:
      
      
      # ------------------------------------------------------------------
-     # EXAMPLE 2 -- KitchenStaff
+     # EXAMPLE 2 -- Staff
      #
-     require 'caesar'
-
+     
      # Tell Caesar which attributes have children using Caesar#bloody and 
      # which have blocks that you want to execute later using Caesar#virgin.
-     class KitchenStaff < Caesar #:nodoc:
+     class Staff < Caesar 
        bloody :location
        bloody :person
        virgin :calculate
      end
      
-     extend KitchenStaff::DSL
+     extend Staff::DSL
      
-     # In this example, the top level method is "staff" and we pass it an 
-     # name so the instance variable will be called @staff_fte. Had we used 
-     # "team :sad", it would have been called @team_sad.
+     # The top level method is the lower case name of the class. For deeper
+     # names like Class::SecondLevel it will use the final name 
+     # (i.e. secondlevel). You can supply an optional modifier name which 
+     # will be included in the instance variable (@staff_fte).
      staff :fte do
        desc 'Our hard-working, "full-time" staff'
        location :splashdown do
@@ -116,6 +116,7 @@ Or for GitHub fans:
      # You can call them manually and send arguments like you normally would. 
      p @staff_fte.splashdown.delano.salary.call             # => 475.95
      p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
+
 
 
 == More Info

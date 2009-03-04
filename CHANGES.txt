@@ -1,6 +1,16 @@
 CAESAR -- CHANGES
 
 
+#### 0.3.2 (2009-03-04) ###############################
+
+* FIX: Added file and line info for eval code (better debugging).
+* CHANGE: The top level DSL method names are now determined by
+          by the class name. Some::ClassName becomes classname. 
+          This is less confusing than allowing it to be anything
+          and makes it possible to use several DSLs in the same
+          namespace. 
+
+
 #### 0.3.1 (2009-03-04) ###############################
 
 * NEW: Accept instances without a name

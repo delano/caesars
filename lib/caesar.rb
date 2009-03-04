@@ -9,7 +9,7 @@
 # See README.rdoc for a usage example.
 #
 class Caesar
-  VERSION = "0.3.1"
+  VERSION = "0.3.2"
   # A subclass of ::Hash that provides method names for hash parameters.
   # It's like a lightweight OpenStruct. 
   #     ch = Caesar::Hash[:tabasco => :lots!]
@@ -73,19 +73,19 @@ class Caesar
   # This is used to catch the top level DSL method. That's why you can 
   # used any method name you like. 
   def self.inherited(modname)
+    meth = (modname.to_s.split(/::/))[-1].downcase  # Some::ClassName => classname
     module_eval %Q{
       module #{modname}::DSL
-        def method_missing(meth, *args, &b)
-          raise NameError.new("undefined local variable or method \#{meth} in #{modname}") if args.empty? && b.nil?
+        def #{meth}(*args, &b)
           name = !args.empty? ? args.first.to_s : nil
-          varname = "@\#{meth.to_s}"
+          varname = "@#{meth.to_s}"
           varname << "_\#{name}" if name
           i = instance_variable_set(varname, #{modname.to_s}.new(name))
           i.instance_eval(&b) if b
           i
         end
       end
-    }
+    }, __FILE__, __LINE__
   end
 end
 
