@@ -11,9 +11,9 @@ $:.unshift(File.join(File.join(File.dirname(__FILE__), '..'), 'lib')) # Make sur
 require 'caesar'
 
 # Subclass Caesar, then tell it which attributes have children using
-# Caesar.complex, also which attributes should store their blocks
-# rather than execute them and start drinking! I mean, start writing 
-# your domain specific language!
+# Caesar.complex and which have blocks that you want to execute later.
+# That's it! Just start drinking! I mean, start writing your domain 
+# specific language!
 
 class KitchenStaff < Caesar #:nodoc:
   complex :location

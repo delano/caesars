@@ -2,16 +2,16 @@
 # Caesar -- A simple class for rapid DSL prototyping.
 #
 # Subclass Caesar, then tell it which attributes have children using
-# Caesar.complex, also which attributes should store their blocks
-# rather than execute them and start drinking! I mean, start writing 
-# your domain specific language!
+# Caesar.complex and which have blocks that you want to execute later.
+# That's it! Just start drinking! I mean, start writing your domain 
+# specific language!
 #
 # Usage:
 #
-#     class KitchenStaff < Caesar    
-#       complex :location
-#       complex :person
-#       blocked :calculate
+#     class KitchenStaff < Caesar #:nodoc:
+#       complex :location					# Has children
+#       complex :person           # This too
+#       blocked :calculate        # Will store its block as a Proc
 #     end
 #     
 #     extend KitchenStaff::DSL
