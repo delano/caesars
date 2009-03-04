@@ -6,8 +6,8 @@
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
 
   s.authors = ["Delano Mandelbaum"]
-  s.description = %q{A simple class for rapid DSL prototyping.}
-  s.summary = %q{Caesar: A simple class for rapid DSL prototyping}
+  s.description = %q{A simple class for rapid DSL prototyping in Ruby.}
+  s.summary = %q{Caesar: A simple class for rapid DSL prototyping in Ruby.}
   s.email = %q{delano@solutious.com}
 
   # = MANIFEST =
@@ -28,7 +28,7 @@
   s.has_rdoc = true
   s.homepage = %q{http://github.com/delano/caesar}
   s.extra_rdoc_files = %w[README.rdoc LICENSE.txt CHANGES.txt]
-  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Caesar: A simple class for rapid DSL prototyping.", "--main", "README.rdoc"]
+  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Caesar: A simple class for rapid DSL prototyping in Ruby.", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.1.1}
 #  s.rubyforge_project = "caesar"

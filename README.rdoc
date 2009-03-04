@@ -1,6 +1,6 @@
 = Caesar - v0.3
 
-A simple class for rapid DSL prototyping.
+A simple class for rapid DSL prototyping in Ruby.
 
 == Installation
 
