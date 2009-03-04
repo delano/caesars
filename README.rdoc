@@ -17,7 +17,68 @@ Or for GitHub fans:
     
 == Usage
     
-See bin/example
+    require 'caesar'
+    
+    # Subclass Caesar, then tell it which attributes have children using
+    # Caesar.complex, also which attributes should store their blocks
+    # rather than execute them and start drinking! I mean, start writing 
+    # your domain specific language!
+    
+    class KitchenStaff < Caesar #:nodoc:
+      complex :location
+      complex :person
+      blocked :calculate
+    end
+    
+    extend KitchenStaff::DSL
+    
+    staff :fte do
+      holidays 0
+      location :splashdown do
+        town :tsawwassen
+        person :steve, :sheila do
+          role :manager
+        end
+        person :steve do
+          role :cook
+          anger :high
+          hours 25
+          catchphrase "Rah! [strokes goatee]"
+        end
+        person :sheila do
+          catchphrase "This gravy tastes like food I ate in a Mexican prison."
+          hours rand(20)
+          rate "9.35/h"
+          calculate :salary do |gumption|
+            "%.2f" % [gumption * self.splashdown.sheila.rate.to_f]
+          end
+        end
+        person :delano do
+          role :cook
+          rate "8.35/h"
+          hours 57
+          satisfaction :low
+          calculate :salary do 
+            self.splashdown.delano.rate.to_f * self.splashdown.delano.hours
+          end
+        end
+      end
+    end
+    
+    # The instance you create with the DSL becomes available via an instance variable
+    # in the same namespace. In this example we used "staff :fte" so the variable will be 
+    # called @staff_fte. Had we used "team :awesome", it would have been @team_awesome.
+    
+    p @staff_fte.holidays           # => 0
+    p @staff_fte.splashdown.delano  # => {:role=>:cook, :rate=>"$8.35/h", :satisfaction=>:low}
+    p @staff_fte.splashdown.sheila  # => {:role=>:manager, :catchphrase=>"This gravy tastes like food I ate in a Mexican prison."}
+    p @staff_fte.splashdown.steve   # => {:role=>[:manager, :cook], :anger=>:high, :catchphrase=>"Rah! [strokes goatee]"}
+    p @staff_fte.location_values    # => [:splashdown]
+    p @staff_fte.calculate_values   # => [:salary, :salary]
+    p @staff_fte.person_values.uniq # => [:steve, :sheila, :delano, :angela]
+    p @staff_fte.splashdown.delano.satisfaction            # => :low
+    p @staff_fte.splashdown.delano.salary.call             # => 475.95
+    p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
     
 
 == Changes
