@@ -1,0 +1,45 @@
+= Caesar - v0.3
+
+A simple class for rapid DSL prototyping.
+
+== Installation
+
+One of:
+
+* copy lib/caesar.rb into your lib directory. 
+
+Or for GitHub fans:
+
+* git clone git://github.com/delano/caesar.git
+* gem sources -a http://gems.github.com (you only have to do this once, ever...), then:
+  * gem install delano-caesar
+
+    
+== Usage
+    
+See bin/example
+    
+
+== Changes
+
+* v0.3 (2009-03-04)
+  * Initial public release
+
+
+== More Info
+
+* GitHub[http://github.com/delano/caesar]
+* Inspiration[http://www.youtube.com/watch?v=ycElb0tB9_U]
+* Recipe[http://twitter.com/solutious/status/1264327499]
+
+== Credits
+
+* Delano Mandelbaum (delano@solutious.com)
+
+== Thanks
+
+* Clams, Tomatoes, Vodka, and the rest of the crew. 
+
+== License
+
+See: LICENSE.txt
