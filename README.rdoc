@@ -17,7 +17,7 @@ Or for GitHub fans:
   * gem install delano-caesar
 
     
-     == Usage
+== Usage
          
      # ------------------------------------------------------------------
      #   EXAMPLE 1 -- Flavour
