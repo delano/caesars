@@ -9,9 +9,9 @@
 # Usage:
 #
 #     class KitchenStaff < Caesar #:nodoc:
-#       complex :location					# Has children
-#       complex :person           # This too
-#       blocked :calculate        # Will store its block as a Proc
+#       bloody :location				 # Has children
+#       bloody :person           # This too
+#       virgin :calculate        # Will store its block as a Proc
 #     end
 #     
 #     extend KitchenStaff::DSL
@@ -92,10 +92,10 @@ class Caesar
       @caesar_pointer[name] = args.size == 1 ? args.first : args
     end
   end
-  def self.blocked(meth)
-    self.complex(meth, false)
+  def self.virgin(meth)
+    self.bloody(meth, false)
   end
-  def self.complex(meth, execute=true)
+  def self.bloody(meth, execute=true)
     define_method(meth) do |*names,&b|  # |*names,&b| syntax does not parse in Ruby 1.8
       all = instance_variable_get("@" << meth.to_s) || []
       
