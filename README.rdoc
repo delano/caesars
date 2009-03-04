@@ -16,13 +16,14 @@ Or for GitHub fans:
 * gem sources -a http://gems.github.com (you only have to do this once, ever...), then:
   * gem install delano-caesar
 
-    
+		
 == Usage
          
      # ------------------------------------------------------------------
      #   EXAMPLE 1 -- Flavour
      # 
-     
+     require 'caesar'
+
      class Flavour < Caesar  # Subclass Caesar. 
      end
      
@@ -45,7 +46,8 @@ Or for GitHub fans:
      # ------------------------------------------------------------------
      # EXAMPLE 2 -- KitchenStaff
      #
-     
+     require 'caesar'
+
      # Tell Caesar which attributes have children using Caesar#bloody and 
      # which have blocks that you want to execute later using Caesar#virgin.
      class KitchenStaff < Caesar #:nodoc:
@@ -114,12 +116,6 @@ Or for GitHub fans:
      # You can call them manually and send arguments like you normally would. 
      p @staff_fte.splashdown.delano.salary.call             # => 475.95
      p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
-
-
-== Changes
-
-* v0.3 (2009-03-04)
-  * Initial public release
 
 
 == More Info
