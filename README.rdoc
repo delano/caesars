@@ -17,103 +17,103 @@ Or for GitHub fans:
   * gem install delano-caesar
 
     
-    == Usage
-        
-    # ------------------------------------------------------------------
-    #   EXAMPLE 1 -- Flavour
-    # 
-    
-    class Flavour < Caesar  # Subclass Caesar. 
-    end
-    
-    extend Flavour::DSL     # Bring the DSL into the current namespace. 
-                            # This module is created dynamically based
-                            # on the name of the subclass.
-                                 
-    flavour do              # Start drinking! I mean, start writing your
-      spicy true            # domain specific language! 
-      clamy true            # Use any attribute name you want.
-      salty true
-      vodka :very_true      # And any value you want. 
-    end
-    
-    p @flavour              # => #<Flavour:0x3f56b0 ...>
-    p @flavour.spicy        # => true
-    
-    
-    
-    # ------------------------------------------------------------------
-    # EXAMPLE 2 -- KitchenStaff
-    #
-    
-    # Tell Caesar which attributes have children using Caesar#bloody and 
-    # which have blocks that you want to execute later using Caesar#virgin.
-    class KitchenStaff < Caesar #:nodoc:
-      bloody :location
-      bloody :person
-      virgin :calculate
-    end
-    
-    extend KitchenStaff::DSL
-    
-    # In this example, the top level method is "staff" and we pass it an 
-    # name so the instance variable will be called @staff_fte. Had we used 
-    # "team :sad", it would have been called @team_sad.
-    staff :fte do
-      desc 'Our hard-working, "full-time" staff'
-      location :splashdown do
-        town :tsawwassen
-        person :steve, :sheila do
-          role :manager
-        end
-        person :steve do
-          role :cook
-          anger :high
-          hours 25
-          catchphrase "Rah! [strokes goatee]"
-        end
-        person :sheila do
-          catchphrase "This gravy tastes like food I ate in a Mexican prison."
-          hours rand(20)
-          rate "9.35/h"
-          calculate :salary do |gumption|
-            ("%.2f" % [gumption * self.splashdown.sheila.rate.to_f]).to_f
-          end
-        end
-        person :delano do
-          role :cook
-          rate "8.35/h"
-          hours 57
-          satisfaction :low
-          calculate :salary do 
-            self.splashdown.delano.rate.to_f * self.splashdown.delano.hours
-          end
-        end
-      end
-    end
-    
-    p @staff_fte                    # => #<KitchenStaff: ...>
-    p @staff_fte.desc               # => Our hard-working, "full-time" staff
-    
-    # Deeper attributes are also available via instance methods
-    p @staff_fte.splashdown.delano  # => {:role=>:cook, :rate=>"$8.35/h", :satisfaction=>:low}
-    p @staff_fte.splashdown.sheila  # => {:role=>:manager, :catchphrase=>"This gravy tastes like food I ate in a Mexican prison."}
-    p @staff_fte.splashdown.steve   # => {:role=>[:manager, :cook], :anger=>:high, :catchphrase=>"Rah! [strokes goatee]"}
-    p @staff_fte.splashdown.delano.satisfaction   # => :low
-    
-    # You can also access them using hash syntax
-    p @staff_fte.splashdown[:steve][:role]  # => [:manager, :cook]
-    
-    # The "bloody" attributes keep track of all values that are used. These are available as arrays
-    # via "NAME_values" methods. The goes for the virgin ones. 
-    p @staff_fte.location_values    # => [:splashdown]
-    p @staff_fte.person_values.uniq # => [:steve, :sheila, :delano, :angela]
-    p @staff_fte.calculate_values   # => [:salary, :salary]
-    
-    # The "virgin" methods store their blocks as Procs and are not executed automatically. 
-    # You can call them manually and send arguments like you normally would. 
-    p @staff_fte.splashdown.delano.salary.call             # => 475.95
-    p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
+     == Usage
+         
+     # ------------------------------------------------------------------
+     #   EXAMPLE 1 -- Flavour
+     # 
+     
+     class Flavour < Caesar  # Subclass Caesar. 
+     end
+     
+     extend Flavour::DSL     # Bring the DSL into the current namespace. 
+                             # This module is created dynamically based
+                             # on the name of the subclass.
+                                  
+     flavour do              # Start drinking! I mean, start writing your
+       spicy true            # domain specific language! 
+       clamy true            # Use any attribute name you want.
+       salty true
+       vodka :very_true      # And any value you want. 
+     end
+     
+     p @flavour              # => #<Flavour:0x3f56b0 ...>
+     p @flavour.spicy        # => true
+     
+     
+     
+     # ------------------------------------------------------------------
+     # EXAMPLE 2 -- KitchenStaff
+     #
+     
+     # Tell Caesar which attributes have children using Caesar#bloody and 
+     # which have blocks that you want to execute later using Caesar#virgin.
+     class KitchenStaff < Caesar #:nodoc:
+       bloody :location
+       bloody :person
+       virgin :calculate
+     end
+     
+     extend KitchenStaff::DSL
+     
+     # In this example, the top level method is "staff" and we pass it an 
+     # name so the instance variable will be called @staff_fte. Had we used 
+     # "team :sad", it would have been called @team_sad.
+     staff :fte do
+       desc 'Our hard-working, "full-time" staff'
+       location :splashdown do
+         town :tsawwassen
+         person :steve, :sheila do
+           role :manager
+         end
+         person :steve do
+           role :cook
+           anger :high
+           hours 25
+           catchphrase "Rah! [strokes goatee]"
+         end
+         person :sheila do
+           catchphrase "This gravy tastes like food I ate in a Mexican prison."
+           hours rand(20)
+           rate "9.35/h"
+           calculate :salary do |gumption|
+             ("%.2f" % [gumption * self.splashdown.sheila.rate.to_f]).to_f
+           end
+         end
+         person :delano do
+           role :cook
+           rate "8.35/h"
+           hours 57
+           satisfaction :low
+           calculate :salary do 
+             self.splashdown.delano.rate.to_f * self.splashdown.delano.hours
+           end
+         end
+       end
+     end
+     
+     p @staff_fte                    # => #<KitchenStaff: ...>
+     p @staff_fte.desc               # => Our hard-working, "full-time" staff
+     
+     # Deeper attributes are also available via instance methods
+     p @staff_fte.splashdown.delano  # => {:role=>:cook, :rate=>"$8.35/h", :satisfaction=>:low}
+     p @staff_fte.splashdown.sheila  # => {:role=>:manager, :catchphrase=>"This gravy tastes like food I ate in a Mexican prison."}
+     p @staff_fte.splashdown.steve   # => {:role=>[:manager, :cook], :anger=>:high, :catchphrase=>"Rah! [strokes goatee]"}
+     p @staff_fte.splashdown.delano.satisfaction   # => :low
+     
+     # You can also access them using hash syntax
+     p @staff_fte.splashdown[:steve][:role]  # => [:manager, :cook]
+     
+     # The "bloody" attributes keep track of all values that are used. These are available as arrays
+     # via "NAME_values" methods. The goes for the virgin ones. 
+     p @staff_fte.location_values    # => [:splashdown]
+     p @staff_fte.person_values.uniq # => [:steve, :sheila, :delano, :angela]
+     p @staff_fte.calculate_values   # => [:salary, :salary]
+     
+     # The "virgin" methods store their blocks as Procs and are not executed automatically. 
+     # You can call them manually and send arguments like you normally would. 
+     p @staff_fte.splashdown.delano.salary.call             # => 475.95
+     p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
 
 
 == Changes
