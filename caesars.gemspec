@@ -1,6 +1,6 @@
 @spec = Gem::Specification.new do |s|
   s.name = %q{caesars}
-  s.version = "0.3.2"
+  s.version = "0.4.0"
   s.date = %q{2009-03-04}
   s.specification_version = 1 if s.respond_to? :specification_version=
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=

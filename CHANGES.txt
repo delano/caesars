@@ -1,6 +1,19 @@
 CAESAR -- CHANGES
 
 
+#### 0.4.0 (2009-03-05) ###############################
+
+* CHANGE: Removed bloody method. We now parse blocks immediately.
+* CHANGE: Renamed virgin method to chill.
+* NEW: Caesar::Config class for loading DSLs as config files. 
+See Example 3. 
+* NEW: Added find_deferred method to automatically jump up the
+heirarchy when looking for a specific attribute. 
+* NEW: Added to_hash and [] methods to Caesar::Glass to make it 
+more hashlike. 
+* FIX: "chilled" attributes weren't available by method name
+
+
 #### 0.3.2 (2009-03-04) ###############################
 
 * FIX: Added file and line info for eval code (better debugging).
