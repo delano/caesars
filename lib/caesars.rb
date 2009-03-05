@@ -58,7 +58,8 @@ class Caesars
     att = criteria.pop
     val = nil
     while !criteria.empty?
-      str = criteria.collect { |v| "[:#{v}]" }.join << "[:#{att}]"
+      str = criteria.collect { |v| "[:#{v}]" if v }.join
+      str << "[:#{att}]" if att
       val = eval "@caesars_properties#{str} if defined?(@caesars_properties#{str})"
       break if val
       criteria.pop

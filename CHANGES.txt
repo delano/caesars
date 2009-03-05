@@ -1,6 +1,11 @@
 CAESAR -- CHANGES
 
 
+#### 0.4.3 (2009-03-??) ###############################
+
+* FIX: find_deferred now gracefully handles nil errors
+
+
 #### 0.4.2 (2009-03-05) ###############################
 
 * FIX: missing bin/party.conf in gem release
