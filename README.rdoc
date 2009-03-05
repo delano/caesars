@@ -2,8 +2,6 @@
 
 A simple class for rapid DSL prototyping in Ruby.
 
-NOTE: Currently runs only with Ruby 1.9+!
-
 == Installation
 
 One of:
