@@ -16,7 +16,7 @@ require 'caesars'
 #   EXAMPLE 1 -- Flavour
 # 
 
-class Flavour < Caesars  # Subclass Caesars. 
+class Flavour < Caesars::Glass  # Subclass Caesars. 
 end
 
 extend Flavour::DSL     # Bring the DSL into the current namespace. 
@@ -30,8 +30,8 @@ flavour do              # Start drinking! I mean, start writing your
   vodka :very_true      # And any value you want. 
 end
 
-p @flavour              # => #<Flavour:0x3f56b0 ...>
-p @flavour.spicy        # => true
+#p @flavour              # => #<Flavour:0x3f56b0 ...>
+#p @flavour.spicy        # => true
 
 
 
@@ -39,16 +39,10 @@ p @flavour.spicy        # => true
 # EXAMPLE 2 -- Staff
 #
 
-class Staff < Caesars
-  # The bloody caesar is a drink made with clamato juice and vodka. 
-  # The bloody mary is the same but calls for tomato juice. The bloody
-  # attribute accepts a block that is executed immediately. 
-  bloody :location
-  bloody :person
+class Staff < Caesars::Glass
   
-  # The virgin caesar follows the same recipe but it's alcohol free. 
-  # The virgin attribute accepts a block that is stored as a Proc. 
-  virgin :calculate
+  chill :calculate      # Delay execution of the blocks for the calculate
+                        # attribute. They will be stored as Procs.                      
 end
 
 extend Staff::DSL
@@ -85,31 +79,54 @@ staff :fte do
       satisfaction :low
       calculate :salary do 
         self.splashdown.delano.rate.to_f * self.splashdown.delano.hours
+        
       end
     end
   end
 end
 
-p @staff_fte                    # => #<Staff: ...>
-p @staff_fte.desc               # => Our hard-working, "full-time" staff
+#p @staff_fte                    # => #<Staff: ...>
+#p @staff_fte.desc               # => Our hard-working, "full-time" staff
+#
+## Deeper attributes are also available via instance methods
+#p @staff_fte.splashdown.delano  # => {:role=>:cook, :rate=>"$8.35/h", :satisfaction=>:low}
+#p @staff_fte.splashdown.sheila  # => {:role=>:manager, :catchphrase=>"This gravy tastes like food I ate in a Mexican prison."}
+#p @staff_fte.splashdown.steve   # => {:role=>[:manager, :cook], :anger=>:high, :catchphrase=>"Rah! [strokes goatee]"}
+#p @staff_fte.splashdown.delano.satisfaction   # => :low
+#
+## You can also access them using hash syntax
+#p @staff_fte.splashdown[:steve][:role]  # => [:manager, :cook]
+#
+## The "chilled" attributes store their blocks as Procs and are not executed automatically. 
+## You can call them manually and send arguments like you normally would. 
+#p @staff_fte.splashdown.delano.salary.call             # => 475.95
+#p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
+#p @staff_fte.splashdown.keys
 
-# Deeper attributes are also available via instance methods
-p @staff_fte.splashdown.delano  # => {:role=>:cook, :rate=>"$8.35/h", :satisfaction=>:low}
-p @staff_fte.splashdown.sheila  # => {:role=>:manager, :catchphrase=>"This gravy tastes like food I ate in a Mexican prison."}
-p @staff_fte.splashdown.steve   # => {:role=>[:manager, :cook], :anger=>:high, :catchphrase=>"Rah! [strokes goatee]"}
-p @staff_fte.splashdown.delano.satisfaction   # => :low
 
-# You can also access them using hash syntax
-p @staff_fte.splashdown[:steve][:role]  # => [:manager, :cook]
+# ------------------------------------------------------------------
+# EXAMPLE 3 -- ConfigFile
+#
 
-# The "bloody" attributes keep track of all values that are used. These are available as arrays
-# via "NAME_values" methods. The goes for the virgin ones. 
-p @staff_fte.location_values    # => [:splashdown]
-p @staff_fte.person_values.uniq # => [:steve, :sheila, :delano, :angela]
-p @staff_fte.calculate_values   # => [:salary, :salary]
 
-# The "virgin" methods store their blocks as Procs and are not executed automatically. 
-# You can call them manually and send arguments like you normally would. 
-p @staff_fte.splashdown.delano.salary.call             # => 475.95
-p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
-p @staff_fte.splashdown.keys
+
+class Food < Caesars::Glass
+  chill :order
+end
+class Drink < Caesars::Glass
+end
+
+class PartyConfig < Caesars
+  dsl Food::DSL
+  dsl Drink::DSL
+end
+
+conffile = File.join(File.dirname(__FILE__), 'party.conf')
+@config = PartyConfig.new(:path => conffile)
+p @config.food
+
+
+
+
+
+
