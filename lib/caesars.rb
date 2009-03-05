@@ -1,12 +1,10 @@
 
 # Caesars -- A simple class for rapid DSL prototyping.
 #
-# Subclass Caesars, then tell it which attributes have children using
-# Caesars.bloody and which have blocks that you want to execute later
-# using Caesars.virgin. That's it! Just start drinking! I mean, start 
-# writing your domain specific language!
+# Subclass Caesars and start drinking! I mean, start prototyping
+# your own domain specific language!
 #
-# See README.rdoc for a usage example.
+# See bin/example
 #
 class Caesars
   VERSION = "0.3.2"
@@ -69,9 +67,16 @@ class Caesars
     end
   end
   # Executes automatically when Caesars is subclassed. This creates the
-  # YourClass::DSL module which contains a single method: method_missing. 
-  # This is used to catch the top level DSL method. That's why you can 
-  # used any method name you like. 
+  # YourClass::DSL module which contains a single method named after YourClass 
+  # that is used to catch the top level DSL method. 
+  #
+  # For example, if your class is called Glasses::HighBall, your top level method
+  # would be: highball.
+  #
+  #      highball :mine do
+  #        volume 9.oz
+  #      end
+  #
   def self.inherited(modname)
     meth = (modname.to_s.split(/::/))[-1].downcase  # Some::ClassName => classname
     module_eval %Q{

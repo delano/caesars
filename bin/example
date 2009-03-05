@@ -37,11 +37,15 @@ p @flavour.spicy        # => true
 # EXAMPLE 2 -- Staff
 #
 
-# Tell Caesars which attributes have children using Caesars#bloody and 
-# which have blocks that you want to execute later using Caesars#virgin.
 class Staff < Caesars
+  # The bloody caesar is a drink made with clamato juice and vodka. 
+  # The bloody mary is the same but calls for tomato juice. The bloody
+  # attribute accepts a block that is executed immediately. 
   bloody :location
   bloody :person
+  
+  # The virgin caesar follows the same recipe but it's alcohol free. 
+  # The virgin attribute accepts a block that is stored as a Proc. 
   virgin :calculate
 end
 
@@ -84,7 +88,7 @@ staff :fte do
   end
 end
 
-p @staff_fte                    # => #<KitchenStaff: ...>
+p @staff_fte                    # => #<Staff: ...>
 p @staff_fte.desc               # => Our hard-working, "full-time" staff
 
 # Deeper attributes are also available via instance methods
