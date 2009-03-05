@@ -42,7 +42,8 @@ class Caesars
 
   # Look for an attribute, bubbling up to the parent if it's not found
   # +criteria+ is an array of attribute names, orders according to their
-  # relationship.
+  # relationship. The last element is considered to the desired attribute.
+  # It can be an array.
   #
   #      # Looking for 'attribute'. 
   #      # First checks at @caesars_properties[grandparent][parent][attribute]
@@ -50,7 +51,7 @@ class Caesars
   #      # Finally, @caesars_properties[attribute]
   #      find_deferred('grandparent', 'parent', 'attribute')
   #
-  # Returns the attribute if found or nil
+  # Returns the attribute if found or nil.
   #
   def find_deferred(*criteria)
     # This is a nasty implementation. Sorry me! I'll enjoy a few
@@ -58,8 +59,10 @@ class Caesars
     att = criteria.pop
     val = nil
     while !criteria.empty?
-      str = criteria.collect { |v| "[:#{v}]" if v }.join
-      str << "[:#{att}]" if att
+      str = criteria.collect { |v| "[:'#{v}']" if v }.join
+      if att
+        str << (att.is_a?(Array) ? att.collect { |v| "[:'#{v}']" if v }.join : "[:'#{att}']")
+      end
       val = eval "@caesars_properties#{str} if defined?(@caesars_properties#{str})"
       break if val
       criteria.pop
@@ -89,13 +92,15 @@ class Caesars
       args << meth if args.empty?
       args.each do |name|
         prev = @caesars_pointer
+        (@caesars_pointer[:"#{meth}_values"] ||= []) << name
         @caesars_pointer[name] ||= Caesars::Hash.new
         @caesars_pointer = @caesars_pointer[name]
         b.call if b
         @caesars_pointer = prev
       end
         
-    elsif @caesars_pointer[meth]
+    elsif @caesars_pointer.kind_of?(Hash) && @caesars_pointer[meth]
+      
       @caesars_pointer[meth] = [@caesars_pointer[meth]] unless @caesars_pointer[meth].is_a?(Array)
       @caesars_pointer[meth] += args
     elsif !args.empty?
@@ -109,17 +114,22 @@ class Caesars
       def #{meth}(*names,&b)
         # caesar.toplevel.unnamed_chilled_attribute
         return @caesars_pointer[:'#{meth}'] if names.empty? && b.nil?
-      
+        
         # Use the name of the bloody method if no name is supplied. 
         names << :'#{meth}' if names.empty?
-    
+        #{}all = instance_variable_get("@" << #{meth}.to_s) || []
+        
         names.each do |name|
+          (@caesars_pointer[:"#{meth}_values"] ||= []) << name
           @caesars_pointer[name] = b
         end
       
         @caesars_pointer[:'#{meth}']
       end
     }
+    define_method(:"#{meth}_values") do
+      instance_variable_get("@" << meth.to_s) || []
+    end
     nil
   end
   # Executes automatically when Caesars is subclassed. This creates the
@@ -188,7 +198,14 @@ class Caesars::Config
     
     refresh
   end
-
+  
+  def empty?
+    keys.each do |obj|
+      return false if self.respond_to?(obj.to_sym)
+    end
+    true
+  end
+  
   def self.dsl(glass)
     @@glasses << glass
   end
@@ -199,6 +216,12 @@ class Caesars::Config
     
   def keys
     @@glasses.collect { |glass| glass.methname }
+  end
+  
+  # This method is a stub. It gets called by refresh after the 
+  # config file has be loaded. You can use it to do some post 
+  # processing on the configuration before it's used elsewhere. 
+  def postprocess
   end
   
   def refresh
@@ -215,6 +238,8 @@ class Caesars::Config
         eval %Q{
           #{dsl}
         }
+        
+        postprocess
         
       rescue SyntaxError => ex
         puts "Syntax error in #{@path}."

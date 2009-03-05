@@ -4,6 +4,10 @@ CAESAR -- CHANGES
 #### 0.4.3 (2009-03-??) ###############################
 
 * FIX: find_deferred now gracefully handles nil errors
+* NEW: Stores list of values for all "complex" attributes 
+(the ones with children). Available as: NAME_values
+* NEW: empty? method in Caesar::Config
+* NEW: post processing hook in Caesar::Config#refresh
 
 
 #### 0.4.2 (2009-03-05) ###############################
