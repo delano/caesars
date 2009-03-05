@@ -48,17 +48,17 @@ Or for GitHub fans:
      # EXAMPLE 2 -- Staff
      #
      
-		 class Staff < Caesars
-		   # The bloody caesar is a drink made with clamato juice and vodka. 
-		   # The bloody mary is the same but calls for tomato juice. The bloody
-		   # attribute accepts a block that is executed immediately. 
-		   bloody :location
-		   bloody :person
-     
-		   # The virgin caesar follows the same recipe but it's alcohol free. 
-		   # The virgin attribute accepts a block that is stored as a Proc. 
-		   virgin :calculate
-		 end
+     class Staff < Caesars
+       # The bloody caesar is a drink made with clamato juice and vodka. 
+       # The bloody mary is the same but calls for tomato juice. The bloody
+       # attribute accepts a block that is executed immediately. 
+       bloody :location
+       bloody :person
+       
+       # The virgin caesar follows the same recipe but it's alcohol free. 
+       # The virgin attribute accepts a block that is stored as a Proc. 
+       virgin :calculate
+     end
      
      # The top level method is the lower case name of the class. For deeper
      # names like Class::SecondLevel it will use the final name 

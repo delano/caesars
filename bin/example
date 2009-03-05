@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
 
+# Caesars -- A working example
 #
-# Caesars Example
+# If your reading this via the rdocs you won't be able to see the code
+# See: http://github.com/delano/caesar/blob/master/bin/example
 #
 # Usage: bin/example
 #
 
-$:.unshift(File.join(File.join(File.dirname(__FILE__), '..'), 'lib')) # Make sure our local lib is first in line
+$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib')) # Make sure our local lib is first in line
 
 require 'caesars'
 
