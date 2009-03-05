@@ -1,7 +1,7 @@
 @spec = Gem::Specification.new do |s|
   s.name = %q{caesars}
-  s.version = "0.4.0"
-  s.date = %q{2009-03-04}
+  s.version = "0.4.2"
+  s.date = %q{2009-03-05}
   s.specification_version = 1 if s.respond_to? :specification_version=
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
 
@@ -19,6 +19,7 @@
   Rakefile
   bin/example
   bin/example.bat
+  bin/party.conf
   caesars.gemspec
   lib/caesars.rb
   )

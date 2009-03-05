@@ -7,7 +7,7 @@
 # See bin/example
 #
 class Caesars
-  VERSION = "0.4.0"
+  VERSION = "0.4.2"
   # A subclass of ::Hash that provides method names for hash parameters.
   # It's like a lightweight OpenStruct. 
   #     ch = Caesars::Hash[:tabasco => :lots!]
@@ -24,14 +24,14 @@ class Caesars
   
   @@caesars_chilled = []
   
-  # Creates an instance of Caesars. 
-  # +name+ is . 
+  
   def initialize(name=nil)
     @caesars_name = name if name
     @caesars_properties = Caesars::Hash.new
     @caesars_pointer = @caesars_properties
   end
   
+  # Returns an array of the available 
   def keys
     @caesars_properties.keys
   end
@@ -104,22 +104,22 @@ class Caesars
   end
 
   def self.chill(meth)
-    define_method(meth) do |*names,&b|  # |*names,&b| syntax does not parse in Ruby 1.8
-      # caesar.toplevel.unnamed_chilled_attribute
-      return @caesars_pointer[meth] if names.empty? && b.nil?
+    module_eval %Q{
+      def #{meth}(*names,&b)
+        # caesar.toplevel.unnamed_chilled_attribute
+        return @caesars_pointer[:'#{meth}'] if names.empty? && b.nil?
       
-      # Use the name of the bloody method if no name is supplied. 
-      names << meth if names.empty?
+        # Use the name of the bloody method if no name is supplied. 
+        names << :'#{meth}' if names.empty?
     
-      names.each do |name|
-        @caesars_pointer[name] = b
-      end
+        names.each do |name|
+          @caesars_pointer[name] = b
+        end
       
-      nil
-    end
-    #define_method("#{meth}_values") do ||
-    #  instance_variable_get("@" << meth.to_s) || []
-    #end
+        @caesars_pointer[:'#{meth}']
+      end
+    }
+    nil
   end
   # Executes automatically when Caesars is subclassed. This creates the
   # YourClass::DSL module which contains a single method named after YourClass 

@@ -16,7 +16,7 @@ require 'caesars'
 #   EXAMPLE 1 -- Flavour
 # 
 
-class Flavour < Caesars  # Subclass Caesars. 
+class Flavour < Caesars  #:nodoc: all
 end
 
 extend Flavour::DSL     # Bring the DSL into the current namespace. 
@@ -39,7 +39,7 @@ p @flavour.spicy        # => true
 # EXAMPLE 2 -- Staff
 #
 
-class Staff < Caesars
+class Staff < Caesars   #:nodoc: all
   
   chill :calculate      # Delay execution of the blocks for the calculate
                         # attribute. They will be stored as Procs.                      
@@ -108,13 +108,13 @@ p @staff_fte.splashdown.keys
 # EXAMPLE 3 -- External Config file
 #
 
-class Food < Caesars
+class Food < Caesars #:nodoc: all
   chill :order
 end
-class Drink < Caesars
+class Drink < Caesars #:nodoc: all
 end
 
-class PartyConfig < Caesars::Config
+class PartyConfig < Caesars::Config #:nodoc: all
   dsl Food::DSL
   dsl Drink::DSL
 end

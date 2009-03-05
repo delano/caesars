@@ -1,6 +1,15 @@
 CAESAR -- CHANGES
 
 
+#### 0.4.2 (2009-03-05) ###############################
+
+* FIX: missing bin/party.conf in gem release
+* FIX: Now works with Ruby 1.8+
+* NEW: Cleaner rdocs. 
+* TODO: Fix support for top level methods with names:
+food :extra do; end; # => food_extra
+
+
 #### 0.4.0 (2009-03-05) ###############################
 
 * CHANGE: Removed bloody method. We now parse blocks immediately.
