@@ -1,4 +1,4 @@
-= Caesar - v0.3
+= Caesars - v0.3
 
 A simple class for rapid DSL prototyping in Ruby.
 
@@ -8,7 +8,8 @@ NOTE: Currently runs only with Ruby 1.9+!
 
 One of:
 
-* copy lib/caesar.rb into your lib directory. 
+* gem install caesars
+* copy lib/caesars.rb into your lib directory. 
 
 Or for GitHub fans:
 
@@ -24,7 +25,7 @@ Or for GitHub fans:
      #   EXAMPLE 1 -- Flavour
      # 
      
-     class Flavour < Caesar  # Subclass Caesar. 
+     class Flavour < Caesars  # Subclass Caesars. 
      end
      
      extend Flavour::DSL     # Bring the DSL into the current namespace. 
@@ -47,9 +48,9 @@ Or for GitHub fans:
      # EXAMPLE 2 -- Staff
      #
      
-     # Tell Caesar which attributes have children using Caesar#bloody and 
-     # which have blocks that you want to execute later using Caesar#virgin.
-     class Staff < Caesar 
+     # Tell Caesars which attributes have children using Caesars#bloody and 
+     # which have blocks that you want to execute later using Caesars#virgin.
+     class Staff < Caesars 
        bloody :location
        bloody :person
        virgin :calculate

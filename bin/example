@@ -1,20 +1,20 @@
 #!/usr/bin/env ruby
 
 #
-# Caesar Example
+# Caesars Example
 #
 # Usage: bin/example
 #
 
 $:.unshift(File.join(File.join(File.dirname(__FILE__), '..'), 'lib')) # Make sure our local lib is first in line
 
-require 'caesar'
+require 'caesars'
 
 # ------------------------------------------------------------------
 #   EXAMPLE 1 -- Flavour
 # 
 
-class Flavour < Caesar  # Subclass Caesar. 
+class Flavour < Caesars  # Subclass Caesars. 
 end
 
 extend Flavour::DSL     # Bring the DSL into the current namespace. 
@@ -37,9 +37,9 @@ p @flavour.spicy        # => true
 # EXAMPLE 2 -- Staff
 #
 
-# Tell Caesar which attributes have children using Caesar#bloody and 
-# which have blocks that you want to execute later using Caesar#virgin.
-class Staff < Caesar 
+# Tell Caesars which attributes have children using Caesars#bloody and 
+# which have blocks that you want to execute later using Caesars#virgin.
+class Staff < Caesars
   bloody :location
   bloody :person
   virgin :calculate
@@ -106,3 +106,4 @@ p @staff_fte.calculate_values   # => [:salary, :salary]
 # You can call them manually and send arguments like you normally would. 
 p @staff_fte.splashdown.delano.salary.call             # => 475.95
 p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
+p @staff_fte.splashdown.keys

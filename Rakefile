@@ -13,7 +13,7 @@ task :default => :package
 
 # PACKAGE =============================================================
 
-name = "caesar"
+name = "caesars"
 load "#{name}.gemspec"
 
 version = @spec.version

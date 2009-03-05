@@ -1,18 +1,18 @@
 
-# Caesar -- A simple class for rapid DSL prototyping.
+# Caesars -- A simple class for rapid DSL prototyping.
 #
-# Subclass Caesar, then tell it which attributes have children using
-# Caesar.bloody and which have blocks that you want to execute later
-# using Caesar.virgin. That's it! Just start drinking! I mean, start 
+# Subclass Caesars, then tell it which attributes have children using
+# Caesars.bloody and which have blocks that you want to execute later
+# using Caesars.virgin. That's it! Just start drinking! I mean, start 
 # writing your domain specific language!
 #
 # See README.rdoc for a usage example.
 #
-class Caesar
+class Caesars
   VERSION = "0.3.2"
   # A subclass of ::Hash that provides method names for hash parameters.
   # It's like a lightweight OpenStruct. 
-  #     ch = Caesar::Hash[:tabasco => :lots!]
+  #     ch = Caesars::Hash[:tabasco => :lots!]
   #     puts ch.tabasco  # => lots!
   #
   class Hash < ::Hash
@@ -20,23 +20,23 @@ class Caesar
       (self.has_key?(meth)) ? self[meth] : nil
     end
   end
-    # An instance of Caesar::Hash which contains the data specified by your DSL
-  attr_accessor :caesar_properties
-  # Creates an instance of Caesar. 
+    # An instance of Caesars::Hash which contains the data specified by your DSL
+  attr_accessor :caesars_properties
+  # Creates an instance of Caesars. 
   # +name+ is . 
   def initialize(name=nil)
-    @caesar_name = name if name
-    @caesar_properties = Caesar::Hash.new
-    @caesar_pointer = @caesar_properties
+    @caesars_name = name if name
+    @caesars_properties = Caesars::Hash.new
+    @caesars_pointer = @caesars_properties
   end
   # This method handles all of the attributes that do not contain blocks. 
   def method_missing(name, *args, &b)
-    return @caesar_properties[name] if @caesar_properties.has_key?(name) && args.empty? && b.nil?
-    if @caesar_pointer[name]
-      @caesar_pointer[name] = [@caesar_pointer[name]] unless @caesar_pointer[name].is_a?(Array)
-      @caesar_pointer[name] += args
+    return @caesars_properties[name] if @caesars_properties.has_key?(name) && args.empty? && b.nil?
+    if @caesars_pointer[name]
+      @caesars_pointer[name] = [@caesars_pointer[name]] unless @caesars_pointer[name].is_a?(Array)
+      @caesars_pointer[name] += args
     elsif !args.empty?
-      @caesar_pointer[name] = args.size == 1 ? args.first : args
+      @caesars_pointer[name] = args.size == 1 ? args.first : args
     end
   end
   # see bin/example for usage.
@@ -52,13 +52,13 @@ class Caesar
         instance_variable_set("@" << meth.to_s, all << name)
         
         if execute
-          prev = @caesar_pointer
-          @caesar_pointer[name] ||= Caesar::Hash.new
-          @caesar_pointer = @caesar_pointer[name]
+          prev = @caesars_pointer
+          @caesars_pointer[name] ||= Caesars::Hash.new
+          @caesars_pointer = @caesars_pointer[name]
           b.call if b
-          @caesar_pointer = prev
+          @caesars_pointer = prev
         else
-          @caesar_pointer[name] = b
+          @caesars_pointer[name] = b
         end
         
       end
@@ -68,7 +68,7 @@ class Caesar
       instance_variable_get("@" << meth.to_s) || []
     end
   end
-  # Executes automatically when Caesar is subclassed. This creates the
+  # Executes automatically when Caesars is subclassed. This creates the
   # YourClass::DSL module which contains a single method: method_missing. 
   # This is used to catch the top level DSL method. That's why you can 
   # used any method name you like. 
