@@ -4,11 +4,10 @@ CAESAR -- CHANGES
 #### 0.4.3 (2009-03-??) ###############################
 
 * FIX: find_deferred now gracefully handles nil errors
-* NEW: Stores list of values for all "complex" attributes 
-(the ones with children). Available as: NAME_values
-* NEW: empty? method in Caesar::Config
-* NEW: post processing hook in Caesar::Config#refresh
-
+* NEW: empty? method in Caesars::Config
+* NEW: post processing hook in Caesars::Config#refresh
+* NEW: Caesars::Hash#to_hash now recursively casts children 
+to ::Hash.
 
 #### 0.4.2 (2009-03-05) ###############################
 
@@ -23,11 +22,11 @@ food :extra do; end; # => food_extra
 
 * CHANGE: Removed bloody method. We now parse blocks immediately.
 * CHANGE: Renamed virgin method to chill.
-* NEW: Caesar::Config class for loading DSLs as config files. 
+* NEW: Caesars::Config class for loading DSLs as config files. 
 See Example 3. 
 * NEW: Added find_deferred method to automatically jump up the
 heirarchy when looking for a specific attribute. 
-* NEW: Added to_hash and [] methods to Caesar::Glass to make it 
+* NEW: Added to_hash and [] methods to Caesars to make it 
 more hashlike. 
 * FIX: "chilled" attributes weren't available by method name
 

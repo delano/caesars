@@ -17,6 +17,20 @@ class Caesars
     def method_missing(meth)
       self[meth] if self.has_key?(meth)
     end
+    
+    # Returns a clone of itself and all children cast as ::Hash objects
+    def to_hash(hash=self)
+      target = ::Hash[dup]
+      hash.keys.each do |key|
+        if hash[key].is_a? Caesars::Hash
+          target[key] = hash[key].to_hash
+          next
+        end
+        target[key] = hash[key]
+      end
+      target
+    end
+    
   end
 
     # An instance of Caesars::Hash which contains the data specified by your DSL
@@ -37,7 +51,7 @@ class Caesars
   end
   
   def to_hash
-    @caesars_properties
+    @caesars_properties.to_hash
   end
 
   # Look for an attribute, bubbling up to the parent if it's not found
@@ -92,7 +106,7 @@ class Caesars
       args << meth if args.empty?
       args.each do |name|
         prev = @caesars_pointer
-        (@caesars_pointer[:"#{meth}_values"] ||= []) << name
+        #(@caesars_pointer[:"#{meth}_values"] ||= []) << name
         @caesars_pointer[name] ||= Caesars::Hash.new
         @caesars_pointer = @caesars_pointer[name]
         b.call if b
@@ -120,7 +134,7 @@ class Caesars
         #{}all = instance_variable_get("@" << #{meth}.to_s) || []
         
         names.each do |name|
-          (@caesars_pointer[:"#{meth}_values"] ||= []) << name
+          #(@caesars_pointer[:"#{meth}_values"] ||= []) << name
           @caesars_pointer[name] = b
         end
       
