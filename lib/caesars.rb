@@ -149,7 +149,7 @@ class Caesars
     module_eval %Q{
       def #{caesars_meth}(*caesars_names,&b)
         # caesars.toplevel.unnamed_chilled_attribute
-        return @caesars_properties[:'#{caesars_meth}'] if @caesars_properties.has_key?(caesars_meth) && caesars_names.empty? && b.nil?
+        return @caesars_properties[:'#{caesars_meth}'] if @caesars_properties.has_key?(:'#{caesars_meth}') && caesars_names.empty? && b.nil?
         
         # Use the name of the bloody method if no name is supplied. 
         caesars_names << :'#{caesars_meth}' if caesars_names.empty?
@@ -235,14 +235,16 @@ class Caesars::Config
     # We store the options hash b/c we reapply them when we refresh.
     @options = args.last.is_a?(Hash) ? args.pop : {}
     @paths = args.empty? ? [] : args
+    @options = {}
     
     refresh
   end
   
   def init
+    
     # Remove instance variables used to populate DSL data
     instance_variables.each do |varname|
-      next if varname == '@options' || varname == '@paths'
+      next if varname == :'@options' || varname == :'@paths'
       instance_variable_set(varname, nil)
     end
     

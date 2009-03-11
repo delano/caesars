@@ -1,7 +1,14 @@
 CAESAR -- CHANGES
 
 
-#### 0.5.0 (2009-03-??) ###############################
+#### 0.5.1 (2009-03-11) ###############################
+
+* FIX: Method-syntax was broken for attributes of top level method
+* FIX: Caesars::Hash#refresh was setting @options to nil
+* UPDATED: docs and bin/example to reflect Caesars::Hash changes. 
+ 
+
+#### 0.5.0 (2009-03-11) ###############################
 
 * FIX: find_deferred now gracefully handles nil errors
 * NEW: empty? method in Caesars::Config

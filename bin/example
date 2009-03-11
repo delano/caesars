@@ -108,23 +108,28 @@ p @staff_fte.splashdown.keys
 # EXAMPLE 3 -- External Config file
 #
 
-class Food < Caesars #:nodoc: all
+require 'caesars'
+
+class Food < Caesars
   chill :order
 end
-class Drink < Caesars #:nodoc: all
+class Drink < Caesars
 end
 
-class PartyConfig < Caesars::Config #:nodoc: all
+class PartyConfig < Caesars::Config
   dsl Food::DSL
   dsl Drink::DSL
 end
 
 conffile = File.join(File.dirname(__FILE__), 'party.conf')
-@config = PartyConfig.new(:path => conffile)
+@config = PartyConfig.new(conffile)
 
-p @config.food.order.call   # => 8kg
+p @config.food.order.call   # => 10kg
 p @config[:drink][:wine]    # => 12L
 p @config                   # => <PartyConfig:0x3f780c ...>
 p @config.keys              # => [:food, :drink]
 
+# [... make changes to party.conf ...]
+
+@config.refresh
 

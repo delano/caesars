@@ -1,4 +1,4 @@
-= Caesars - v0.4
+= Caesars - v0.5
 
 A simple class for rapid DSL prototyping in Ruby.
 
@@ -123,13 +123,17 @@ Or for GitHub fans:
      end
      
      conffile = File.join(File.dirname(__FILE__), 'party.conf')
-     @config = PartyConfig.new(:path => conffile)
+     @config = PartyConfig.new(conffile)
      
-     p @config.food.order.call   # => 8kg
+     p @config.food.order.call   # => 10kg
      p @config[:drink][:wine]    # => 12L
      p @config                   # => <PartyConfig:0x3f780c ...>
      p @config.keys              # => [:food, :drink]
-
+     
+     # [... make changes to party.conf ...]
+     
+     @config.refresh
+		
 == More Info
 
 * GitHub[http://github.com/delano/caesar]
