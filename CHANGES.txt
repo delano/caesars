@@ -6,7 +6,7 @@ CAESAR -- CHANGES
 * FIX: Method-syntax was broken for attributes of top level method
 * FIX: Caesars::Hash#refresh was setting @options to nil
 * UPDATED: docs and bin/example to reflect Caesars::Hash changes. 
- 
+* FIX: instance_variables in Ruby 1.9.1 returns Symbols 
 
 #### 0.5.0 (2009-03-11) ###############################
 

@@ -7,7 +7,7 @@
 # See bin/example
 #
 class Caesars
-  VERSION = "0.5.0"
+  VERSION = "0.5.1"
   # A subclass of ::Hash that provides method names for hash parameters.
   # It's like a lightweight OpenStruct. 
   #     ch = Caesars::Hash[:tabasco => :lots!]
@@ -144,7 +144,23 @@ class Caesars
     end
   
   end
-
+  
+  # A class method which can be used by subclasses to specify which methods 
+  # should delay execution of their blocks. Here's an example:
+  # 
+  #      class Food < Caesars
+  #        chill :count
+  #      end
+  #      
+  #      food do
+  #        taste :delicious
+  #        count do |items|
+  #          puts items + 2
+  #        end
+  #      end
+  #
+  #      @config.food.order.call(3)     # => 5
+  #
   def self.chill(caesars_meth)
     module_eval %Q{
       def #{caesars_meth}(*caesars_names,&b)
@@ -173,7 +189,7 @@ class Caesars
   # would be: highball.
   #
   #      highball :mine do
-  #        volume 9.oz
+  #        volume "9oz"
   #      end
   #
   def self.inherited(modname)
@@ -241,10 +257,10 @@ class Caesars::Config
   end
   
   def init
-    
     # Remove instance variables used to populate DSL data
     instance_variables.each do |varname|
-      next if varname == :'@options' || varname == :'@paths'
+      next if varname == :'@options' || varname == :'@paths'  # Ruby 1.9.1
+      next if varname == '@options' || varname == '@paths'  # Ruby 1.8
       instance_variable_set(varname, nil)
     end
     
