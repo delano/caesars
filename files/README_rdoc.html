@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Sun Mar 15 08:52:27 -0400 2009</span>
+          <span class='datetime'>Sun Mar 15 08:56:00 -0400 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -79,7 +79,7 @@
             <pre>require 'caesars'&#x000A;&#x000A;class Food &lt; Caesars&#x000A;  chill :order&#x000A;end&#x000A;class Drink &lt; Caesars&#x000A;end&#x000A;&#x000A;class PartyConfig &lt; Caesars::Config&#x000A;  dsl Food::DSL&#x000A;  dsl Drink::DSL&#x000A;end&#x000A;&#x000A;conffile = File.join(File.dirname(__FILE__), 'party.conf')&#x000A;@config = PartyConfig.new(conffile)&#x000A;&#x000A;p @config.food.order.call   # =&gt; 10kg&#x000A;p @config[:drink][:wine]    # =&gt; 12L&#x000A;p @config                   # =&gt; &lt;PartyConfig:0x3f780c ...&gt;&#x000A;p @config.keys              # =&gt; [:food, :drink]&#x000A;&#x000A;# [... make changes to party.conf ...]&#x000A;&#x000A;@config.refresh</pre>
             <h2>More Info</h2>
             <ul>
-            <li><a href="http://github.com/delano/caesar">GitHub</a>
+            <li><a href="http://github.com/delano/caesars">GitHub</a>
             
             </li>
             <li><a href="http://www.youtube.com/watch?v=ycElb0tB9_U">Inspiration</a>
