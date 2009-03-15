@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>: Caesars::Hash [Caesars: A simple class for rapid DSL prototyping in Ruby.]</title>
+    <title>Class: Caesars::Hash [Caesars: A simple class for rapid DSL prototyping in Ruby.]</title>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
-    <link href='../../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <link href='../.././rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <script type='text/javascript'>
       //<![CDATA[
         function popupCode(url) {
@@ -25,7 +25,10 @@
   <body class='page'>
     <div class='class' id='wrapper'>
       <div class='header'>
-        <h1 class='name'>["<span class='type'>Class</span>\n", "Caesars::Hash\n"]</h1>
+        <h1 class='name'>
+          <span class='type'>Class</span>
+          Caesars::Hash
+        </h1>
         <ol class='paths'>
           <li>
             <a href="../../files/lib/caesars_rb.html">lib/caesars.rb</a>
@@ -49,29 +52,31 @@
             <h2>Methods</h2>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000011">method_missing</a></li>
-              <li><a href="#M000012">to_hash</a></li>
+              <li><a href="#M000020">method_missing</a></li>
+              <li><a href="#M000021">to_hash</a></li>
             </ol>
           </div>
           <div id='section'>
             <div id='methods'>
               <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000011'>
-                <a name='M000011'>      </a>
+              <div class='public-instance method' id='method-M000020'>
+                <a name='M000020'>      </a>
                 <div class='synopsis'>
-                  ["<span class='name'>method_missing</span>\n", "<span class='arguments'>(meth)</span>\n"]
+                  <span class='name'>method_missing</span>
+                  <span class='arguments'>(meth)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000011-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000020-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000011-source'>    <span class="ruby-comment cmt"># File lib/caesars.rb, line 17</span>&#x000A;17:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">meth</span>)&#x000A;18:       <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">meth</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">meth</span>)&#x000A;19:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000020-source'>    <span class="ruby-comment cmt"># File lib/caesars.rb, line 17</span>&#x000A;17:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">meth</span>)&#x000A;18:       <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">meth</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">meth</span>)&#x000A;19:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000012'>
-                <a name='M000012'>      </a>
+              <div class='public-instance method' id='method-M000021'>
+                <a name='M000021'>      </a>
                 <div class='synopsis'>
-                  ["<span class='name'>to_hash</span>\n", "<span class='arguments'>(hash=self)</span>\n"]
+                  <span class='name'>to_hash</span>
+                  <span class='arguments'>(hash=self)</span>
                 </div>
                 <div class='description'>
                   <p>
@@ -79,10 +84,10 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000012-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000021-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000012-source'>    <span class="ruby-comment cmt"># File lib/caesars.rb, line 22</span>&#x000A;22:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_hash</span>(<span class="ruby-identifier">hash</span>=<span class="ruby-keyword kw">self</span>)&#x000A;23:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">hash</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Caesars</span><span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>) <span class="ruby-comment cmt"># nothing to do</span>&#x000A;24:       <span class="ruby-identifier">target</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>[<span class="ruby-identifier">dup</span>]&#x000A;25:       <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>&#x000A;26:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Caesars</span><span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>&#x000A;27:           <span class="ruby-identifier">target</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">to_hash</span>&#x000A;28:           <span class="ruby-keyword kw">next</span>&#x000A;29:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span>&#x000A;30:           <span class="ruby-identifier">target</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">to_hash</span>(<span class="ruby-identifier">h</span>) }  &#x000A;31:           <span class="ruby-keyword kw">next</span>&#x000A;32:         <span class="ruby-keyword kw">end</span>&#x000A;33:         <span class="ruby-identifier">target</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>]&#x000A;34:       <span class="ruby-keyword kw">end</span>&#x000A;35:       <span class="ruby-identifier">target</span>&#x000A;36:     <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000021-source'>    <span class="ruby-comment cmt"># File lib/caesars.rb, line 22</span>&#x000A;22:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_hash</span>(<span class="ruby-identifier">hash</span>=<span class="ruby-keyword kw">self</span>)&#x000A;23:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">hash</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Caesars</span><span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>) <span class="ruby-comment cmt"># nothing to do</span>&#x000A;24:       <span class="ruby-identifier">target</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>[<span class="ruby-identifier">dup</span>]&#x000A;25:       <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>&#x000A;26:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Caesars</span><span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>&#x000A;27:           <span class="ruby-identifier">target</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">to_hash</span>&#x000A;28:           <span class="ruby-keyword kw">next</span>&#x000A;29:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span>&#x000A;30:           <span class="ruby-identifier">target</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">to_hash</span>(<span class="ruby-identifier">h</span>) }  &#x000A;31:           <span class="ruby-keyword kw">next</span>&#x000A;32:         <span class="ruby-keyword kw">end</span>&#x000A;33:         <span class="ruby-identifier">target</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>]&#x000A;34:       <span class="ruby-keyword kw">end</span>&#x000A;35:       <span class="ruby-identifier">target</span>&#x000A;36:     <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>
@@ -93,6 +98,17 @@
     </div>
     <div id='footer'>
       <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+          document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/scr
+          
+          try {
+            var pageTracker = _gat._getTracker("UA-4642735-10");
+            pageTracker._trackPageview();
+          } catch(err) {}
+        //]]>
+      </script>
     </div>
   </body>
 </html>
