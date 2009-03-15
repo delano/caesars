@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>File: CHANGES.txt [Caesars: A simple class for rapid DSL prototyping in Ruby.]</title>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='file' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>["CHANGES.txt\n"]</h1>
+        <div class='paths'>
+          CHANGES.txt
+        </div>
+        <div class='last-update'>
+          Last Update:
+          <span class='datetime'>2009-03-15 08:51:09 -0400</span>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            CAESAR &#8212; CHANGES
+            </p>
+            <p>
+            #### 0.5.1 (2009-03-11) ###############################
+            </p>
+            <ul>
+            <li>FIX: Method-syntax was broken for attributes of top level method
+            
+            </li>
+            <li>FIX: Caesars::Hash#refresh was setting @options to nil
+            
+            </li>
+            <li>UPDATED: docs and <a href="bin/example.html">bin/example</a> to reflect <a
+            href="../classes/Caesars/Hash.html">Caesars::Hash</a> changes.
+            
+            </li>
+            <li>FIX: instance_variables in Ruby 1.9.1 returns Symbols
+            
+            </li>
+            </ul>
+            <p>
+            #### 0.5.0 (2009-03-11) ###############################
+            </p>
+            <ul>
+            <li>FIX: find_deferred now gracefully handles nil errors
+            
+            </li>
+            <li>NEW: empty? method in <a
+            href="../classes/Caesars/Config.html">Caesars::Config</a>
+            
+            </li>
+            <li>NEW: post processing hook in <a
+            href="../classes/Caesars/Config.html#M000016">Caesars::Config#refresh</a>
+            
+            </li>
+            <li>NEW: <a
+            href="../classes/Caesars/Hash.html#M000012">Caesars::Hash#to_hash</a> now
+            recursively casts children to ::Hash.
+            
+            </li>
+            <li>FIX: Added Array support to <a
+            href="../classes/Caesars/Hash.html">Caesars::Hash</a>
+            
+            </li>
+            <li>NEW: Setters for <a href="../classes/Caesars.html">Caesars</a> attributes
+            
+            </li>
+            <li>NEW: <a href="../classes/Caesars/Config.html">Caesars::Config</a> supports
+            multiple config files
+            
+            </li>
+            <li>NEW: Top level methods used more than once now merges values
+            
+            </li>
+            </ul>
+            <p>
+            rather than overwrites.
+            </p>
+            <ul>
+            <li>NEW: <a href="../classes/Caesars/Config.html">Caesars::Config</a> supports
+            reloading config files on the fly
+            
+            </li>
+            </ul>
+            <p>
+            #### 0.4.2 (2009-03-05) ###############################
+            </p>
+            <ul>
+            <li>FIX: missing <a href="bin/party_conf.html">bin/party.conf</a> in gem
+            release
+            
+            </li>
+            <li>FIX: Now works with Ruby 1.8+
+            
+            </li>
+            <li>NEW: Cleaner rdocs.
+            
+            </li>
+            <li>TODO: Fix support for top level methods with names:
+            
+            </li>
+            </ul>
+            <p>
+            food :extra do; end; # => food_extra
+            </p>
+            <p>
+            #### 0.4.0 (2009-03-05) ###############################
+            </p>
+            <ul>
+            <li>CHANGE: Removed bloody method. We now parse blocks immediately.
+            
+            </li>
+            <li>CHANGE: Renamed virgin method to chill.
+            
+            </li>
+            <li>NEW: <a href="../classes/Caesars/Config.html">Caesars::Config</a> class for
+            loading DSLs as config files.
+            
+            </li>
+            </ul>
+            <p>
+            See Example 3.
+            </p>
+            <ul>
+            <li>NEW: Added find_deferred method to automatically jump up the
+            
+            </li>
+            </ul>
+            <p>
+            heirarchy when looking for a specific attribute.
+            </p>
+            <ul>
+            <li>NEW: Added to_hash and [] methods to <a
+            href="../classes/Caesars.html">Caesars</a> to make it
+            
+            </li>
+            </ul>
+            <p>
+            more hashlike.
+            </p>
+            <ul>
+            <li>FIX: &#8220;chilled&#8221; attributes weren&#8217;t available by method
+            name
+            
+            </li>
+            </ul>
+            <p>
+            #### 0.3.2 (2009-03-04) ###############################
+            </p>
+            <ul>
+            <li>FIX: Added file and line info for eval code (better debugging).
+            
+            </li>
+            <li>CHANGE: The top level DSL method names are now determined by
+            
+            </li>
+            </ul>
+            <p>
+            by the class name. Some::ClassName becomes classname. This is less
+            confusing than allowing it to be anything and makes it possible to use
+            several DSLs in the same namespace.
+            </p>
+            <p>
+            #### 0.3.1 (2009-03-04) ###############################
+            </p>
+            <ul>
+            <li>NEW: Accept instances without a name
+            
+            </li>
+            <li>CHANGE: Updated examples.
+            
+            </li>
+            <li>NEW: More rdocs.
+            
+            </li>
+            </ul>
+            <p>
+            #### 0.3 (2009-03-04) ###############################
+            </p>
+            <p>
+            Initial public release
+            </p>
+          </div>
+          <div id='section'>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>

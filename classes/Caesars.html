@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>: Caesars [Caesars: A simple class for rapid DSL prototyping in Ruby.]</title>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='class' id='wrapper'>
+      <div class='header'>
+        <h1 class='name'>["<span class='type'>Class</span>\n", "Caesars\n"]</h1>
+        <ol class='paths'>
+          <li>
+            <a href="../files/lib/caesars_rb.html">lib/caesars.rb</a>
+          </li>
+        </ol>
+        <div class='parent'>
+          Parent:
+          <strong>Object</strong>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <p>
+            <a href="Caesars.html">Caesars</a> &#8212; A simple class for rapid DSL
+            prototyping.
+            </p>
+            <p>
+            Subclass <a href="Caesars.html">Caesars</a> and start drinking! I mean,
+            start prototyping your own domain specific language!
+            </p>
+            <p>
+            See <a href="../files/bin/example.html">bin/example</a>
+            </p>
+          </div>
+          <div id='method-list'>
+            <h2>Methods</h2>
+            <h3>public class</h3>
+            <ol>
+              <li><a href="#M000009">chill</a></li>
+              <li><a href="#M000010">inherited</a></li>
+              <li><a href="#M000001">new</a></li>
+            </ol>
+            <h3>public instance</h3>
+            <ol>
+              <li><a href="#M000006">[]</a></li>
+              <li><a href="#M000007">[]=</a></li>
+              <li><a href="#M000005">find</a></li>
+              <li><a href="#M000004">find_deferred</a></li>
+              <li><a href="#M000002">keys</a></li>
+              <li><a href="#M000008">method_missing</a></li>
+              <li><a href="#M000003">to_hash</a></li>
+            </ol>
+          </div>
+          <div id='section'>
+            <div id='class-list'>
+              <h2>Classes and Modules</h2>
+              Class <a href="Caesars/Config.html" class="link">Caesars::Config</a><br />
+              Class <a href="Caesars/Hash.html" class="link">Caesars::Hash</a><br />
+            </div>
+            <div id='constants-list'>
+              <h2>Constants</h2>
+              <div class='name-list'>
+                <table summary='Constants'>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>VERSION</td>
+                    <td>=</td>
+                    <td class='context-item-value'>&quot;0.5.1&quot;</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='attribute-list'>
+              <h2 class='section-bar'>Attributes</h2>
+              <div class='name-list'>
+                <table>
+                  <tr class='top-aligned-row context-row'>
+                    <td class='context-item-name'>caesars_properties</td>
+                    <td class='context-item-value'>[RW]</td>
+                    <td class='context-item-desc'>
+                      
+                      An instance of <a href="Caesars/Hash.html">Caesars::Hash</a> which contains
+                      the data specified by your DSL
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div id='methods'>
+              <h2>Public class methods</h2>
+              <div class='public-class method' id='method-M000009'>
+                <a name='M000009'>      </a>
+                <div class='synopsis'>
+                  ["<span class='name'>chill</span>\n", "<span class='arguments'>(caesars_meth)</span>\n"]
+                </div>
+                <div class='description'>
+                  <p>
+                  A class method which can be used by subclasses to specify which methods
+                  should delay execution of their blocks. Here&#8217;s an example:
+                  </p>
+                  <pre>class Food &lt; Caesars&#x000A;  chill :count&#x000A;end&#x000A;&#x000A;food do&#x000A;  taste :delicious&#x000A;  count do |items|&#x000A;    puts items + 2&#x000A;  end&#x000A;end&#x000A;&#x000A;@config.food.order.call(3)     # =&gt; 5</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000009-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000009-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 164</span>&#x000A;164:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">chill</span>(<span class="ruby-identifier">caesars_meth</span>)&#x000A;165:     <span class="ruby-identifier">module_eval</span> <span class="ruby-node">%Q{&#x000A;166:       def #{caesars_meth}(*caesars_names,&amp;b)&#x000A;167:         # caesars.toplevel.unnamed_chilled_attribute&#x000A;168:         return @caesars_properties[:'#{caesars_meth}'] if @caesars_properties.has_key?(:'#{caesars_meth}') &amp;&amp; caesars_names.empty? &amp;&amp; b.nil?&#x000A;169:         &#x000A;170:         # Use the name of the bloody method if no name is supplied. &#x000A;171:         caesars_names &lt;&lt; :'#{caesars_meth}' if caesars_names.empty?&#x000A;172:         &#x000A;173:         caesars_names.each do |name|&#x000A;174:           @caesars_pointer[name] = b&#x000A;175:         end&#x000A;176:       &#x000A;177:         @caesars_pointer[:'#{caesars_meth}']&#x000A;178:       end&#x000A;179:     }</span>&#x000A;180:     <span class="ruby-keyword kw">nil</span>&#x000A;181:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-class method' id='method-M000010'>
+                <a name='M000010'>      </a>
+                <div class='synopsis'>
+                  ["<span class='name'>inherited</span>\n", "<span class='arguments'>(modname)</span>\n"]
+                </div>
+                <div class='description'>
+                  <p>
+                  Executes automatically when <a href="Caesars.html">Caesars</a> is
+                  subclassed. This creates the YourClass::DSL module which contains a single
+                  method named after YourClass that is used to catch the top level DSL
+                  method.
+                  </p>
+                  <p>
+                  For example, if your class is called Glasses::HighBall, your top level
+                  method would be: highball.
+                  </p>
+                  <pre>highball :mine do&#x000A;  volume &quot;9oz&quot;&#x000A;end</pre>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000010-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000010-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 195</span>&#x000A;195:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">inherited</span>(<span class="ruby-identifier">modname</span>)&#x000A;196:     <span class="ruby-identifier">meth</span> = (<span class="ruby-identifier">modname</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/::/</span>))[<span class="ruby-value">-1</span>].<span class="ruby-identifier">downcase</span>  <span class="ruby-comment cmt"># Some::ClassName =&gt; classname</span>&#x000A;197:     <span class="ruby-identifier">module_eval</span> <span class="ruby-node">%Q{&#x000A;198:       module #{modname}::DSL&#x000A;199:         def #{meth}(*args, &amp;b)&#x000A;200:           name = !args.empty? ? args.first.to_s : nil&#x000A;201:           varname = &quot;@#{meth.to_s}&quot;&#x000A;202:           varname &lt;&lt; &quot;_\#{name}&quot; if name&#x000A;203:           inst = instance_variable_get(varname)&#x000A;204:           &#x000A;205:           # When the top level DSL method is called without a block&#x000A;206:           # it will return the appropriate instance variable name&#x000A;207:           return inst if b.nil?&#x000A;208:           &#x000A;209:           # Add to existing instance, if it exists. Otherwise create one anew.&#x000A;210:           inst = instance_variable_set(varname, inst || #{modname.to_s}.new(name))&#x000A;211:           inst.instance_eval(&amp;b)&#x000A;212:           inst&#x000A;213:         end&#x000A;214:         &#x000A;215:         def self.methname&#x000A;216:           :&quot;#{meth}&quot;&#x000A;217:         end&#x000A;218:         &#x000A;219:       end&#x000A;220:     }</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span>&#x000A;221:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-class method' id='method-M000001'>
+                <a name='M000001'>      </a>
+                <div class='synopsis'>
+                  ["<span class='name'>new</span>\n", "<span class='arguments'>(name=nil)</span>\n"]
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000001-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000001-source'>    <span class="ruby-comment cmt"># File lib/caesars.rb, line 44</span>&#x000A;44:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>=<span class="ruby-keyword kw">nil</span>)&#x000A;45:     <span class="ruby-ivar">@caesars_name</span> = <span class="ruby-identifier">name</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>&#x000A;46:     <span class="ruby-ivar">@caesars_properties</span> = <span class="ruby-constant">Caesars</span><span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>&#x000A;47:     <span class="ruby-ivar">@caesars_pointer</span> = <span class="ruby-ivar">@caesars_properties</span>&#x000A;48:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <h2>Public instance methods</h2>
+              <div class='public-instance method' id='method-M000006'>
+                <a name='M000006'>      </a>
+                <div class='synopsis'>
+                  ["<span class='name'>[]</span>\n", "<span class='arguments'>(name)</span>\n"]
+                </div>
+                <div class='description'>
+                  <p>
+                  Act a bit like a hash for the case: @subclass[:property]
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000006-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000006-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 102</span>&#x000A;102:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">name</span>)&#x000A;103:     <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@caesars_properties</span>[<span class="ruby-identifier">name</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@caesars_properties</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">name</span>)&#x000A;104:     <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@caesars_properties</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@caesars_properties</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>)&#x000A;105:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000007'>
+                <a name='M000007'>      </a>
+                <div class='synopsis'>
+                  ["<span class='name'>[]=</span>\n", "<span class='arguments'>(name, value)</span>\n"]
+                </div>
+                <div class='description'>
+                  <p>
+                  Act a bit like a hash for the case: @subclass[:property] = value
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000007-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000007-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 109</span>&#x000A;109:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span>)&#x000A;110:     <span class="ruby-ivar">@caesars_properties</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">value</span>&#x000A;111:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000005'>
+                <a name='M000005'>      </a>
+                <div class='synopsis'>
+                  ["<span class='name'>find</span>\n", "<span class='arguments'>(*criteria)</span>\n"]
+                </div>
+                <div class='description'>
+                  <p>
+                  Looks for the specific attribute specified. <tt>criteria</tt> is an array
+                  of attribute names, orders according to their relationship. The last
+                  element is considered to the desired attribute. It can be an array.
+                  </p>
+                  <p>
+                  Unlike <a href="Caesars.html#M000004">find_deferred</a>, it will return
+                  only the value specified, otherwise nil.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000005-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000005-source'>    <span class="ruby-comment cmt"># File lib/caesars.rb, line 93</span>&#x000A;93:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">criteria</span>)&#x000A;94:     <span class="ruby-identifier">criteria</span>.<span class="ruby-identifier">flatten!</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">criteria</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)&#x000A;95:     <span class="ruby-identifier">str</span> = <span class="ruby-identifier">criteria</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;[:'#{v}']&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">v</span> }.<span class="ruby-identifier">join</span>&#x000A;96:     <span class="ruby-identifier">val</span> = <span class="ruby-identifier">eval</span> <span class="ruby-node">&quot;@caesars_properties#{str} if defined?(@caesars_properties#{str})&quot;</span>&#x000A;97:     <span class="ruby-identifier">val</span>&#x000A;98:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000004'>
+                <a name='M000004'>      </a>
+                <div class='synopsis'>
+                  ["<span class='name'>find_deferred</span>\n", "<span class='arguments'>(*criteria)</span>\n"]
+                </div>
+                <div class='description'>
+                  <p>
+                  Look for an attribute, bubbling up to the parent if it&#8217;s not found
+                  <tt>criteria</tt> is an array of attribute names, orders according to their
+                  relationship. The last element is considered to the desired attribute. It
+                  can be an array.
+                  </p>
+                  <pre># Looking for 'attribute'.&#x000A;# First checks at @caesars_properties[grandparent][parent][attribute]&#x000A;# Then, @caesars_properties[grandparent][attribute]&#x000A;# Finally, @caesars_properties[attribute]&#x000A;find_deferred('grandparent', 'parent', 'attribute')</pre>
+                  <p>
+                  Returns the attribute if found or nil.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000004-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000004-source'>    <span class="ruby-comment cmt"># File lib/caesars.rb, line 72</span>&#x000A;72:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_deferred</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">criteria</span>)&#x000A;73:     <span class="ruby-comment cmt"># This is a nasty implementation. Sorry me! I'll enjoy a few</span>&#x000A;74:     <span class="ruby-comment cmt"># caesars and be right with you. </span>&#x000A;75:     <span class="ruby-identifier">att</span> = <span class="ruby-identifier">criteria</span>.<span class="ruby-identifier">pop</span>&#x000A;76:     <span class="ruby-identifier">val</span> = <span class="ruby-keyword kw">nil</span>&#x000A;77:     <span class="ruby-keyword kw">while</span> <span class="ruby-operator">!</span><span class="ruby-identifier">criteria</span>.<span class="ruby-identifier">empty?</span>&#x000A;78:       <span class="ruby-identifier">val</span> = <span class="ruby-identifier">find</span>(<span class="ruby-identifier">criteria</span>, <span class="ruby-identifier">att</span>)&#x000A;79:       <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">val</span>&#x000A;80:       <span class="ruby-identifier">criteria</span>.<span class="ruby-identifier">pop</span>&#x000A;81:     <span class="ruby-keyword kw">end</span>&#x000A;82:     <span class="ruby-comment cmt"># One last try in the root namespace</span>&#x000A;83:     <span class="ruby-identifier">val</span> = <span class="ruby-ivar">@caesars_properties</span>[<span class="ruby-identifier">att</span>.<span class="ruby-identifier">to_sym</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-ivar">@caesars_properties</span>[<span class="ruby-identifier">att</span>.<span class="ruby-identifier">to_sym</span>]) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">val</span>&#x000A;84:     <span class="ruby-identifier">val</span>&#x000A;85:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000002'>
+                <a name='M000002'>      </a>
+                <div class='synopsis'>
+                  ["<span class='name'>keys</span>\n", "<span class='arguments'>()</span>\n"]
+                </div>
+                <div class='description'>
+                  <p>
+                  Returns an array of the available
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000002-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000002-source'>    <span class="ruby-comment cmt"># File lib/caesars.rb, line 51</span>&#x000A;51:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">keys</span>&#x000A;52:     <span class="ruby-ivar">@caesars_properties</span>.<span class="ruby-identifier">keys</span>&#x000A;53:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000008'>
+                <a name='M000008'>      </a>
+                <div class='synopsis'>
+                  ["<span class='name'>method_missing</span>\n", "<span class='arguments'>(meth, *args, &amp;b)</span>\n"]
+                </div>
+                <div class='description'>
+                  <p>
+                  This method handles all of the attributes that do not contain blocks.
+                  It&#8217;s used in the DSL for handling attributes dyanamically (that
+                  weren&#8217;t defined previously) and also in subclasses of Caesar for
+                  returning the appropriate attribute values.
+                  </p>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000008-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000008-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 117</span>&#x000A;117:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">meth</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">b</span>)&#x000A;118:     <span class="ruby-comment cmt"># Handle the setter, attribute=</span>&#x000A;119:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">meth</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/=$/</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@caesars_properties</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">meth</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chop</span>.<span class="ruby-identifier">to_sym</span>)&#x000A;120:       <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@caesars_properties</span>[<span class="ruby-identifier">meth</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chop</span>.<span class="ruby-identifier">to_sym</span>] = (<span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">args</span>&#x000A;121:     <span class="ruby-keyword kw">end</span>&#x000A;122:     &#x000A;123:     <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@caesars_properties</span>[<span class="ruby-identifier">meth</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@caesars_properties</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">meth</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">nil?</span>&#x000A;124:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">nil?</span>&#x000A;125:     &#x000A;126:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">b</span>&#x000A;127:       <span class="ruby-comment cmt"># Use the name of the bloody method if no name is supplied. </span>&#x000A;128:       <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">meth</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>&#x000A;129:       <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>&#x000A;130:         <span class="ruby-identifier">prev</span> = <span class="ruby-ivar">@caesars_pointer</span>&#x000A;131:         <span class="ruby-comment cmt">#(@caesars_pointer[:&quot;#{meth}_values&quot;] ||= []) &lt;&lt; name</span>&#x000A;132:         <span class="ruby-ivar">@caesars_pointer</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">Caesars</span><span class="ruby-operator">::</span><span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>&#x000A;133:         <span class="ruby-ivar">@caesars_pointer</span> = <span class="ruby-ivar">@caesars_pointer</span>[<span class="ruby-identifier">name</span>]&#x000A;134:         <span class="ruby-identifier">b</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">b</span>&#x000A;135:         <span class="ruby-ivar">@caesars_pointer</span> = <span class="ruby-identifier">prev</span>&#x000A;136:       <span class="ruby-keyword kw">end</span>&#x000A;137:         &#x000A;138:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@caesars_pointer</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@caesars_pointer</span>[<span class="ruby-identifier">meth</span>]&#x000A;139:       &#x000A;140:       <span class="ruby-ivar">@caesars_pointer</span>[<span class="ruby-identifier">meth</span>] = [<span class="ruby-ivar">@caesars_pointer</span>[<span class="ruby-identifier">meth</span>]] <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@caesars_pointer</span>[<span class="ruby-identifier">meth</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)&#x000A;141:       <span class="ruby-ivar">@caesars_pointer</span>[<span class="ruby-identifier">meth</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">args</span>&#x000A;142:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>&#x000A;143:       <span class="ruby-ivar">@caesars_pointer</span>[<span class="ruby-identifier">meth</span>] = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">args</span>&#x000A;144:     <span class="ruby-keyword kw">end</span>&#x000A;145:   &#x000A;146:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000003'>
+                <a name='M000003'>      </a>
+                <div class='synopsis'>
+                  ["<span class='name'>to_hash</span>\n", "<span class='arguments'>()</span>\n"]
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000003-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000003-source'>    <span class="ruby-comment cmt"># File lib/caesars.rb, line 55</span>&#x000A;55:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_hash</span>&#x000A;56:     <span class="ruby-ivar">@caesars_properties</span>.<span class="ruby-identifier">to_hash</span>&#x000A;57:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>
