@@ -136,7 +136,7 @@ Or for GitHub fans:
 		
 == More Info
 
-* GitHub[http://github.com/delano/caesar]
+* GitHub[http://github.com/delano/caesars]
 * Inspiration[http://www.youtube.com/watch?v=ycElb0tB9_U]
 * Recipe[http://twitter.com/solutious/status/1264327499]
 
