@@ -8,6 +8,7 @@ CAESAR -- CHANGES
 * UPDATED: docs and bin/example to reflect Caesars::Hash changes. 
 * FIX: instance_variables in Ruby 1.9.1 returns Symbols 
 
+
 #### 0.5.0 (2009-03-11) ###############################
 
 * FIX: find_deferred now gracefully handles nil errors

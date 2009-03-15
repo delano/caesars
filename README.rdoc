@@ -147,6 +147,8 @@ Or for GitHub fans:
 == Thanks
 
 * Clams, Tomatoes, Vodka, and the rest of the crew. 
+* Caleb Buxton (http://cpb.ca) for early feedback.
+
 
 == License
 
