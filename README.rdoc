@@ -133,7 +133,20 @@ Or for GitHub fans:
      # [... make changes to party.conf ...]
      
      @config.refresh
-		
+
+*party.conf*
+
+     food do 
+       oysters "10kg"
+       order do
+         self.oysters
+       end
+     end
+     
+     drink do
+       wine "12L"
+     end
+
 == More Info
 
 * GitHub[http://github.com/delano/caesars]
