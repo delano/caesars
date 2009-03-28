@@ -11,9 +11,9 @@ One of:
 
 Or for GitHub fans:
 
+* gem install delano-caesars --source http://gems.github.com
 * git clone git://github.com/delano/caesar.git
-* gem sources -a http://gems.github.com (you only have to do this once, ever...), then:
-  * gem install delano-caesar
+
 
 == EXAMPLE 1 -- Flavour
 
