@@ -108,21 +108,23 @@ class Caesars
   # should be returned.
   # 
   #      find_deferred(:environment, :role:, [:disks, '/file/path'])
-  #
-  # [:environment][:role][:disks]['/file/path']
-  # [:environment][:disks]['/file/path']
-  # [:disks]['/file/path']
+  # 
+  # Search order:
+  # * [:environment][:role][:disks]['/file/path']
+  # * [:environment][:disks]['/file/path']
+  # * [:disks]['/file/path']
   #
   # Other nested Arrays are treated special too. We look at the criteria from
   # right to left and remove the first nested element we find.
   #
   #      find_deferred([:region, :zone], :environment, :role, :ami)
   #
-  # [:region][:zone][:environment][:role][:ami]
-  # [:region][:environment][:role][:ami]
-  # [:environment][:role][:ami]
-  # [:environment][:ami]
-  # [:ami]
+  # Search order:
+  # * [:region][:zone][:environment][:role][:ami]
+  # * [:region][:environment][:role][:ami]
+  # * [:environment][:role][:ami]
+  # * [:environment][:ami]
+  # * [:ami]
   #
   # Returns the attribute if found or nil.
   #
@@ -253,7 +255,7 @@ class Caesars
   #        end
   #      end
   #
-  #      @config.food.order.call(3)     # => 5
+  #      @config.food.count.call(3)     # => 5
   #
   def self.chill(caesars_meth)
     module_eval %Q{

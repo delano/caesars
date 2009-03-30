@@ -53,17 +53,21 @@ extend Staff::DSL
 # will be included in the instance variable (@staff_fte).
 staff :fte do
   desc 'Our hard-working, "full-time" staff'
+
   location :splashdown do
     town :tsawwassen
+
     person :steve, :sheila do
       role :manager
     end
+
     person :steve do
       role :cook
       anger :high
       hours 25
       catchphrase "Rah! [strokes goatee]"
     end
+
     person :sheila do
       catchphrase "This gravy tastes like food I ate in a Mexican prison."
       hours rand(20)
@@ -72,16 +76,17 @@ staff :fte do
         ("%.2f" % [gumption * self.splashdown.sheila.rate.to_f]).to_f
       end
     end
+
     person :delano do
       role :cook
       rate "8.35/h"
       hours 57
       satisfaction :low
       calculate :salary do 
-        self.splashdown.delano.rate.to_f * self.splashdown.delano.hours
-        
+        self.splashdown.delano.rate.to_f * self.splashdown.delano.hours        
       end
     end
+
   end
 end
 
@@ -101,7 +106,6 @@ p @staff_fte.splashdown[:steve][:role]  # => [:manager, :cook]
 # You can call them manually and send arguments like you normally would. 
 p @staff_fte.splashdown.delano.salary.call             # => 475.95
 p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
-p @staff_fte.splashdown.keys
 
 
 # ------------------------------------------------------------------
