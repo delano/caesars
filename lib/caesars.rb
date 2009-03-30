@@ -8,6 +8,12 @@
 #
 class Caesars
   VERSION = "0.5.1"
+  @@debug = false
+  
+  def Caesars.enable_debug; @@debug = true; end
+  def Caesars.disable_debug; @@debug = false; end
+  def Caesars.debug?; @@debug; end
+  
   # A subclass of ::Hash that provides method names for hash parameters.
   # It's like a lightweight OpenStruct. 
   #     ch = Caesars::Hash[:tabasco => :lots!]
@@ -55,7 +61,9 @@ class Caesars
   def to_hash
     @caesars_properties.to_hash
   end
-
+  
+  # DEPRECATED -- use find_deferred
+  #
   # Look for an attribute, bubbling up to the parent if it's not found
   # +criteria+ is an array of attribute names, orders according to their
   # relationship. The last element is considered to the desired attribute.
@@ -69,12 +77,13 @@ class Caesars
   #
   # Returns the attribute if found or nil.
   #
-  def find_deferred(*criteria)
+  def find_deferred_old(*criteria)
     # This is a nasty implementation. Sorry me! I'll enjoy a few
     # caesars and be right with you. 
     att = criteria.pop
     val = nil
     while !criteria.empty?
+      p [criteria, att].flatten if Caesars.debug?
       val = find(criteria, att)
       break if val
       criteria.pop
@@ -82,6 +91,88 @@ class Caesars
     # One last try in the root namespace
     val = @caesars_properties[att.to_sym] if defined?(@caesars_properties[att.to_sym]) && !val
     val
+  end
+  
+  # Look for an attribute, bubbling up through the parents until it's found.
+  # +criteria+ is an array of hierarchical attributes, ordered according to 
+  # their relationship. The last element is the desired attribute to find.
+  # Looking for 'ami':
+  #
+  #      find_deferred(:environment, :role, :ami)
+  #
+  # First checks at @caesars_properties[:environment][:role][:ami]
+  # Then, @caesars_properties[:environment][:ami]
+  # Finally, @caesars_properties[:ami]
+  #
+  # If the last element is an Array, it's assumed that only that combination
+  # should be returned.
+  # 
+  #      find_deferred(:environment, :role:, [:disks, '/file/path'])
+  #
+  # [:environment][:role][:disks]['/file/path']
+  # [:environment][:disks]['/file/path']
+  # [:disks]['/file/path']
+  #
+  # Other nested Arrays are treated special too. We look at the criteria from
+  # right to left and remove the first nested element we find.
+  #
+  #      find_deferred([:region, :zone], :environment, :role, :ami)
+  #
+  # [:region][:zone][:environment][:role][:ami]
+  # [:region][:environment][:role][:ami]
+  # [:environment][:role][:ami]
+  # [:environment][:ami]
+  # [:ami]
+  #
+  # Returns the attribute if found or nil.
+  #
+  def find_deferred(*criteria)
+    # The last element is assumed to be the attribute we're looking for. 
+    # The purpose of this function is to bubble up the hierarchy of a
+    # hash to find it.
+    att = criteria.pop  
+
+    # Account for everything being sent as an Array
+    # i.e. find([1, 2, :attribute])
+    # We don't use flatten b/c we don't want to disturb nested Arrays
+    if criteria.empty?
+      criteria = att
+      att = criteria.pop
+    end
+
+    found = nil
+    sacrifice = nil
+
+    while !criteria.empty?
+      p [criteria, att].flatten if Caesars.debug?
+      found = find(criteria, att)
+      break if found
+
+      # Nested Arrays are treated special. We look at the criteria from
+      # right to left and remove the first nested element we find.
+      #
+      # i.e. [['a', 'b'], 1, 2, [:first, :second], :attribute]
+      #
+      # In this example, :second will be removed first.
+      criteria.reverse.each_with_index do |el,index|
+        next unless el.is_a?(Array)    # Ignore regular criteria
+        next if el.empty?              # Ignore empty nested hashes
+        sacrifice = el.pop
+        break
+      end
+
+      # Remove empty nested Arrays
+      criteria.delete_if { |el| el.is_a?(Array) && el.empty? }
+
+      # We need to make a sacrifice
+      sacrifice = criteria.pop if sacrifice.nil?
+
+      break if (@limit ||= 0) > 5  # A failsafe
+      @limit += 1
+      sacrifice = nil
+    end
+
+    found || find(att)  # One last try in the root namespace
   end
   
   # Looks for the specific attribute specified. 
@@ -92,8 +183,11 @@ class Caesars
   # Unlike find_deferred, it will return only the value specified, otherwise nil. 
   def find(*criteria)
     criteria.flatten! if criteria.first.is_a?(Array)
+    p criteria if Caesars.debug?
+    # BUG: Attributes can be stored as strings and here we only look for symbols
     str = criteria.collect { |v| "[:'#{v}']" if v }.join
-    val = eval "@caesars_properties#{str} if defined?(@caesars_properties#{str})"
+    eval_str = "@caesars_properties#{str} if defined?(@caesars_properties#{str})"
+    val = eval eval_str
     val
   end
   

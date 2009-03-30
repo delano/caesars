@@ -1,6 +1,17 @@
 CAESAR -- CHANGES
 
 
+#### 0.5.2 (2009-03-31) ###############################
+
+* NEW: Caesars.debug?, Caesars.enable_debug, Caesars.disable_debug
+* CHANGED: find_deferred now supports nested Arrays. See rdocs. 
+* BUG: Found bug related to string/symbol ambiguity when using find.
+It's not fixed yet so for now be mindful of which attributes are 
+strings and which are symbols. String attributes are stored as 
+strings but find and find_deferred look for symbols. The hash syntax
+and method accessors are not affected. 
+
+
 #### 0.5.1 (2009-03-11) ###############################
 
 * FIX: Method-syntax was broken for attributes of top level method
