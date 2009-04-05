@@ -146,7 +146,6 @@ class Caesars
     sacrifice = nil
 
     while !criteria.empty?
-      p [criteria, att].flatten if Caesars.debug?
       found = find(criteria, att)
       break if found
 
