@@ -7,9 +7,9 @@
 # See bin/example
 #
 class Caesars
-  VERSION = "0.5.2"
+  VERSION = "0.5.3"
   @@debug = false
-  
+
   def Caesars.enable_debug; @@debug = true; end
   def Caesars.disable_debug; @@debug = false; end
   def Caesars.debug?; @@debug; end
@@ -138,7 +138,7 @@ class Caesars
     # i.e. find([1, 2, :attribute])
     # We don't use flatten b/c we don't want to disturb nested Arrays
     if criteria.empty?
-      criteria = att
+      criteria = attribute
       att = criteria.pop
     end
 
@@ -226,7 +226,12 @@ class Caesars
         #(@caesars_pointer[:"#{meth}_values"] ||= []) << name
         @caesars_pointer[name] ||= Caesars::Hash.new
         @caesars_pointer = @caesars_pointer[name]
-        b.call if b
+        begin
+          b.call if b
+        rescue ArgumentError, SyntaxError => ex
+          STDERR.puts "CAESARS: error in #{meth} (#{args.join(', ')})" 
+          raise ex
+        end
         @caesars_pointer = prev
       end
         
@@ -262,7 +267,7 @@ class Caesars
         # caesars.toplevel.unnamed_chilled_attribute
         return @caesars_properties[:'#{caesars_meth}'] if @caesars_properties.has_key?(:'#{caesars_meth}') && caesars_names.empty? && b.nil?
         
-        # Use the name of the bloody method if no name is supplied. 
+        # Use the name of the chilled method if no name is supplied. 
         caesars_names << :'#{caesars_meth}' if caesars_names.empty?
         
         caesars_names.each do |name|
@@ -275,6 +280,46 @@ class Caesars
     nil
   end
   
+  
+  
+  # Force the specified keyword to always be treated as a hash. 
+  # Example:
+  #
+  #     startup do
+  #       disks do
+  #         create "/path/2"         # Available as hash: [action][disks][create][/path/2] == {}
+  #         create "/path/4" do      # Available as hash: [action][disks][create][/path/4] == {size => 14}
+  #           size 14
+  #         end
+  #       end
+  #     end
+  #
+  def self.forced_hash(caesars_meth, &b)
+    module_eval %Q{
+      def #{caesars_meth}(*caesars_names,&b)
+        if @caesars_properties.has_key?(:'#{caesars_meth}') && caesars_names.empty? && b.nil?
+          return @caesars_properties[:'#{caesars_meth}'] 
+        end
+        
+        return nil if caesars_names.empty? && b.nil?
+        return method_missing(:'#{caesars_meth}', *caesars_names, &b) if caesars_names.empty?
+
+        caesars_name = caesars_names.shift
+
+        prev = @caesars_pointer
+        @caesars_pointer[:'#{caesars_meth}'] ||= Caesars::Hash.new
+        hash = Caesars::Hash.new
+        @caesars_pointer = hash
+        b.call if b
+        @caesars_pointer = prev
+        @caesars_pointer[:'#{caesars_meth}'][caesars_name] = hash 
+        @caesars_pointer = prev
+      end
+    }
+    nil
+    
+
+  end
   
   # Executes automatically when Caesars is subclassed. This creates the
   # YourClass::DSL module which contains a single method named after YourClass 
@@ -351,7 +396,7 @@ class Caesars::Config
     refresh
   end
   
-  def init
+  def caesars_init
     # Remove instance variables used to populate DSL data
     instance_variables.each do |varname|
       next if varname == :'@options' || varname == :'@paths'  # Ruby 1.9.1
@@ -374,7 +419,7 @@ class Caesars::Config
   end
   
   def refresh
-    init 
+    caesars_init
     
     @paths.each do |path|
       puts "Loading config from #{path}" if @verbose 
@@ -391,9 +436,10 @@ class Caesars::Config
         
         postprocess
         
-      rescue SyntaxError => ex
+      rescue ArgumentError, SyntaxError => ex
         puts "Syntax error in #{path}."
         puts ex.message
+        puts ex.backtrace if Caesars.debug?
         exit 1
       end
     end
@@ -427,8 +473,6 @@ class Caesars::Config
   end
   
 end
-
-
 
 
 
