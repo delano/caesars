@@ -1,9 +1,15 @@
 CAESAR -- CHANGES
 
 
+#### 0.5.3 (2009-04-10) ###############################
+
+* ADDED: Better error handling when reading DSL config files
+* ADDED: forced_hash method 
+
+
 #### 0.5.2 (2009-03-31) ###############################
 
-* NEW: Caesars.debug?, Caesars.enable_debug, Caesars.disable_debug
+* ADDED: Caesars.debug?, Caesars.enable_debug, Caesars.disable_debug
 * CHANGED: find_deferred now supports nested Arrays. See rdocs. 
 * BUG: Found bug related to string/symbol ambiguity when using find.
 It's not fixed yet so for now be mindful of which attributes are 
@@ -14,31 +20,31 @@ and method accessors are not affected.
 
 #### 0.5.1 (2009-03-11) ###############################
 
-* FIX: Method-syntax was broken for attributes of top level method
-* FIX: Caesars::Hash#refresh was setting @options to nil
+* FIXED: Method-syntax was broken for attributes of top level method
+* FIXED: Caesars::Hash#refresh was setting @options to nil
 * UPDATED: docs and bin/example to reflect Caesars::Hash changes. 
-* FIX: instance_variables in Ruby 1.9.1 returns Symbols 
+* FIXED: instance_variables in Ruby 1.9.1 returns Symbols 
 
 
 #### 0.5.0 (2009-03-11) ###############################
 
-* FIX: find_deferred now gracefully handles nil errors
-* NEW: empty? method in Caesars::Config
-* NEW: post processing hook in Caesars::Config#refresh
-* NEW: Caesars::Hash#to_hash now recursively casts children to ::Hash.
-* FIX: Added Array support to Caesars::Hash
-* NEW: Setters for Caesars attributes
-* NEW: Caesars::Config supports multiple config files
-* NEW: Top level methods used more than once now merges values
+* FIXED: find_deferred now gracefully handles nil errors
+* ADDED: empty? method in Caesars::Config
+* ADDED: post processing hook in Caesars::Config#refresh
+* ADDED: Caesars::Hash#to_hash now recursively casts children to ::Hash.
+* FIXED: Added Array support to Caesars::Hash
+* ADDED: Setters for Caesars attributes
+* ADDED: Caesars::Config supports multiple config files
+* ADDED: Top level methods used more than once now merges values
 rather than overwrites. 
-* NEW: Caesars::Config supports reloading config files on the fly
+* ADDED: Caesars::Config supports reloading config files on the fly
 
 
 #### 0.4.2 (2009-03-05) ###############################
 
-* FIX: missing bin/party.conf in gem release
-* FIX: Now works with Ruby 1.8+
-* NEW: Cleaner rdocs. 
+* FIXED: missing bin/party.conf in gem release
+* FIXED: Now works with Ruby 1.8+
+* ADDED: Cleaner rdocs. 
 * TODO: Fix support for top level methods with names:
 food :extra do; end; # => food_extra
 
@@ -47,18 +53,18 @@ food :extra do; end; # => food_extra
 
 * CHANGE: Removed bloody method. We now parse blocks immediately.
 * CHANGE: Renamed virgin method to chill.
-* NEW: Caesars::Config class for loading DSLs as config files. 
+* ADDED: Caesars::Config class for loading DSLs as config files. 
 See Example 3. 
-* NEW: Added find_deferred method to automatically jump up the
+* ADDED: Added find_deferred method to automatically jump up the
 heirarchy when looking for a specific attribute. 
-* NEW: Added to_hash and [] methods to Caesars to make it 
+* ADDED: Added to_hash and [] methods to Caesars to make it 
 more hashlike. 
-* FIX: "chilled" attributes weren't available by method name
+* FIXED: "chilled" attributes weren't available by method name
 
 
 #### 0.3.2 (2009-03-04) ###############################
 
-* FIX: Added file and line info for eval code (better debugging).
+* FIXED: Added file and line info for eval code (better debugging).
 * CHANGE: The top level DSL method names are now determined by
 by the class name. Some::ClassName becomes classname. 
 This is less confusing than allowing it to be anything
@@ -68,9 +74,9 @@ namespace.
 
 #### 0.3.1 (2009-03-04) ###############################
 
-* NEW: Accept instances without a name
+* ADDED: Accept instances without a name
 * CHANGE: Updated examples. 
-* NEW: More rdocs. 
+* ADDED: More rdocs. 
 
 
 
