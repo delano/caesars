@@ -7,7 +7,7 @@
 # See bin/example
 #
 class Caesars
-  VERSION = "0.5.3"
+  VERSION = "0.5.4"
   @@debug = false
 
   def Caesars.enable_debug; @@debug = true; end
@@ -126,25 +126,28 @@ class Caesars
   # * [:environment][:ami]
   # * [:ami]
   #
+  # NOTE: There is a maximum depth of 10. 
+  #
   # Returns the attribute if found or nil.
   #
   def find_deferred(*criteria)
+    
     # The last element is assumed to be the attribute we're looking for. 
     # The purpose of this function is to bubble up the hierarchy of a
     # hash to find it.
     att = criteria.pop  
-
+    
     # Account for everything being sent as an Array
     # i.e. find([1, 2, :attribute])
     # We don't use flatten b/c we don't want to disturb nested Arrays
     if criteria.empty?
-      criteria = attribute
+      criteria = att
       att = criteria.pop
     end
-
+    
     found = nil
     sacrifice = nil
-
+    
     while !criteria.empty?
       found = find(criteria, att)
       break if found
@@ -167,9 +170,8 @@ class Caesars
 
       # We need to make a sacrifice
       sacrifice = criteria.pop if sacrifice.nil?
-
-      break if (@limit ||= 0) > 5  # A failsafe
-      @limit += 1
+      break if (limit ||= 0) > 10  # A failsafe
+      limit += 1
       sacrifice = nil
     end
 
@@ -358,6 +360,7 @@ class Caesars
         
       end
     }, __FILE__, __LINE__
+    
   end
   
 end
