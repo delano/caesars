@@ -25,13 +25,13 @@
   <body class='page'>
     <div class='file' id='wrapper'>
       <div class='header'>
-        <h1 class='name'>["CHANGES.txt\n"]</h1>
+        <h1 class='name'>CHANGES.txt</h1>
         <div class='paths'>
           CHANGES.txt
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>2009-03-30 18:59:21 -0400</span>
+          <span class='datetime'>Sat Apr 11 16:28:54 -0400 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -41,10 +41,32 @@
             CAESAR &#8212; CHANGES
             </p>
             <p>
+            #### 0.5.4 (2009-04-11) ###############################
+            </p>
+            <ul>
+            <li>FIXED: find_deferred would abort early because the safety limit
+            
+            </li>
+            </ul>
+            <p>
+            to prevent endless loops wasn&#8217;t being reset between calls.
+            </p>
+            <p>
+            #### 0.5.3 (2009-04-10) ###############################
+            </p>
+            <ul>
+            <li>ADDED: Better error handling when reading DSL config files
+            
+            </li>
+            <li>ADDED: forced_hash method
+            
+            </li>
+            </ul>
+            <p>
             #### 0.5.2 (2009-03-31) ###############################
             </p>
             <ul>
-            <li>NEW: <a href="../classes/Caesars.html#M000003">Caesars.debug?</a>, <a
+            <li>ADDED: <a href="../classes/Caesars.html#M000003">Caesars.debug?</a>, <a
             href="../classes/Caesars.html#M000001">Caesars.enable_debug</a>, <a
             href="../classes/Caesars.html#M000002">Caesars.disable_debug</a>
             
@@ -66,17 +88,17 @@
             #### 0.5.1 (2009-03-11) ###############################
             </p>
             <ul>
-            <li>FIX: Method-syntax was broken for attributes of top level method
+            <li>FIXED: Method-syntax was broken for attributes of top level method
             
             </li>
-            <li>FIX: Caesars::Hash#refresh was setting @options to nil
+            <li>FIXED: Caesars::Hash#refresh was setting @options to nil
             
             </li>
             <li>UPDATED: docs and <a href="bin/example.html">bin/example</a> to reflect <a
             href="../classes/Caesars/Hash.html">Caesars::Hash</a> changes.
             
             </li>
-            <li>FIX: instance_variables in Ruby 1.9.1 returns Symbols
+            <li>FIXED: instance_variables in Ruby 1.9.1 returns Symbols
             
             </li>
             </ul>
@@ -84,34 +106,34 @@
             #### 0.5.0 (2009-03-11) ###############################
             </p>
             <ul>
-            <li>FIX: find_deferred now gracefully handles nil errors
+            <li>FIXED: find_deferred now gracefully handles nil errors
             
             </li>
-            <li>NEW: empty? method in <a
+            <li>ADDED: empty? method in <a
             href="../classes/Caesars/Config.html">Caesars::Config</a>
             
             </li>
-            <li>NEW: post processing hook in <a
-            href="../classes/Caesars/Config.html#M000020">Caesars::Config#refresh</a>
+            <li>ADDED: post processing hook in <a
+            href="../classes/Caesars/Config.html#M000019">Caesars::Config#refresh</a>
             
             </li>
-            <li>NEW: <a
-            href="../classes/Caesars/Hash.html#M000016">Caesars::Hash#to_hash</a> now
+            <li>ADDED: <a
+            href="../classes/Caesars/Hash.html#M000026">Caesars::Hash#to_hash</a> now
             recursively casts children to ::Hash.
             
             </li>
-            <li>FIX: Added Array support to <a
+            <li>FIXED: Added Array support to <a
             href="../classes/Caesars/Hash.html">Caesars::Hash</a>
             
             </li>
-            <li>NEW: Setters for <a href="../classes/Caesars.html">Caesars</a> attributes
+            <li>ADDED: Setters for <a href="../classes/Caesars.html">Caesars</a> attributes
             
             </li>
-            <li>NEW: <a href="../classes/Caesars/Config.html">Caesars::Config</a> supports
-            multiple config files
+            <li>ADDED: <a href="../classes/Caesars/Config.html">Caesars::Config</a>
+            supports multiple config files
             
             </li>
-            <li>NEW: Top level methods used more than once now merges values
+            <li>ADDED: Top level methods used more than once now merges values
             
             </li>
             </ul>
@@ -119,8 +141,8 @@
             rather than overwrites.
             </p>
             <ul>
-            <li>NEW: <a href="../classes/Caesars/Config.html">Caesars::Config</a> supports
-            reloading config files on the fly
+            <li>ADDED: <a href="../classes/Caesars/Config.html">Caesars::Config</a>
+            supports reloading config files on the fly
             
             </li>
             </ul>
@@ -128,14 +150,14 @@
             #### 0.4.2 (2009-03-05) ###############################
             </p>
             <ul>
-            <li>FIX: missing <a href="bin/party_conf.html">bin/party.conf</a> in gem
+            <li>FIXED: missing <a href="bin/party_conf.html">bin/party.conf</a> in gem
             release
             
             </li>
-            <li>FIX: Now works with Ruby 1.8+
+            <li>FIXED: Now works with Ruby 1.8+
             
             </li>
-            <li>NEW: Cleaner rdocs.
+            <li>ADDED: Cleaner rdocs.
             
             </li>
             <li>TODO: Fix support for top level methods with names:
@@ -155,8 +177,8 @@
             <li>CHANGE: Renamed virgin method to chill.
             
             </li>
-            <li>NEW: <a href="../classes/Caesars/Config.html">Caesars::Config</a> class for
-            loading DSLs as config files.
+            <li>ADDED: <a href="../classes/Caesars/Config.html">Caesars::Config</a> class
+            for loading DSLs as config files.
             
             </li>
             </ul>
@@ -164,7 +186,7 @@
             See Example 3.
             </p>
             <ul>
-            <li>NEW: Added find_deferred method to automatically jump up the
+            <li>ADDED: Added find_deferred method to automatically jump up the
             
             </li>
             </ul>
@@ -172,7 +194,7 @@
             heirarchy when looking for a specific attribute.
             </p>
             <ul>
-            <li>NEW: Added to_hash and [] methods to <a
+            <li>ADDED: Added to_hash and [] methods to <a
             href="../classes/Caesars.html">Caesars</a> to make it
             
             </li>
@@ -181,7 +203,7 @@
             more hashlike.
             </p>
             <ul>
-            <li>FIX: &#8220;chilled&#8221; attributes weren&#8217;t available by method
+            <li>FIXED: &#8220;chilled&#8221; attributes weren&#8217;t available by method
             name
             
             </li>
@@ -190,7 +212,7 @@
             #### 0.3.2 (2009-03-04) ###############################
             </p>
             <ul>
-            <li>FIX: Added file and line info for eval code (better debugging).
+            <li>FIXED: Added file and line info for eval code (better debugging).
             
             </li>
             <li>CHANGE: The top level DSL method names are now determined by
@@ -206,13 +228,13 @@
             #### 0.3.1 (2009-03-04) ###############################
             </p>
             <ul>
-            <li>NEW: Accept instances without a name
+            <li>ADDED: Accept instances without a name
             
             </li>
             <li>CHANGE: Updated examples.
             
             </li>
-            <li>NEW: More rdocs.
+            <li>ADDED: More rdocs.
             
             </li>
             </ul>
