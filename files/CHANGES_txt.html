@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Sat Apr 11 16:28:54 -0400 2009</span>
+          <span class='datetime'>Sun Apr 26 20:24:08 -0400 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -39,6 +39,33 @@
           <div id='description'>
             <p>
             CAESAR &#8212; CHANGES
+            </p>
+            <p>
+            #### 0.5.5 (2009-04-27) ###############################
+            </p>
+            <ul>
+            <li>CHANGE: <a href="../classes/Caesars.html#M000016">Caesars.chill</a> and <a
+            href="../classes/Caesars.html#M000015">Caesars.forced_hash</a> can now be
+            used together.
+            
+            </li>
+            <li>ADDED: Print error to STDERR when a duplicate key found for forced_hash
+            keys
+            
+            </li>
+            <li>ADDED: <a href="../classes/Caesars.html#M000017">Caesars.forced_array</a>
+            
+            </li>
+            <li>CHANGE: <a
+            href="../classes/Caesars.html#M000014">Caesars.method_missing</a> now
+            stores and returns an empty <a
+            href="../classes/Caesars/Hash.html">Caesars::Hash</a>
+            
+            </li>
+            </ul>
+            <p>
+            for known methods that are called (currently only ones defined by
+            forced_array)
             </p>
             <p>
             #### 0.5.4 (2009-04-11) ###############################
@@ -114,11 +141,11 @@
             
             </li>
             <li>ADDED: post processing hook in <a
-            href="../classes/Caesars/Config.html#M000019">Caesars::Config#refresh</a>
+            href="../classes/Caesars/Config.html#M000022">Caesars::Config#refresh</a>
             
             </li>
             <li>ADDED: <a
-            href="../classes/Caesars/Hash.html#M000026">Caesars::Hash#to_hash</a> now
+            href="../classes/Caesars/Hash.html#M000029">Caesars::Hash#to_hash</a> now
             recursively casts children to ::Hash.
             
             </li>

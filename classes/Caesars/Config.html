@@ -54,18 +54,18 @@
             <h2>Methods</h2>
             <h3>public class</h3>
             <ol>
-              <li><a href="#M000022">dsl</a></li>
-              <li><a href="#M000016">new</a></li>
+              <li><a href="#M000025">dsl</a></li>
+              <li><a href="#M000019">new</a></li>
             </ol>
             <h3>public instance</h3>
             <ol>
-              <li><a href="#M000023">[]</a></li>
-              <li><a href="#M000017">caesars_init</a></li>
-              <li><a href="#M000020">check_paths</a></li>
-              <li><a href="#M000021">empty?</a></li>
-              <li><a href="#M000024">keys</a></li>
-              <li><a href="#M000018">postprocess</a></li>
-              <li><a href="#M000019">refresh</a></li>
+              <li><a href="#M000026">[]</a></li>
+              <li><a href="#M000020">caesars_init</a></li>
+              <li><a href="#M000023">check_paths</a></li>
+              <li><a href="#M000024">empty?</a></li>
+              <li><a href="#M000027">keys</a></li>
+              <li><a href="#M000021">postprocess</a></li>
+              <li><a href="#M000022">refresh</a></li>
             </ol>
           </div>
           <div id='section'>
@@ -93,21 +93,21 @@
             </div>
             <div id='methods'>
               <h2>Public class methods</h2>
-              <div class='public-class method' id='method-M000022'>
-                <a name='M000022'>      </a>
+              <div class='public-class method' id='method-M000025'>
+                <a name='M000025'>      </a>
                 <div class='synopsis'>
                   <span class='name'>dsl</span>
                   <span class='arguments'>(glass)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000022-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000025-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000022-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 466</span>&#x000A;466:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dsl</span>(<span class="ruby-identifier">glass</span>)&#x000A;467:     <span class="ruby-ivar">@@glasses</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">glass</span>&#x000A;468:   <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000025-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 531</span>&#x000A;531:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dsl</span>(<span class="ruby-identifier">glass</span>)&#x000A;532:     <span class="ruby-ivar">@@glasses</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">glass</span>&#x000A;533:   <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-class method' id='method-M000016'>
-                <a name='M000016'>      </a>
+              <div class='public-class method' id='method-M000019'>
+                <a name='M000019'>      </a>
                 <div class='synopsis'>
                   <span class='name'>new</span>
                   <span class='arguments'>(*args)</span>
@@ -123,80 +123,80 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000016-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000019-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000016-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 393</span>&#x000A;393:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;394:     <span class="ruby-comment cmt"># We store the options hash b/c we reapply them when we refresh.</span>&#x000A;395:     <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}&#x000A;396:     <span class="ruby-ivar">@paths</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span>[] <span class="ruby-operator">:</span> <span class="ruby-identifier">args</span>&#x000A;397:     <span class="ruby-ivar">@options</span> = {}&#x000A;398:     &#x000A;399:     <span class="ruby-identifier">refresh</span>&#x000A;400:   <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000019-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 455</span>&#x000A;455:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)&#x000A;456:     <span class="ruby-comment cmt"># We store the options hash b/c we reapply them when we refresh.</span>&#x000A;457:     <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}&#x000A;458:     <span class="ruby-ivar">@paths</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span>[] <span class="ruby-operator">:</span> <span class="ruby-identifier">args</span>&#x000A;459:     <span class="ruby-ivar">@options</span> = {}&#x000A;460:     &#x000A;461:     <span class="ruby-identifier">refresh</span>&#x000A;462:   <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000023'>
-                <a name='M000023'>      </a>
+              <div class='public-instance method' id='method-M000026'>
+                <a name='M000026'>      </a>
                 <div class='synopsis'>
                   <span class='name'>[]</span>
                   <span class='arguments'>(name)</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000023-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000026-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000023-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 470</span>&#x000A;470:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">name</span>)&#x000A;471:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">name</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">name</span>)&#x000A;472:   <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-              <div class='public-instance method' id='method-M000017'>
-                <a name='M000017'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>caesars_init</span>
-                  <span class='arguments'>()</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000017-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000017-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 402</span>&#x000A;402:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">caesars_init</span>&#x000A;403:     <span class="ruby-comment cmt"># Remove instance variables used to populate DSL data</span>&#x000A;404:     <span class="ruby-identifier">instance_variables</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">varname</span><span class="ruby-operator">|</span>&#x000A;405:       <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">varname</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:'@options'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">varname</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:'@paths'</span>  <span class="ruby-comment cmt"># Ruby 1.9.1</span>&#x000A;406:       <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">varname</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'@options'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">varname</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'@paths'</span>  <span class="ruby-comment cmt"># Ruby 1.8</span>&#x000A;407:       <span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-identifier">varname</span>, <span class="ruby-keyword kw">nil</span>)&#x000A;408:     <span class="ruby-keyword kw">end</span>&#x000A;409:     &#x000A;410:     <span class="ruby-comment cmt"># Re-apply options</span>&#x000A;411:     <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>&#x000A;412:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{n}=&quot;</span>, <span class="ruby-identifier">v</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-node">&quot;#{n}=&quot;</span>)&#x000A;413:     <span class="ruby-keyword kw">end</span>&#x000A;414:     &#x000A;415:     <span class="ruby-identifier">check_paths</span>     <span class="ruby-comment cmt"># make sure files exist</span>&#x000A;416:   <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000026-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 535</span>&#x000A;535:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">name</span>)&#x000A;536:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">name</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">name</span>)&#x000A;537:   <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='public-instance method' id='method-M000020'>
                 <a name='M000020'>      </a>
                 <div class='synopsis'>
-                  <span class='name'>check_paths</span>
+                  <span class='name'>caesars_init</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000020-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000020-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 451</span>&#x000A;451:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_paths</span>&#x000A;452:     <span class="ruby-ivar">@paths</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>&#x000A;453:       <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;You provided a nil value&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">path</span>&#x000A;454:       <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Config file #{path} does not exist!&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">path</span>)&#x000A;455:     <span class="ruby-keyword kw">end</span>&#x000A;456:   <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000020-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 464</span>&#x000A;464:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">caesars_init</span>&#x000A;465:     <span class="ruby-comment cmt"># Remove instance variables used to populate DSL data</span>&#x000A;466:     <span class="ruby-identifier">instance_variables</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">varname</span><span class="ruby-operator">|</span>&#x000A;467:       <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">varname</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:'@options'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">varname</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:'@paths'</span>  <span class="ruby-comment cmt"># Ruby 1.9.1</span>&#x000A;468:       <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">varname</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'@options'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">varname</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'@paths'</span>  <span class="ruby-comment cmt"># Ruby 1.8</span>&#x000A;469:       <span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-identifier">varname</span>, <span class="ruby-keyword kw">nil</span>)&#x000A;470:     <span class="ruby-keyword kw">end</span>&#x000A;471:     &#x000A;472:     <span class="ruby-comment cmt"># Re-apply options</span>&#x000A;473:     <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>&#x000A;474:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{n}=&quot;</span>, <span class="ruby-identifier">v</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-node">&quot;#{n}=&quot;</span>)&#x000A;475:     <span class="ruby-keyword kw">end</span>&#x000A;476:     &#x000A;477:     <span class="ruby-identifier">check_paths</span>     <span class="ruby-comment cmt"># make sure files exist</span>&#x000A;478:   <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000021'>
-                <a name='M000021'>      </a>
+              <div class='public-instance method' id='method-M000023'>
+                <a name='M000023'>      </a>
                 <div class='synopsis'>
-                  <span class='name'>empty?</span>
+                  <span class='name'>check_paths</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000021-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000023-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000021-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 459</span>&#x000A;459:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">empty?</span>&#x000A;460:     <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>&#x000A;461:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">to_sym</span>)&#x000A;462:     <span class="ruby-keyword kw">end</span>&#x000A;463:     <span class="ruby-keyword kw">true</span>&#x000A;464:   <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000023-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 516</span>&#x000A;516:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">check_paths</span>&#x000A;517:     <span class="ruby-ivar">@paths</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>&#x000A;518:       <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;You provided a nil value&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">path</span>&#x000A;519:       <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Config file #{path} does not exist!&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">path</span>)&#x000A;520:     <span class="ruby-keyword kw">end</span>&#x000A;521:   <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
               <div class='public-instance method' id='method-M000024'>
                 <a name='M000024'>      </a>
                 <div class='synopsis'>
-                  <span class='name'>keys</span>
+                  <span class='name'>empty?</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
                   <a class='source-toggle' href='#' onclick="toggleCode('M000024-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000024-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 474</span>&#x000A;474:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">keys</span>&#x000A;475:     <span class="ruby-ivar">@@glasses</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">glass</span><span class="ruby-operator">|</span> <span class="ruby-identifier">glass</span>.<span class="ruby-identifier">methname</span> }&#x000A;476:   <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000024-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 524</span>&#x000A;524:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">empty?</span>&#x000A;525:     <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>&#x000A;526:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">to_sym</span>)&#x000A;527:     <span class="ruby-keyword kw">end</span>&#x000A;528:     <span class="ruby-keyword kw">true</span>&#x000A;529:   <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000018'>
-                <a name='M000018'>      </a>
+              <div class='public-instance method' id='method-M000027'>
+                <a name='M000027'>      </a>
+                <div class='synopsis'>
+                  <span class='name'>keys</span>
+                  <span class='arguments'>()</span>
+                </div>
+                <div class='source'>
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000027-source'); return false">
+                    [show source]
+                  </a>
+                  <pre id='M000027-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 539</span>&#x000A;539:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">keys</span>&#x000A;540:     <span class="ruby-ivar">@@glasses</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">glass</span><span class="ruby-operator">|</span> <span class="ruby-identifier">glass</span>.<span class="ruby-identifier">methname</span> }&#x000A;541:   <span class="ruby-keyword kw">end</span></pre>
+                </div>
+              </div>
+              <div class='public-instance method' id='method-M000021'>
+                <a name='M000021'>      </a>
                 <div class='synopsis'>
                   <span class='name'>postprocess</span>
                   <span class='arguments'>()</span>
@@ -209,23 +209,23 @@
                   </p>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000018-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000021-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000018-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 421</span>&#x000A;421:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">postprocess</span>&#x000A;422:   <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000021-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 483</span>&#x000A;483:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">postprocess</span>&#x000A;484:   <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
-              <div class='public-instance method' id='method-M000019'>
-                <a name='M000019'>      </a>
+              <div class='public-instance method' id='method-M000022'>
+                <a name='M000022'>      </a>
                 <div class='synopsis'>
                   <span class='name'>refresh</span>
                   <span class='arguments'>()</span>
                 </div>
                 <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000019-source'); return false">
+                  <a class='source-toggle' href='#' onclick="toggleCode('M000022-source'); return false">
                     [show source]
                   </a>
-                  <pre id='M000019-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 424</span>&#x000A;424:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">refresh</span>&#x000A;425:     <span class="ruby-identifier">caesars_init</span>&#x000A;426:     &#x000A;427:     <span class="ruby-ivar">@paths</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>&#x000A;428:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Loading config from #{path}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@verbose</span> &#x000A;429:       &#x000A;430:       <span class="ruby-keyword kw">begin</span>&#x000A;431:         <span class="ruby-ivar">@@glasses</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">glass</span><span class="ruby-operator">|</span> <span class="ruby-identifier">extend</span> <span class="ruby-identifier">glass</span> }&#x000A;432:         <span class="ruby-identifier">dsl</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span> <span class="ruby-identifier">path</span>&#x000A;433:         &#x000A;434:         <span class="ruby-comment cmt"># We're using eval so the DSL code can be executed in this</span>&#x000A;435:         <span class="ruby-comment cmt"># namespace.</span>&#x000A;436:         <span class="ruby-identifier">eval</span> <span class="ruby-node">%Q{&#x000A;437:           #{dsl}&#x000A;438:         }</span>, <span class="ruby-identifier">binding</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span>&#x000A;439:         &#x000A;440:         <span class="ruby-identifier">postprocess</span>&#x000A;441:         &#x000A;442:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-constant">SyntaxError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>&#x000A;443:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Syntax error in #{path}.&quot;</span>&#x000A;444:         <span class="ruby-identifier">puts</span> <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>&#x000A;445:         <span class="ruby-identifier">puts</span> <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">backtrace</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Caesars</span>.<span class="ruby-identifier">debug?</span>&#x000A;446:         <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>&#x000A;447:       <span class="ruby-keyword kw">end</span>&#x000A;448:     <span class="ruby-keyword kw">end</span>&#x000A;449:   <span class="ruby-keyword kw">end</span></pre>
+                  <pre id='M000022-source'>     <span class="ruby-comment cmt"># File lib/caesars.rb, line 486</span>&#x000A;486:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">refresh</span>&#x000A;487:     <span class="ruby-identifier">caesars_init</span>&#x000A;488:     &#x000A;489:     <span class="ruby-ivar">@paths</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>&#x000A;490:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Loading config from #{path}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@verbose</span> &#x000A;491:       &#x000A;492:       <span class="ruby-keyword kw">begin</span>&#x000A;493:         <span class="ruby-ivar">@@glasses</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">glass</span><span class="ruby-operator">|</span> <span class="ruby-identifier">extend</span> <span class="ruby-identifier">glass</span> }&#x000A;494:         <span class="ruby-identifier">dsl</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span> <span class="ruby-identifier">path</span>&#x000A;495:         &#x000A;496:         <span class="ruby-comment cmt"># We're using eval so the DSL code can be executed in this</span>&#x000A;497:         <span class="ruby-comment cmt"># namespace.</span>&#x000A;498:         <span class="ruby-identifier">eval</span> <span class="ruby-node">%Q{&#x000A;499:           #{dsl}&#x000A;500:         }</span>, <span class="ruby-identifier">binding</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span>&#x000A;501:         &#x000A;502:         <span class="ruby-identifier">postprocess</span>&#x000A;503:         &#x000A;504:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Caesars</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>&#x000A;505:         <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>&#x000A;506:         <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">backtrace</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Caesars</span>.<span class="ruby-identifier">debug?</span>&#x000A;507:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-constant">SyntaxError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>&#x000A;508:         <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Syntax error in #{path}.&quot;</span>&#x000A;509:         <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">message</span>&#x000A;510:         <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">ex</span>.<span class="ruby-identifier">backtrace</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Caesars</span>.<span class="ruby-identifier">debug?</span>&#x000A;511:         <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>&#x000A;512:       <span class="ruby-keyword kw">end</span>&#x000A;513:     <span class="ruby-keyword kw">end</span>&#x000A;514:   <span class="ruby-keyword kw">end</span></pre>
                 </div>
               </div>
             </div>
