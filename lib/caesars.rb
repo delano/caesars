@@ -7,12 +7,27 @@
 # See bin/example
 #
 class Caesars
-  VERSION = "0.5.4"
+  VERSION = 0.5
   @@debug = false
-
+  @@chilled = {}
+  @@forced_array = {}
+  
   def Caesars.enable_debug; @@debug = true; end
   def Caesars.disable_debug; @@debug = false; end
   def Caesars.debug?; @@debug; end
+  # Is the given +name+ chilled? 
+  # See Caesars.chill
+  def Caesars.chilled?(name)
+    return false unless name
+    @@chilled.has_key?(name.to_sym)
+  end
+  # Is the given +name+ a forced array? 
+  # See Caesars.forced_array
+  def Caesars.forced_array?(name)
+    return false unless name
+    @@forced_array.has_key?(name.to_sym)
+  end
+  
   
   # A subclass of ::Hash that provides method names for hash parameters.
   # It's like a lightweight OpenStruct. 
@@ -46,6 +61,10 @@ class Caesars
     # An instance of Caesars::Hash which contains the data specified by your DSL
   attr_accessor :caesars_properties
   
+  class Error < RuntimeError
+    def initialize(obj=nil); @obj = obj; end
+    def message; "#{self.class}: #{@obj}"; end
+  end
   
   def initialize(name=nil)
     @caesars_name = name if name
@@ -207,81 +226,76 @@ class Caesars
     @caesars_properties[name] = value
   end
   
-  # This method handles all of the attributes that do not contain blocks. 
+  # This method handles all of the attributes that are not forced hashes
   # It's used in the DSL for handling attributes dyanamically (that weren't defined
-  # previously) and also in subclasses of Caesar for returning the appropriate
+  # previously) and also in subclasses of Caesars for returning the appropriate
   # attribute values. 
   def method_missing(meth, *args, &b)
+    
     # Handle the setter, attribute=
     if meth.to_s =~ /=$/ && @caesars_properties.has_key?(meth.to_s.chop.to_sym)
       return @caesars_properties[meth.to_s.chop.to_sym] = (args.size == 1) ? args.first : args
     end
     
     return @caesars_properties[meth] if @caesars_properties.has_key?(meth) && args.empty? && b.nil?
-    return nil if args.empty? && b.nil?
+    
+    # We there are no args and no block, we return nil. This is useful
+    # for calls to methods on a Caesars::Hash object that don't have a
+    # value (so we cam treat self[:someval] the same as self.someval).
+    if args.empty? && b.nil?
+      
+      # We make an exception for methods that we are already expecting. 
+      if Caesars.forced_array?(meth)
+        return @caesars_pointer[meth] ||= Caesars::Hash.new
+      else
+        return nil 
+      end
+    end
     
     if b
       # Use the name of the bloody method if no name is supplied. 
       args << meth if args.empty?
+      
       args.each do |name|
         prev = @caesars_pointer
-        #(@caesars_pointer[:"#{meth}_values"] ||= []) << name
         @caesars_pointer[name] ||= Caesars::Hash.new
-        @caesars_pointer = @caesars_pointer[name]
-        begin
-          b.call if b
-        rescue ArgumentError, SyntaxError => ex
-          STDERR.puts "CAESARS: error in #{meth} (#{args.join(', ')})" 
-          raise ex
+        if Caesars.chilled?(meth)
+          @caesars_pointer[name] = b
+        else
+          @caesars_pointer = @caesars_pointer[name]
+          begin
+            b.call if b
+          rescue ArgumentError, SyntaxError => ex
+            STDERR.puts "CAESARS: error in #{meth} (#{args.join(', ')})" 
+            raise ex
+          end
+          @caesars_pointer = prev
         end
-        @caesars_pointer = prev
       end
-        
+    
+    # We've seen this attribute before, add the valued to the existing element    
     elsif @caesars_pointer.kind_of?(Hash) && @caesars_pointer[meth]
       
-      @caesars_pointer[meth] = [@caesars_pointer[meth]] unless @caesars_pointer[meth].is_a?(Array)
-      @caesars_pointer[meth] += args
+      if Caesars.forced_array?(meth)
+        @caesars_pointer[meth] ||= []
+        @caesars_pointer[meth] << args
+      else
+        # Make the element an Array once there's more than a single value
+        unless @caesars_pointer[meth].is_a?(Array)
+          @caesars_pointer[meth] = [@caesars_pointer[meth]] 
+        end
+        @caesars_pointer[meth] += args
+      end
+      
     elsif !args.empty?
-      @caesars_pointer[meth] = args.size == 1 ? args.first : args
+      if Caesars.forced_array?(meth)
+        @caesars_pointer[meth] = [args]
+      else
+        @caesars_pointer[meth] = args.size == 1 ? args.first : args
+      end
     end
   
   end
-  
-  # A class method which can be used by subclasses to specify which methods 
-  # should delay execution of their blocks. Here's an example:
-  # 
-  #      class Food < Caesars
-  #        chill :count
-  #      end
-  #      
-  #      food do
-  #        taste :delicious
-  #        count do |items|
-  #          puts items + 2
-  #        end
-  #      end
-  #
-  #      @config.food.count.call(3)     # => 5
-  #
-  def self.chill(caesars_meth)
-    module_eval %Q{
-      def #{caesars_meth}(*caesars_names,&b)
-        # caesars.toplevel.unnamed_chilled_attribute
-        return @caesars_properties[:'#{caesars_meth}'] if @caesars_properties.has_key?(:'#{caesars_meth}') && caesars_names.empty? && b.nil?
-        
-        # Use the name of the chilled method if no name is supplied. 
-        caesars_names << :'#{caesars_meth}' if caesars_names.empty?
-        
-        caesars_names.each do |name|
-          @caesars_pointer[name] = b
-        end
-      
-        @caesars_pointer[:'#{caesars_meth}']
-      end
-    }
-    nil
-  end
-  
   
   
   # Force the specified keyword to always be treated as a hash. 
@@ -311,16 +325,64 @@ class Caesars
         prev = @caesars_pointer
         @caesars_pointer[:'#{caesars_meth}'] ||= Caesars::Hash.new
         hash = Caesars::Hash.new
-        @caesars_pointer = hash
-        b.call if b
-        @caesars_pointer = prev
-        @caesars_pointer[:'#{caesars_meth}'][caesars_name] = hash 
-        @caesars_pointer = prev
+        if @caesars_pointer[:'#{caesars_meth}'].has_key?(caesars_name)
+          STDERR.puts "duplicate key ignored: \#{caesars_name}"
+          return
+        end
+        
+        @caesars_pointer = hash   # This is needed but I don't know why
+        if b
+          if Caesars.chilled?(:'#{caesars_meth}')
+            @caesars_pointer[:'#{caesars_meth}'][caesars_name] = b
+          else
+            b.call 
+            @caesars_pointer = prev
+            @caesars_pointer[:'#{caesars_meth}'][caesars_name] = hash
+          end
+          @caesars_pointer = prev
+        end
       end
     }
     nil
-    
-
+  end
+  
+  # Specify a method that should delay execution of its block. 
+  # Here's an example:
+  # 
+  #      class Food < Caesars
+  #        chill :count
+  #      end
+  #      
+  #      food do
+  #        taste :delicious
+  #        count do |items|
+  #          puts items + 2
+  #        end
+  #      end
+  #
+  #      @config.food.count.call(3)     # => 5
+  #
+  def self.chill(caesars_meth)
+    @@chilled[caesars_meth.to_sym] = true
+    nil
+  end
+  
+  # Specify a method that should store it's args as nested Arrays
+  # Here's an example:
+  #
+  #      class Food < Caesars
+  #        forced_array :sauce
+  #      end
+  #      
+  #      food do
+  #        taste :delicious
+  #        sauce 
+  #      end
+  #
+  #      @config.food.count.call(3)     # => 5
+  def self.forced_array(caesars_meth)
+    @@forced_array[caesars_meth.to_sym] = true
+    nil
   end
   
   # Executes automatically when Caesars is subclassed. This creates the
@@ -439,10 +501,13 @@ class Caesars::Config
         
         postprocess
         
+      rescue Caesars::Error => ex
+        STDERR.puts ex.message
+        STDERR.puts ex.backtrace if Caesars.debug?
       rescue ArgumentError, SyntaxError => ex
-        puts "Syntax error in #{path}."
-        puts ex.message
-        puts ex.backtrace if Caesars.debug?
+        STDERR.puts "Syntax error in #{path}."
+        STDERR.puts ex.message
+        STDERR.puts ex.backtrace if Caesars.debug?
         exit 1
       end
     end

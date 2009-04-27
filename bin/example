@@ -112,8 +112,6 @@ p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
 # EXAMPLE 3 -- External Config file
 #
 
-require 'caesars'
-
 class Food < Caesars
   chill :order
 end
@@ -136,4 +134,30 @@ p @config.keys              # => [:food, :drink]
 # [... make changes to party.conf ...]
 
 @config.refresh
+
+
+# ------------------------------------------------------------------
+# EXAMPLE 4 -- Forced Array
+#
+class Shift < Caesars
+  forced_array :peoples
+end
+
+include Shift::DSL
+
+shift do
+  peoples :tom, :jeff, :al
+  compare :tom, :jeff, :al
+  peoples :ada, :gary, :bo
+end
+
+p @shift.peoples[0]          # => [:tom, :jeff, :al]
+p @shift.compare[0]          # => :tom
+p @shift.compare             # => [:tom, :jeff, :al]
+p @shift.peoples[1]          # => [:ada, :gary, :bo]
+p @shift.compare[1]          # => :jeff
+
+
+
+
 

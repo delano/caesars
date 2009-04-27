@@ -1,6 +1,16 @@
 CAESAR -- CHANGES
 
 
+
+#### 0.5.5 (2009-04-27) ###############################
+
+* CHANGE: Caesars.chill and Caesars.forced_hash can now be used together. 
+* ADDED: Print error to STDERR when a duplicate key found for forced_hash keys
+* ADDED: Caesars.forced_array
+* CHANGE: Caesars.method_missing now stores and returns an empty Caesars::Hash
+for known methods that are called (currently only ones defined by forced_array)
+
+
 #### 0.5.4 (2009-04-11) ###############################
 
 * FIXED: find_deferred would abort early because the safety limit
