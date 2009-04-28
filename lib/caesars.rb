@@ -313,34 +313,36 @@ class Caesars
   def self.forced_hash(caesars_meth, &b)
     module_eval %Q{
       def #{caesars_meth}(*caesars_names,&b)
-        if @caesars_properties.has_key?(:'#{caesars_meth}') && caesars_names.empty? && b.nil?
-          return @caesars_properties[:'#{caesars_meth}'] 
+        this_meth = :'#{caesars_meth}'
+
+        if @caesars_properties.has_key?(this_meth) && caesars_names.empty? && b.nil?
+          return @caesars_properties[this_meth] 
         end
         
         return nil if caesars_names.empty? && b.nil?
-        return method_missing(:'#{caesars_meth}', *caesars_names, &b) if caesars_names.empty?
+        return method_missing(this_meth, *caesars_names, &b) if caesars_names.empty?
 
         caesars_name = caesars_names.shift
-
+        
         prev = @caesars_pointer
-        @caesars_pointer[:'#{caesars_meth}'] ||= Caesars::Hash.new
+        @caesars_pointer[this_meth] ||= Caesars::Hash.new
         hash = Caesars::Hash.new
-        if @caesars_pointer[:'#{caesars_meth}'].has_key?(caesars_name)
+        if @caesars_pointer[this_meth].has_key?(caesars_name)
           STDERR.puts "duplicate key ignored: \#{caesars_name}"
           return
         end
         
         @caesars_pointer = hash   # This is needed but I don't know why
         if b
-          if Caesars.chilled?(:'#{caesars_meth}')
-            @caesars_pointer[:'#{caesars_meth}'][caesars_name] = b
+          if Caesars.chilled?(this_meth)
+            @caesars_pointer[this_meth][caesars_name] = b
           else
             b.call 
-            @caesars_pointer = prev
-            @caesars_pointer[:'#{caesars_meth}'][caesars_name] = hash
           end
-          @caesars_pointer = prev
         end
+        @caesars_pointer = prev
+        @caesars_pointer[this_meth][caesars_name] = hash
+        @caesars_pointer = prev        
       end
     }
     nil
