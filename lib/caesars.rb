@@ -11,6 +11,7 @@ class Caesars
   @@debug = false
   @@chilled = {}
   @@forced_array = {}
+  @@forced_ignore = {}
   
   def Caesars.enable_debug; @@debug = true; end
   def Caesars.disable_debug; @@debug = false; end
@@ -27,7 +28,12 @@ class Caesars
     return false unless name
     @@forced_array.has_key?(name.to_sym)
   end
-  
+  # Is the given +name+ a forced ignore? 
+  # See Caesars.forced_ignore
+  def Caesars.forced_ignore?(name)
+    return false unless name
+    @@forced_ignore.has_key?(name.to_sym)
+  end
   
   # A subclass of ::Hash that provides method names for hash parameters.
   # It's like a lightweight OpenStruct. 
@@ -70,6 +76,7 @@ class Caesars
     @caesars_name = name if name
     @caesars_properties = Caesars::Hash.new
     @caesars_pointer = @caesars_properties
+    init if respond_to?(:init)
   end
   
   # Returns an array of the available 
@@ -231,6 +238,10 @@ class Caesars
   # previously) and also in subclasses of Caesars for returning the appropriate
   # attribute values. 
   def method_missing(meth, *args, &b)
+    if Caesars.forced_ignore?(meth)
+      STDERR.puts "Forced ignore: #{meth}" if Caesars.debug?
+      return
+    end
     
     # Handle the setter, attribute=
     if meth.to_s =~ /=$/ && @caesars_properties.has_key?(meth.to_s.chop.to_sym)
@@ -314,7 +325,11 @@ class Caesars
     module_eval %Q{
       def #{caesars_meth}(*caesars_names,&b)
         this_meth = :'#{caesars_meth}'
-
+        if Caesars.forced_ignore?(this_meth)
+          STDERR.puts "Forced ignore: \#{this_meth}" if Caesars.debug?
+          return
+        end
+        
         if @caesars_properties.has_key?(this_meth) && caesars_names.empty? && b.nil?
           return @caesars_properties[this_meth] 
         end
@@ -362,7 +377,7 @@ class Caesars
   #        end
   #      end
   #
-  #      @config.food.count.call(3)     # => 5
+  #      @food.count.call(3)    # => 5
   #
   def self.chill(caesars_meth)
     @@chilled[caesars_meth.to_sym] = true
@@ -378,12 +393,34 @@ class Caesars
   #      
   #      food do
   #        taste :delicious
-  #        sauce 
+  #        sauce :tabasco, :worcester
+  #        sauce :franks
   #      end
   #
-  #      @config.food.count.call(3)     # => 5
+  #      @food.sauce            # => [[:tabasco, :worcester], [:franks]]
+  #
   def self.forced_array(caesars_meth)
+    STDERR.puts "forced_array: #{caesars_meth}" if Caesars.debug?
     @@forced_array[caesars_meth.to_sym] = true
+    nil
+  end
+  
+  # Specify a method that should always be ignored. 
+  # Here's an example:
+  #
+  #     class Food < Caesars
+  #       forced_ignore :taste
+  #     end
+  #     
+  #     food do
+  #       taste :delicious
+  #     end
+  #
+  #     @food.taste             # => nil
+  #
+  def self.forced_ignore(caesars_meth)
+    STDERR.puts "forced_ignore: #{caesars_meth}" if Caesars.debug?
+    @@forced_ignore[caesars_meth.to_sym] = true
     nil
   end
   
@@ -399,7 +436,8 @@ class Caesars
   #      end
   #
   def self.inherited(modname)
-    meth = (modname.to_s.split(/::/))[-1].downcase  # Some::ClassName => classname
+    # NOTE: We may be able to replace this without an eval using Module.nesting
+    meth = (modname.to_s.split(/::/))[-1].downcase  # Some::HighBall => highball
     module_eval %Q{
       module #{modname}::DSL
         def #{meth}(*args, &b)
@@ -479,8 +517,8 @@ class Caesars::Config
     check_paths     # make sure files exist
   end
   
-  # This method is a stub. It gets called by refresh after the 
-  # config file has be loaded. You can use it to do some post 
+  # This method is a stub. It gets called by refresh after each 
+  # config file has be loaded. You can use it to run file specific
   # processing on the configuration before it's used elsewhere. 
   def postprocess
   end
@@ -489,20 +527,15 @@ class Caesars::Config
     caesars_init
     
     @paths.each do |path|
-      puts "Loading config from #{path}" if @verbose 
+      puts "Loading config from #{path}" if @verbose || Caesars.debug?
       
       begin
         @@glasses.each { |glass| extend glass }
         dsl = File.read path
-        
-        # We're using eval so the DSL code can be executed in this
-        # namespace.
-        eval %Q{
-          #{dsl}
-        }, binding, __FILE__, __LINE__
-        
+        # eval so the DSL code can be executed in this namespace.
+        eval dsl, binding, __FILE__, __LINE__
+        # Execute Caesars::Config.postprocesses for each file
         postprocess
-        
       rescue Caesars::Error => ex
         STDERR.puts ex.message
         STDERR.puts ex.backtrace if Caesars.debug?
