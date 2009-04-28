@@ -2,7 +2,7 @@ CAESAR -- CHANGES
 
 
 
-#### 0.5.6 (2009-04-??) ###############################
+#### 0.5.6 (2009-04-28) ###############################
 
 * FIXED: Bug in fixed_hash which wasn't forcing the hash man!
 
