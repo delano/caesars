@@ -1,13 +1,14 @@
 @spec = Gem::Specification.new do |s|
-  s.name = %q{caesars}
-  s.version = "0.5.6"
-  s.date = %q{2009-04-28}
+  s.name = "caesars"
+  s.rubyforge_project = "caesars"
+  s.version = "0.6.0"
+  s.date = "2009-04-30"
   s.specification_version = 1 if s.respond_to? :specification_version=
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
 
   s.authors = ["Delano Mandelbaum"]
-  s.description = %q{A simple class for rapid DSL prototyping in Ruby.}
-  s.summary = %q{Caesars: A simple class for rapid DSL prototyping in Ruby.}
+  s.description = %q{Rapid DSL prototyping in Ruby.}
+  s.summary = %q{Caesars: Rapid DSL prototyping in Ruby.}
   s.email = %q{delano@solutious.com}
 
   # = MANIFEST =
@@ -29,8 +30,7 @@
   s.has_rdoc = true
   s.homepage = %q{http://github.com/delano/caesar}
   s.extra_rdoc_files = %w[README.rdoc LICENSE.txt CHANGES.txt]
-  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Caesars: A simple class for rapid DSL prototyping in Ruby.", "--main", "README.rdoc"]
+  s.rdoc_options = ["--line-numbers", "--title", "Caesars: Rapid DSL prototyping in Ruby.", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.1.1}
-  s.rubyforge_project = "caesars"
+  s.rubygems_version = "1.1.1"
 end
