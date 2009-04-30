@@ -486,6 +486,15 @@ class Caesars::Config
   
   @@glasses = []
   
+  class ForceRefresh < RuntimeError
+    # The list of config types that need to be refreshed. This is currently
+    # for informational-purposes only. It does not affect which files/config
+    # types are refreshed. See Caesars::Config::ForcedRefresh
+    attr_reader :glasses 
+    def initialize(*glasses); @glasses = glasses; end
+    def message; "Force refresh of: #{@glasses.join(',')}"; end
+  end
+  
   # +args+ is a last of config file paths to load into this instance.
   # If the last argument is a hash, it's assumed to be a list of 
   # options. The available options are:
@@ -497,7 +506,7 @@ class Caesars::Config
     @options = args.last.is_a?(Hash) ? args.pop : {}
     @paths = args.empty? ? [] : args
     @options = {}
-    
+    @forced_refreshes = 0
     refresh
   end
   
@@ -505,10 +514,10 @@ class Caesars::Config
     # Remove instance variables used to populate DSL data
     instance_variables.each do |varname|
       next if varname == :'@options' || varname == :'@paths'  # Ruby 1.9.1
-      next if varname == '@options' || varname == '@paths'  # Ruby 1.8
+      next if varname == '@options' || varname == '@paths'    # Ruby 1.8
+      next if varname == '@forced_refreshes' || varname == :'@forced_refreshes'
       instance_variable_set(varname, nil)
     end
-    
     # Re-apply options
     @options.each_pair do |n,v|
       self.send("#{n}=", v) if respond_to?("#{n}=")
@@ -523,28 +532,54 @@ class Caesars::Config
   def postprocess
   end
   
+  # Clear all current configuration (sets all config instance
+  # variables to nil) and reload all config files in +@paths+.
+  # After each path is loaded, Caesars::Config.postprocess is
+  # called. If a ForceRefresh exception is raise, refresh is
+  # run again from the start. This is useful in the case 
+  # where one DSL can affect the parsing of another. Note that
+  # refresh only clears the instance variables, the class vars
+  # for each of the DSLs are not affected so all calls to
+  # +forced_array+, +forced_hash+, +chill+ and +forced_ignore+
+  # are unaffected. 
+  #
+  # Rudy has an example of forced refreshing in action. See 
+  # the files (http://github.com/solutious/rudy):
+  #
+  # * +lib/rudy/config.rb+
+  # * +lib/rudy/config/objects.rb+. 
+  # 
   def refresh
-    caesars_init
-    
-    @paths.each do |path|
-      puts "Loading config from #{path}" if @verbose || Caesars.debug?
-      
-      begin
-        @@glasses.each { |glass| extend glass }
+    caesars_init    # Delete all current configuration
+    @@glasses.each { |glass| extend glass }
+
+    begin
+      @paths.each do |path|
+        puts "Loading config from #{path}" if @verbose || Caesars.debug?
         dsl = File.read path
         # eval so the DSL code can be executed in this namespace.
         eval dsl, binding, __FILE__, __LINE__
-        # Execute Caesars::Config.postprocesses for each file
-        postprocess
-      rescue Caesars::Error => ex
-        STDERR.puts ex.message
-        STDERR.puts ex.backtrace if Caesars.debug?
-      rescue ArgumentError, SyntaxError => ex
-        STDERR.puts "Syntax error in #{path}."
-        STDERR.puts ex.message
-        STDERR.puts ex.backtrace if Caesars.debug?
-        exit 1
+        # Execute Caesars::Config.postprocesses every time a file is loaded
+        postprocess # Can raise ForceRefresh
       end
+    
+    rescue Caesars::Config::ForceRefresh => ex
+      @forced_refreshes += 1
+      if @forced_refreshes > 3
+        STDERR.puts "Too many forced refreshed (#{@forced_refreshes})"
+        exit 9
+      end
+      STDERR.puts ex.message if Caesars.debug?
+      refresh
+      
+    rescue Caesars::Error => ex
+      STDERR.puts ex.message
+      STDERR.puts ex.backtrace if Caesars.debug?
+    rescue ArgumentError, SyntaxError => ex
+      STDERR.puts "Syntax error in #{path}."
+      STDERR.puts ex.message
+      STDERR.puts ex.backtrace if Caesars.debug?
+      exit 1
     end
   end
   
