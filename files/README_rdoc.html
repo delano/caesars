@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang='en'>
   <head>
-    <title>File: README.rdoc [Caesars: A simple class for rapid DSL prototyping in Ruby.]</title>
+    <title>File: README.rdoc [Caesars: Rapid DSL prototyping in Ruby.]</title>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
     <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
     <script type='text/javascript'>
@@ -31,13 +31,13 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Sun Apr 19 08:46:45 -0400 2009</span>
+          <span class='datetime'>Thu Apr 30 14:38:59 -0400 2009</span>
         </div>
       </div>
       <div id='content'>
         <div id='text'>
           <div id='description'>
-            <h1><a href="../classes/Caesars.html">Caesars</a> - v0.5</h1>
+            <h1><a href="../classes/Caesars.html">Caesars</a> - v0.6</h1>
             <p>
             A simple class for rapid DSL prototyping in Ruby.
             </p>
@@ -66,11 +66,11 @@
             
             </li>
             </ul>
-            <h2>EXAMPLE 1 &#8212; Flavour</h2>
+            <h2>EXAMPLE 1 &#8212; A Simple DSL</h2>
             <pre>require 'caesars'&#x000A;&#x000A;class Flavour &lt; Caesars  # Subclass Caesars.&#x000A;end&#x000A;&#x000A;extend Flavour::DSL     # Bring the DSL into the current namespace.&#x000A;                        # This module is created dynamically based&#x000A;                        # on the name of the subclass.&#x000A;&#x000A;flavour do              # Start drinking! I mean, start writing your&#x000A;  spicy true            # domain specific language!&#x000A;  clamy true            # Use any attribute name you want.&#x000A;  salty true&#x000A;  vodka :very_true      # And any value you want.&#x000A;end&#x000A;&#x000A;p @flavour              # =&gt; #&lt;Flavour:0x3f56b0 ...&gt;&#x000A;p @flavour.spicy        # =&gt; true</pre>
-            <h2>EXAMPLE 2 &#8212; Staff</h2>
+            <h2>EXAMPLE 2 &#8212; Storing Blocks as Procs</h2>
             <pre>require 'caesars'&#x000A;&#x000A;class Staff &lt; Caesars&#x000A;&#x000A;  chill :calculate      # Delay execution of the blocks for the calculate&#x000A;                        # attribute. They will be stored as Procs.&#x000A;end&#x000A;&#x000A;extend Staff::DSL&#x000A;&#x000A;# The top level method is the lower case name of the class. For deeper&#x000A;# names like Class::SecondLevel it will use the final name&#x000A;# (i.e. secondlevel). You can supply an optional modifier name which&#x000A;# will be included in the instance variable (@staff_fte).&#x000A;staff :fte do&#x000A;  desc 'Our hard-working, &quot;full-time&quot; staff'&#x000A;&#x000A;  location :splashdown do&#x000A;    town :tsawwassen&#x000A;&#x000A;    person :steve, :sheila do&#x000A;      role :manager&#x000A;    end&#x000A;&#x000A;    person :steve do&#x000A;      role :cook&#x000A;      anger :high&#x000A;      hours 25&#x000A;      catchphrase &quot;Rah! [strokes goatee]&quot;&#x000A;    end&#x000A;&#x000A;    person :sheila do&#x000A;      catchphrase &quot;This gravy tastes like food I ate in a Mexican prison.&quot;&#x000A;      hours rand(20)&#x000A;      rate &quot;9.35/h&quot;&#x000A;      calculate :salary do |gumption|&#x000A;        (&quot;%.2f&quot; % [gumption * self.splashdown.sheila.rate.to_f]).to_f&#x000A;      end&#x000A;    end&#x000A;&#x000A;    person :delano do&#x000A;      role :cook&#x000A;      rate &quot;8.35/h&quot;&#x000A;      hours 57&#x000A;      satisfaction :low&#x000A;      calculate :salary do&#x000A;        self.splashdown.delano.rate.to_f * self.splashdown.delano.hours&#x000A;      end&#x000A;    end&#x000A;&#x000A;  end&#x000A;end&#x000A;&#x000A;p @staff_fte                    # =&gt; #&lt;Staff: ...&gt;&#x000A;p @staff_fte.desc               # =&gt; Our hard-working, &quot;full-time&quot; staff&#x000A;&#x000A;# Deeper attributes are also available via instance methods&#x000A;p @staff_fte.splashdown.delano  # =&gt; {:role=&gt;:cook, :rate=&gt;&quot;$8.35/h&quot;, :satisfaction=&gt;:low}&#x000A;p @staff_fte.splashdown.sheila  # =&gt; {:role=&gt;:manager, :catchphrase=&gt;&quot;This gravy tastes like food I ate in a Mexican prison.&quot;}&#x000A;p @staff_fte.splashdown.steve   # =&gt; {:role=&gt;[:manager, :cook], :anger=&gt;:high, :catchphrase=&gt;&quot;Rah! [strokes goatee]&quot;}&#x000A;p @staff_fte.splashdown.delano.satisfaction   # =&gt; :low&#x000A;&#x000A;# You can also access them using hash syntax&#x000A;p @staff_fte.splashdown[:steve][:role]  # =&gt; [:manager, :cook]&#x000A;&#x000A;# The &quot;chilled&quot; attributes store their blocks as Procs and are not executed automatically.&#x000A;# You can call them manually and send arguments like you normally would.&#x000A;p @staff_fte.splashdown.delano.salary.call             # =&gt; 475.95&#x000A;p @staff_fte.splashdown.sheila.salary.call(rand(100))  # =&gt; 549.77</pre>
-            <h2>EXAMPLE 3 &#8212; External Config file</h2>
+            <h2>EXAMPLE 3 &#8212; External Config Files</h2>
             <pre>require 'caesars'&#x000A;&#x000A;class Food &lt; Caesars&#x000A;  chill :order&#x000A;end&#x000A;class Drink &lt; Caesars&#x000A;end&#x000A;&#x000A;class PartyConfig &lt; Caesars::Config&#x000A;  dsl Food::DSL&#x000A;  dsl Drink::DSL&#x000A;end&#x000A;&#x000A;conffile = File.join(File.dirname(__FILE__), 'party.conf')&#x000A;@config = PartyConfig.new(conffile)&#x000A;&#x000A;p @config.food.order.call   # =&gt; 10kg&#x000A;p @config[:drink][:wine]    # =&gt; 12L&#x000A;p @config                   # =&gt; &lt;PartyConfig:0x3f780c ...&gt;&#x000A;p @config.keys              # =&gt; [:food, :drink]&#x000A;&#x000A;# [... make changes to party.conf ...]&#x000A;&#x000A;@config.refresh</pre>
             <p>
             <b>party.conf</b>
