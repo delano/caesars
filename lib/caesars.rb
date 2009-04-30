@@ -1,5 +1,5 @@
 
-# Caesars -- A simple class for rapid DSL prototyping.
+# Caesars -- Rapid DSL prototyping in Ruby.
 #
 # Subclass Caesars and start drinking! I mean, start prototyping
 # your own domain specific language!
@@ -7,7 +7,7 @@
 # See bin/example
 #
 class Caesars
-  VERSION = 0.5
+  VERSION = 0.6
   @@debug = false
   @@chilled = {}
   @@forced_array = {}
@@ -486,6 +486,7 @@ class Caesars::Config
   
   @@glasses = []
   
+  # Used by postprocess to tell refresh to reload all configs.
   class ForceRefresh < RuntimeError
     # The list of config types that need to be refreshed. This is currently
     # for informational-purposes only. It does not affect which files/config
@@ -510,19 +511,14 @@ class Caesars::Config
     refresh
   end
   
+  # Reset all config instance variables to nil.
   def caesars_init
     # Remove instance variables used to populate DSL data
-    instance_variables.each do |varname|
-      next if varname == :'@options' || varname == :'@paths'  # Ruby 1.9.1
-      next if varname == '@options' || varname == '@paths'    # Ruby 1.8
-      next if varname == '@forced_refreshes' || varname == :'@forced_refreshes'
-      instance_variable_set(varname, nil)
-    end
+    keys.each { |confname| instance_variable_set("@#{confname}", nil) }
     # Re-apply options
     @options.each_pair do |n,v|
       self.send("#{n}=", v) if respond_to?("#{n}=")
     end
-    
     check_paths     # make sure files exist
   end
   
@@ -583,6 +579,8 @@ class Caesars::Config
     end
   end
   
+  # Checks all values of +@paths+, raises an exception for nil
+  # values and file paths that don't exist.
   def check_paths
     @paths.each do |path|
       raise "You provided a nil value" unless path
@@ -590,7 +588,7 @@ class Caesars::Config
     end
   end
   
-  
+  # Do any of the known DSLs have config data?
   def empty?
     keys.each do |obj|
       return false if self.respond_to?(obj.to_sym)
@@ -598,18 +596,55 @@ class Caesars::Config
     true
   end
   
+  # Specify a DSL class (+glass+) to include in this config. 
+  # 
+  #     class CoolDrink < Caesars::Config
+  #       dsl CoolDrink::Flavours::DSL
+  #     end
+  #
   def self.dsl(glass)
     @@glasses << glass
   end
   
+  # Provide a hash-like interface for Config classes.
+  # +name+ is the name of a DSL config. 
+  #
+  #     class CoolDrink < Caesars::Config
+  #       dsl CoolDrink::Flavours::DSL
+  #     end
+  #
+  #     cd = CoolDrink.new('/path/2/config')
+  #     cd[:flavours]     # => {}
+  #
   def [](name)
     self.send(name) if respond_to?(name)
   end
-    
+  
+  # Returns the list of known DSL config names. 
+  #     class CoolDrink < Caesars::Config
+  #       dsl CoolDrink::Flavours::DSL
+  #     end
+  #
+  #     cd = CoolDrink.new('/path/2/config')
+  #     cd.keys           # => [:flavours]
+  #
   def keys
     @@glasses.collect { |glass| glass.methname }
   end
   
+  # Is +name+ a known configuration type?
+  #
+  #     class CoolDrink < Caesars::Config
+  #       dsl CoolDrink::Flavours::DSL
+  #     end
+  #
+  #     cd = CoolDrink.new('/path/2/config')
+  #     cd.has_key?(:taste)        # => false
+  #     cd.has_key?(:flavours)     # => true
+  #
+  def has_key?(name)
+    respond_to?(name)
+  end
 end
 
 

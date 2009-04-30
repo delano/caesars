@@ -1,4 +1,4 @@
-= Caesars - v0.5
+= Caesars - v0.6
 
 A simple class for rapid DSL prototyping in Ruby.
 
@@ -15,7 +15,7 @@ Or for GitHub fans:
 * git clone git://github.com/delano/caesar.git
 
 
-== EXAMPLE 1 -- Flavour
+== EXAMPLE 1 -- A Simple DSL
 
      require 'caesars'
 
@@ -38,7 +38,7 @@ Or for GitHub fans:
 
 
 
-== EXAMPLE 2 -- Staff
+== EXAMPLE 2 -- Storing Blocks as Procs
 
      require 'caesars'
      
@@ -111,7 +111,7 @@ Or for GitHub fans:
      p @staff_fte.splashdown.sheila.salary.call(rand(100))  # => 549.77
 
 
-== EXAMPLE 3 -- External Config file
+== EXAMPLE 3 -- External Config Files
 
      require 'caesars'
      

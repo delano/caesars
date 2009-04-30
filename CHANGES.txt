@@ -1,12 +1,13 @@
-CAESAR -- CHANGES
-
+CAESARS -- CHANGES
 
 
 #### 0.6.0 (2009-04-30) ###############################
 
-* ADDED: Caesars.forced_ignore
 * ADDED: Forced reloading for Caesars::Config.refresh. This allows
 one DSL to affect the parsing of another. 
+* ADDED: Caesars.forced_ignore
+* ADDED: Better docs for Caesars::Config
+* ADDED: Ceasars::Config.has_key?
 
 
 #### 0.5.6 (2009-04-28) ###############################
