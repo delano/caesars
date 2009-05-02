@@ -38,12 +38,21 @@ class Caesars
   end
   
   # Add +s+ to the list of global symbols (across all instances of Caesars)
-  def Caesars.add_known_symbol(s); @@known_symbols << s.to_sym; end
+  def Caesars.add_known_symbol(g, s)
+    g = Caesars.glass(g)
+    STDERR.puts "add_symbol: #{g} => #{s}" if Caesars.debug?
+    @@known_symbols << s.to_sym
+    @@known_symbols_by_glass[g] ||= []
+    @@known_symbols_by_glass[g] << s.to_sym
+  end
+  
   # Is +s+ in the global keyword list? (accross all instances of Caesars)
   def Caesars.known_symbol?(s); @@known_symbols.member?(s.to_sym); end
   # Is +s+ in the keyword list for glass +g+?
   def Caesars.known_symbol_by_glass?(g, s)
-   @@known_symbols_by_glass[g] && @@known_symbols_by_glass[g].member?(s.to_sym)
+    g &&= g.to_sym
+    @@known_symbols_by_glass[g] ||= []
+   @@known_symbols_by_glass[g].member?(s.to_sym)
   end
     
   # A subclass of ::Hash that provides method names for hash parameters.
@@ -255,7 +264,10 @@ class Caesars
   end
   
   # Returns the lowercase name of the class. i.e. Some::Taste  # => taste
-  def glass; @glass ||= (self.class.to_s.split(/::/))[-1].downcase; end
+  def glass; @glass ||= (self.class.to_s.split(/::/))[-1].downcase.to_sym; end
+  
+  # Returns the lowercase name of +klass+. i.e. Some::Taste  # => taste
+  def self.glass(klass); (klass.to_s.split(/::/))[-1].downcase.to_sym; end
   
   # This method handles all of the attributes that are not forced hashes
   # It's used in the DSL for handling attributes dyanamically (that weren't defined
@@ -347,6 +359,8 @@ class Caesars
   #     end
   #
   def self.forced_hash(caesars_meth, &b)
+    STDERR.puts "forced_hash: #{caesars_meth}" if Caesars.debug?
+    Caesars.add_known_symbol(self, caesars_meth)
     module_eval %Q{
       def #{caesars_meth}(*caesars_names,&b)
         this_meth = :'#{caesars_meth}'
@@ -406,8 +420,8 @@ class Caesars
   #      @food.count.call(3)    # => 5
   #
   def self.chill(caesars_meth)
-    add_known_symbol(caesars_meth)
     STDERR.puts "chill: #{caesars_meth}" if Caesars.debug?
+    Caesars.add_known_symbol(self, caesars_meth)
     @@chilled[caesars_meth.to_sym] = true
     nil
   end
@@ -428,8 +442,8 @@ class Caesars
   #      @food.sauce            # => [[:tabasco, :worcester], [:franks]]
   #
   def self.forced_array(caesars_meth)
-    add_known_symbol(caesars_meth)
     STDERR.puts "forced_array: #{caesars_meth}" if Caesars.debug?
+    Caesars.add_known_symbol(self, caesars_meth)
     @@forced_array[caesars_meth.to_sym] = true
     nil
   end
@@ -448,8 +462,8 @@ class Caesars
   #     @food.taste             # => nil
   #
   def self.forced_ignore(caesars_meth)
-    add_known_symbol(caesars_meth)
     STDERR.puts "forced_ignore: #{caesars_meth}" if Caesars.debug?
+    Caesars.add_known_symbol(self, caesars_meth)
     @@forced_ignore[caesars_meth.to_sym] = true
     nil
   end
@@ -468,10 +482,10 @@ class Caesars
   def self.inherited(modname)
     # NOTE: We may be able to replace this without an eval using Module.nesting
     meth = (modname.to_s.split(/::/))[-1].downcase  # Some::HighBall => highball
+    Caesars.add_known_symbol(meth, meth)
     module_eval %Q{
       module #{modname}::DSL
         def #{meth}(*args, &b)
-          Caesars.add_known_symbol(:'#{meth}')
           name = !args.empty? ? args.first.to_s : nil
           varname = "@#{meth.to_s}"
           varname << "_\#{name}" if name

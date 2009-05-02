@@ -1,6 +1,11 @@
 CAESARS -- CHANGES
 
 
+#### 0.6.1 (2009-05-01) ###############################
+
+* ADDED: known_symbol? and known_symbol_by_glass?
+ 
+
 #### 0.6.0 (2009-04-30) ###############################
 
 * ADDED: Forced reloading for Caesars::Config.refresh. This allows
