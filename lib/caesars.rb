@@ -12,6 +12,8 @@ class Caesars
   @@chilled = {}
   @@forced_array = {}
   @@forced_ignore = {}
+  @@known_symbols = []
+  @@known_symbols_by_glass = {}
   
   def Caesars.enable_debug; @@debug = true; end
   def Caesars.disable_debug; @@debug = false; end
@@ -35,6 +37,24 @@ class Caesars
     @@forced_ignore.has_key?(name.to_sym)
   end
   
+  # Add +s+ to the list of global symbols (across all instances of Caesars)
+  def Caesars.add_known_symbol(g, s)
+    g = Caesars.glass(g)
+    STDERR.puts "add_symbol: #{g} => #{s}" if Caesars.debug?
+    @@known_symbols << s.to_sym
+    @@known_symbols_by_glass[g] ||= []
+    @@known_symbols_by_glass[g] << s.to_sym
+  end
+  
+  # Is +s+ in the global keyword list? (accross all instances of Caesars)
+  def Caesars.known_symbol?(s); @@known_symbols.member?(s.to_sym); end
+  # Is +s+ in the keyword list for glass +g+?
+  def Caesars.known_symbol_by_glass?(g, s)
+    g &&= g.to_sym
+    @@known_symbols_by_glass[g] ||= []
+   @@known_symbols_by_glass[g].member?(s.to_sym)
+  end
+    
   # A subclass of ::Hash that provides method names for hash parameters.
   # It's like a lightweight OpenStruct. 
   #     ch = Caesars::Hash[:tabasco => :lots!]
@@ -79,14 +99,11 @@ class Caesars
     init if respond_to?(:init)
   end
   
-  # Returns an array of the available 
-  def keys
-    @caesars_properties.keys
-  end
+  # Returns an array of the available top-level attributes
+  def keys; @caesars_properties.keys; end
   
-  def to_hash
-    @caesars_properties.to_hash
-  end
+  # Returns the parsed tree as a regular hash (instead of a Caesars::Hash)
+  def to_hash; @caesars_properties.to_hash; end
   
   # DEPRECATED -- use find_deferred
   #
@@ -233,11 +250,31 @@ class Caesars
     @caesars_properties[name] = value
   end
   
+  # Add +keyword+ to the list of known symbols for this instances
+  # as well as to the master known symbols list. See: known_symbol?
+  def add_known_symbol(s)
+    @@known_symbols << s.to_sym
+    @@known_symbols_by_glass[glass] ||= []
+    @@known_symbols_by_glass[glass] << s.to_sym
+  end  
+  
+  # Has +s+ already appeared as a keyword in the DSL for this glass type?
+  def known_symbol?(s)
+    @@known_symbols_by_glass[glass] && @@known_symbols_by_glass[glass].member?(s)
+  end
+  
+  # Returns the lowercase name of the class. i.e. Some::Taste  # => taste
+  def glass; @glass ||= (self.class.to_s.split(/::/))[-1].downcase.to_sym; end
+  
+  # Returns the lowercase name of +klass+. i.e. Some::Taste  # => taste
+  def self.glass(klass); (klass.to_s.split(/::/))[-1].downcase.to_sym; end
+  
   # This method handles all of the attributes that are not forced hashes
   # It's used in the DSL for handling attributes dyanamically (that weren't defined
   # previously) and also in subclasses of Caesars for returning the appropriate
   # attribute values. 
   def method_missing(meth, *args, &b)
+    add_known_symbol(meth)
     if Caesars.forced_ignore?(meth)
       STDERR.puts "Forced ignore: #{meth}" if Caesars.debug?
       return
@@ -322,9 +359,12 @@ class Caesars
   #     end
   #
   def self.forced_hash(caesars_meth, &b)
+    STDERR.puts "forced_hash: #{caesars_meth}" if Caesars.debug?
+    Caesars.add_known_symbol(self, caesars_meth)
     module_eval %Q{
       def #{caesars_meth}(*caesars_names,&b)
         this_meth = :'#{caesars_meth}'
+        add_known_symbol(this_meth)
         if Caesars.forced_ignore?(this_meth)
           STDERR.puts "Forced ignore: \#{this_meth}" if Caesars.debug?
           return
@@ -380,6 +420,8 @@ class Caesars
   #      @food.count.call(3)    # => 5
   #
   def self.chill(caesars_meth)
+    STDERR.puts "chill: #{caesars_meth}" if Caesars.debug?
+    Caesars.add_known_symbol(self, caesars_meth)
     @@chilled[caesars_meth.to_sym] = true
     nil
   end
@@ -401,6 +443,7 @@ class Caesars
   #
   def self.forced_array(caesars_meth)
     STDERR.puts "forced_array: #{caesars_meth}" if Caesars.debug?
+    Caesars.add_known_symbol(self, caesars_meth)
     @@forced_array[caesars_meth.to_sym] = true
     nil
   end
@@ -420,6 +463,7 @@ class Caesars
   #
   def self.forced_ignore(caesars_meth)
     STDERR.puts "forced_ignore: #{caesars_meth}" if Caesars.debug?
+    Caesars.add_known_symbol(self, caesars_meth)
     @@forced_ignore[caesars_meth.to_sym] = true
     nil
   end
@@ -438,6 +482,7 @@ class Caesars
   def self.inherited(modname)
     # NOTE: We may be able to replace this without an eval using Module.nesting
     meth = (modname.to_s.split(/::/))[-1].downcase  # Some::HighBall => highball
+    Caesars.add_known_symbol(meth, meth)
     module_eval %Q{
       module #{modname}::DSL
         def #{meth}(*args, &b)
@@ -550,7 +595,9 @@ class Caesars::Config
     @@glasses.each { |glass| extend glass }
 
     begin
+      current_path = nil  # used in error messages
       @paths.each do |path|
+        current_path = path
         puts "Loading config from #{path}" if @verbose || Caesars.debug?
         dsl = File.read path
         # eval so the DSL code can be executed in this namespace.
@@ -568,14 +615,12 @@ class Caesars::Config
       STDERR.puts ex.message if Caesars.debug?
       refresh
       
-    rescue Caesars::Error => ex
-      STDERR.puts ex.message
-      STDERR.puts ex.backtrace if Caesars.debug?
+    #rescue Caesars::Error => ex
+    #  STDERR.puts ex.message
+    #  STDERR.puts ex.backtrace if Caesars.debug?
     rescue ArgumentError, SyntaxError => ex
-      STDERR.puts "Syntax error in #{path}."
-      STDERR.puts ex.message
-      STDERR.puts ex.backtrace if Caesars.debug?
-      exit 1
+      STDERR.puts "Syntax error in #{current_path}."
+      raise ex
     end
   end
   
