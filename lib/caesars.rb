@@ -88,8 +88,17 @@ class Caesars
   attr_accessor :caesars_properties
   
   class Error < RuntimeError
+    attr_accessor :backtrace
     def initialize(obj=nil); @obj = obj; end
     def message; "#{self.class}: #{@obj}"; end
+  end
+  class SyntaxError < Caesars::Error
+    def message
+      msg = "Syntax error in #{@obj}"
+      bt = @backtrace 
+      msg << " in " << bt.first.scan(/\`(.+?)'/).flatten.first if bt
+      msg
+    end
   end
   
   def initialize(name=nil)
@@ -376,7 +385,8 @@ class Caesars
         
         return nil if caesars_names.empty? && b.nil?
         return method_missing(this_meth, *caesars_names, &b) if caesars_names.empty?
-
+        
+        # TODO: This should be a loop
         caesars_name = caesars_names.shift
         
         prev = @caesars_pointer
@@ -387,17 +397,30 @@ class Caesars
           return
         end
         
-        @caesars_pointer = hash   # This is needed but I don't know why
+        # The pointer is pointing to the hash that contains "this_meth". 
+        # We wan't to make it point to the this_meth hash so when we call 
+        # the block, we'll create new entries in there. 
+        @caesars_pointer = hash  
+        
         if b
           if Caesars.chilled?(this_meth)
+            # We're done processing this_meth so we want to return the pointer
+            # to the level above. 
+            @caesars_pointer = prev
             @caesars_pointer[this_meth][caesars_name] = b
           else
+            # Since the pointer is pointing to the this_meth hash, all keys
+            # created in the block we be placed inside. 
             b.call 
+            # We're done processing this_meth so we want to return the pointer
+            # to the level above. 
+            @caesars_pointer = prev
+            @caesars_pointer[this_meth][caesars_name] = hash
           end
         end
-        @caesars_pointer = prev
-        @caesars_pointer[this_meth][caesars_name] = hash
-        @caesars_pointer = prev        
+        
+        @caesars_pointer = prev    
+        
       end
     }
     nil
@@ -526,8 +549,8 @@ end
 #
 class Caesars::Config
   attr_accessor :paths
-  attr_accessor :options
-  attr_accessor :verbose
+  attr_reader :options
+  attr_reader :verbose
   
   @@glasses = []
   
@@ -554,6 +577,11 @@ class Caesars::Config
     @options = {}
     @forced_refreshes = 0
     refresh
+  end
+  
+  def verbose=(enable)
+    @verbose = enable == true
+    @options[:verbose] = @verbose
   end
   
   # Reset all config instance variables to nil.
@@ -593,7 +621,7 @@ class Caesars::Config
   def refresh
     caesars_init    # Delete all current configuration
     @@glasses.each { |glass| extend glass }
-
+    
     begin
       current_path = nil  # used in error messages
       @paths.each do |path|
@@ -612,15 +640,16 @@ class Caesars::Config
         STDERR.puts "Too many forced refreshed (#{@forced_refreshes})"
         exit 9
       end
-      STDERR.puts ex.message if Caesars.debug?
+      STDERR.puts ex.message if @verbose || Caesars.debug?
       refresh
       
     #rescue Caesars::Error => ex
     #  STDERR.puts ex.message
     #  STDERR.puts ex.backtrace if Caesars.debug?
     rescue ArgumentError, SyntaxError => ex
-      STDERR.puts "Syntax error in #{current_path}."
-      raise ex
+      newex = Caesars::SyntaxError.new(current_path)
+      newex.backtrace = ex.backtrace
+      raise newex
     end
   end
   

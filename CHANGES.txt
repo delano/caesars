@@ -1,10 +1,18 @@
 CAESARS -- CHANGES
 
 
+#### 0.6.2 (2009-05-03) ###############################
+
+* FIXED: When setting Caesars::Config.verbose it would get reset after a refresh. 
+* FIXED: Handling a keyword that's passed to both forced_hash and chill
+* ADDED: Print message to STDERR when force refreshing in debug or verbose mode
+* ADDED: Caesars::SyntaxError
+
+
 #### 0.6.1 (2009-05-02) ###############################
 
-* ADDED: known_symbol? and known_symbol_by_glass? 
-
+* ADDED: known_symbol? and known_symbol_by_glass?
+ 
 #### 0.6.0 (2009-04-30) ###############################
 
 * ADDED: Forced reloading for Caesars::Config.refresh. This allows
