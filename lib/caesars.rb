@@ -402,25 +402,24 @@ class Caesars
         # the block, we'll create new entries in there. 
         @caesars_pointer = hash  
         
-        if b
-          if Caesars.chilled?(this_meth)
-            # We're done processing this_meth so we want to return the pointer
-            # to the level above. 
-            @caesars_pointer = prev
-            @caesars_pointer[this_meth][caesars_name] = b
-          else
+        if Caesars.chilled?(this_meth)
+          # We're done processing this_meth so we want to return the pointer
+          # to the level above. 
+          @caesars_pointer = prev
+          @caesars_pointer[this_meth][caesars_name] = b
+        else          
+          if b
             # Since the pointer is pointing to the this_meth hash, all keys
             # created in the block we be placed inside. 
             b.call 
-            # We're done processing this_meth so we want to return the pointer
-            # to the level above. 
-            @caesars_pointer = prev
-            @caesars_pointer[this_meth][caesars_name] = hash
           end
+           # We're done processing this_meth so we want to return the pointer
+           # to the level above. 
+           @caesars_pointer = prev
+           @caesars_pointer[this_meth][caesars_name] = hash
         end
         
-        @caesars_pointer = prev    
-        
+        @caesars_pointer = prev   
       end
     }
     nil

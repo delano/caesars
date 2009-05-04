@@ -1,6 +1,11 @@
 CAESARS -- CHANGES
 
 
+#### 0.6.3 (2009-05-04) ###############################
+
+* FIXED: Bug in forced_hash, not creating some keys
+
+
 #### 0.6.2 (2009-05-03) ###############################
 
 * FIXED: When setting Caesars::Config.verbose it would get reset after a refresh. 
