@@ -1,6 +1,10 @@
 CAESARS -- CHANGES
 
 
+#### 0.6.5 (2009-05-10) ###############################
+
+* FIXED: OrderHash was missing from 0.6.4 release
+
 #### 0.6.4 (2009-05-10) ###############################
 
 * CHANGE: OrderedHash support for Ruby 1.8 and JRuby
