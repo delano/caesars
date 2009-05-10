@@ -159,6 +159,7 @@ Or for GitHub fans:
 
 == Credits
 
+* OrderedHash implementation by jan molic
 * Delano Mandelbaum (delano@solutious.com)
 
 == Thanks

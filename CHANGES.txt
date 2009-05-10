@@ -1,6 +1,11 @@
 CAESARS -- CHANGES
 
 
+#### 0.6.4 (2009-05-10) ###############################
+
+* CHANGE: OrderedHash support for Ruby 1.8 and JRuby
+
+
 #### 0.6.3 (2009-05-04) ###############################
 
 * FIXED: Bug in forced_hash, not creating some keys

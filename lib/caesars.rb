@@ -1,3 +1,4 @@
+require 'orderedhash'
 
 # Caesars -- Rapid DSL prototyping in Ruby.
 #
@@ -14,6 +15,7 @@ class Caesars
   @@forced_ignore = {}
   @@known_symbols = []
   @@known_symbols_by_glass = {}
+  HASH_TYPE = (RUBY_VERSION =~ /1.9/) ? ::Hash : ::OrderedHash
   
   def Caesars.enable_debug; @@debug = true; end
   def Caesars.disable_debug; @@debug = false; end
@@ -60,7 +62,7 @@ class Caesars
   #     ch = Caesars::Hash[:tabasco => :lots!]
   #     puts ch.tabasco  # => lots!
   #
-  class Hash < ::Hash
+  class Hash < HASH_TYPE
     def method_missing(meth)
       self[meth] if self.has_key?(meth)
     end
@@ -68,7 +70,7 @@ class Caesars
     # Returns a clone of itself and all children cast as ::Hash objects
     def to_hash(hash=self)
       return hash unless hash.is_a?(Caesars::Hash) # nothing to do
-      target = ::Hash[dup]
+      target = (Caesars::HASH_TYPE)[dup]
       hash.keys.each do |key|
         if hash[key].is_a? Caesars::Hash
           target[key] = hash[key].to_hash
@@ -571,7 +573,7 @@ class Caesars::Config
   #
   def initialize(*args)
     # We store the options hash b/c we reapply them when we refresh.
-    @options = args.last.is_a?(Hash) ? args.pop : {}
+    @options = args.last.kind_of?(Hash) ? args.pop : {}
     @paths = args.empty? ? [] : args
     @options = {}
     @forced_refreshes = 0
