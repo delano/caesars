@@ -1,6 +1,13 @@
 CAESARS -- CHANGES
 
 
+#### 0.6.6 (2009-05-12) ###############################
+
+* CHANGE: Renamed OrderedHash to Caesars::OrderedHash to eliminate change of namespace conflicts
+* CHANGE: Caesars::VERSION is now a String an includes the TINY (0.6.6)
+* FIX: OrderedHash.merge was making an inappropriate call to dup
+
+
 #### 0.6.5 (2009-05-10) ###############################
 
 * FIXED: OrderHash was missing from 0.6.4 release

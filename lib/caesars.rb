@@ -1,4 +1,4 @@
-require 'orderedhash'
+
 
 # Caesars -- Rapid DSL prototyping in Ruby.
 #
@@ -8,14 +8,16 @@ require 'orderedhash'
 # See bin/example
 #
 class Caesars
-  VERSION = 0.6
+  require 'caesars/orderedhash'
+  
+  VERSION = "0.6.6"
   @@debug = false
   @@chilled = {}
   @@forced_array = {}
   @@forced_ignore = {}
   @@known_symbols = []
   @@known_symbols_by_glass = {}
-  HASH_TYPE = (RUBY_VERSION =~ /1.9/) ? ::Hash : ::OrderedHash
+  HASH_TYPE = (RUBY_VERSION =~ /1.9/) ? ::Hash : Caesars::OrderedHash
   
   def Caesars.enable_debug; @@debug = true; end
   def Caesars.disable_debug; @@debug = false; end
