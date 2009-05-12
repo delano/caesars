@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Sat May 09 21:03:31 -0400 2009</span>
+          <span class='datetime'>Tue May 12 06:45:54 -0400 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -41,11 +41,33 @@
             CAESARS &#8212; CHANGES
             </p>
             <p>
+            #### 0.6.6 (2009-05-12) ###############################
+            </p>
+            <ul>
+            <li>CHANGE: Renamed OrderedHash to Caesars::OrderedHash to eliminate change of
+            namespace conflicts
+            
+            </li>
+            <li>CHANGE: Caesars::VERSION is now a String an includes the TINY (0.6.6)
+            
+            </li>
+            <li>FIX: OrderedHash.merge was making an inappropriate call to dup
+            
+            </li>
+            </ul>
+            <p>
+            #### 0.6.5 (2009-05-10) ###############################
+            </p>
+            <ul>
+            <li>FIXED: OrderHash was missing from 0.6.4 release
+            
+            </li>
+            </ul>
+            <p>
             #### 0.6.4 (2009-05-10) ###############################
             </p>
             <ul>
-            <li>CHANGE: <a href="../classes/OrderedHash.html">OrderedHash</a> support for
-            Ruby 1.8 and JRuby
+            <li>CHANGE: OrderedHash support for Ruby 1.8 and JRuby
             
             </li>
             </ul>
@@ -90,7 +112,7 @@
             </p>
             <ul>
             <li>ADDED: Forced reloading for <a
-            href="../classes/Caesars/Config.html#M000033">Caesars::Config.refresh</a>.
+            href="../classes/Caesars/Config.html#M000032">Caesars::Config.refresh</a>.
             This allows
             
             </li>
@@ -99,7 +121,7 @@
             one DSL to affect the parsing of another.
             </p>
             <ul>
-            <li>ADDED: <a href="../classes/Caesars.html#M000027">Caesars.forced_ignore</a>
+            <li>ADDED: <a href="../classes/Caesars.html#M000026">Caesars.forced_ignore</a>
             
             </li>
             <li>ADDED: Better docs for <a
@@ -122,8 +144,8 @@
             #### 0.5.5 (2009-04-27) ###############################
             </p>
             <ul>
-            <li>CHANGE: <a href="../classes/Caesars.html#M000025">Caesars.chill</a> and <a
-            href="../classes/Caesars.html#M000024">Caesars.forced_hash</a> can now be
+            <li>CHANGE: <a href="../classes/Caesars.html#M000024">Caesars.chill</a> and <a
+            href="../classes/Caesars.html#M000023">Caesars.forced_hash</a> can now be
             used together.
             
             </li>
@@ -131,11 +153,11 @@
             keys
             
             </li>
-            <li>ADDED: <a href="../classes/Caesars.html#M000026">Caesars.forced_array</a>
+            <li>ADDED: <a href="../classes/Caesars.html#M000025">Caesars.forced_array</a>
             
             </li>
             <li>CHANGE: <a
-            href="../classes/Caesars.html#M000023">Caesars.method_missing</a> now
+            href="../classes/Caesars.html#M000022">Caesars.method_missing</a> now
             stores and returns an empty <a
             href="../classes/Caesars/Hash.html">Caesars::Hash</a>
             
@@ -171,9 +193,9 @@
             #### 0.5.2 (2009-03-31) ###############################
             </p>
             <ul>
-            <li>ADDED: <a href="../classes/Caesars.html#M000004">Caesars.debug?</a>, <a
-            href="../classes/Caesars.html#M000002">Caesars.enable_debug</a>, <a
-            href="../classes/Caesars.html#M000003">Caesars.disable_debug</a>
+            <li>ADDED: <a href="../classes/Caesars.html#M000003">Caesars.debug?</a>, <a
+            href="../classes/Caesars.html#M000001">Caesars.enable_debug</a>, <a
+            href="../classes/Caesars.html#M000002">Caesars.disable_debug</a>
             
             </li>
             <li>CHANGED: find_deferred now supports nested Arrays. See rdocs.
@@ -219,11 +241,11 @@
             
             </li>
             <li>ADDED: post processing hook in <a
-            href="../classes/Caesars/Config.html#M000033">Caesars::Config#refresh</a>
+            href="../classes/Caesars/Config.html#M000032">Caesars::Config#refresh</a>
             
             </li>
             <li>ADDED: <a
-            href="../classes/Caesars/Hash.html#M000043">Caesars::Hash#to_hash</a> now
+            href="../classes/Caesars/Hash.html#M000042">Caesars::Hash#to_hash</a> now
             recursively casts children to ::Hash.
             
             </li>

@@ -4331,91 +4331,51 @@
         
         Element.addMethods();
         var search_index = [
-          { method: '==', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000053"><span class="method_name">==</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'orderedhash', module: 'lib/orderedhash.rb', html: '<a href="files/lib/orderedhash_rb.html#M000001"><span class="method_name">OrderedHash</span> <span class="module_name">(lib/orderedhash.rb)</span></a>' },
-          { method: '[]', module: 'caesars', html: '<a href="classes/Caesars.html#M000017"><span class="method_name">[]</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: '[]', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000037"><span class="method_name">[]</span> <span class="module_name">(Caesars::Config)</span></a>' },
-          { method: '[]', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000047"><span class="method_name">[]</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: '[]=', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000052"><span class="method_name">[]=</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: '[]=', module: 'caesars', html: '<a href="classes/Caesars.html#M000018"><span class="method_name">[]=</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: '__class__', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000081"><span class="method_name">__class__</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'add_known_symbol', module: 'caesars', html: '<a href="classes/Caesars.html#M000019"><span class="method_name">add_known_symbol</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'add_known_symbol', module: 'caesars', html: '<a href="classes/Caesars.html#M000008"><span class="method_name">add_known_symbol</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'caesars_init', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000031"><span class="method_name">caesars_init</span> <span class="module_name">(Caesars::Config)</span></a>' },
-          { method: 'check_paths', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000034"><span class="method_name">check_paths</span> <span class="module_name">(Caesars::Config)</span></a>' },
-          { method: 'chill', module: 'caesars', html: '<a href="classes/Caesars.html#M000025"><span class="method_name">chill</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'chilled?', module: 'caesars', html: '<a href="classes/Caesars.html#M000005"><span class="method_name">chilled?</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'class', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000080"><span class="method_name">class</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'clear', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000054"><span class="method_name">clear</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'debug?', module: 'caesars', html: '<a href="classes/Caesars.html#M000004"><span class="method_name">debug?</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'delete', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000055"><span class="method_name">delete</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'delete_if', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000060"><span class="method_name">delete_if</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'disable_debug', module: 'caesars', html: '<a href="classes/Caesars.html#M000003"><span class="method_name">disable_debug</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'dsl', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000036"><span class="method_name">dsl</span> <span class="module_name">(Caesars::Config)</span></a>' },
-          { method: 'each', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000058"><span class="method_name">each</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'each_key', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000056"><span class="method_name">each_key</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'each_pair', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000059"><span class="method_name">each_pair</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'each_value', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000057"><span class="method_name">each_value</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'each_with_index', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000085"><span class="method_name">each_with_index</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'empty?', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000035"><span class="method_name">empty?</span> <span class="module_name">(Caesars::Config)</span></a>' },
-          { method: 'enable_debug', module: 'caesars', html: '<a href="classes/Caesars.html#M000002"><span class="method_name">enable_debug</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'find', module: 'caesars', html: '<a href="classes/Caesars.html#M000016"><span class="method_name">find</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'find_deferred', module: 'caesars', html: '<a href="classes/Caesars.html#M000015"><span class="method_name">find_deferred</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'find_deferred_old', module: 'caesars', html: '<a href="classes/Caesars.html#M000014"><span class="method_name">find_deferred_old</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'first', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000063"><span class="method_name">first</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'forced_array', module: 'caesars', html: '<a href="classes/Caesars.html#M000026"><span class="method_name">forced_array</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'forced_array?', module: 'caesars', html: '<a href="classes/Caesars.html#M000006"><span class="method_name">forced_array?</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'forced_hash', module: 'caesars', html: '<a href="classes/Caesars.html#M000024"><span class="method_name">forced_hash</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'forced_ignore', module: 'caesars', html: '<a href="classes/Caesars.html#M000027"><span class="method_name">forced_ignore</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'forced_ignore?', module: 'caesars', html: '<a href="classes/Caesars.html#M000007"><span class="method_name">forced_ignore?</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'glass', module: 'caesars', html: '<a href="classes/Caesars.html#M000022"><span class="method_name">glass</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: '[]', module: 'caesars', html: '<a href="classes/Caesars.html#M000016"><span class="method_name">[]</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: '[]', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000036"><span class="method_name">[]</span> <span class="module_name">(Caesars::Config)</span></a>' },
+          { method: '[]=', module: 'caesars', html: '<a href="classes/Caesars.html#M000017"><span class="method_name">[]=</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'add_known_symbol', module: 'caesars', html: '<a href="classes/Caesars.html#M000018"><span class="method_name">add_known_symbol</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'add_known_symbol', module: 'caesars', html: '<a href="classes/Caesars.html#M000007"><span class="method_name">add_known_symbol</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'caesars_init', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000030"><span class="method_name">caesars_init</span> <span class="module_name">(Caesars::Config)</span></a>' },
+          { method: 'check_paths', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000033"><span class="method_name">check_paths</span> <span class="module_name">(Caesars::Config)</span></a>' },
+          { method: 'chill', module: 'caesars', html: '<a href="classes/Caesars.html#M000024"><span class="method_name">chill</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'chilled?', module: 'caesars', html: '<a href="classes/Caesars.html#M000004"><span class="method_name">chilled?</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'debug?', module: 'caesars', html: '<a href="classes/Caesars.html#M000003"><span class="method_name">debug?</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'disable_debug', module: 'caesars', html: '<a href="classes/Caesars.html#M000002"><span class="method_name">disable_debug</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'dsl', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000035"><span class="method_name">dsl</span> <span class="module_name">(Caesars::Config)</span></a>' },
+          { method: 'empty?', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000034"><span class="method_name">empty?</span> <span class="module_name">(Caesars::Config)</span></a>' },
+          { method: 'enable_debug', module: 'caesars', html: '<a href="classes/Caesars.html#M000001"><span class="method_name">enable_debug</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'find', module: 'caesars', html: '<a href="classes/Caesars.html#M000015"><span class="method_name">find</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'find_deferred', module: 'caesars', html: '<a href="classes/Caesars.html#M000014"><span class="method_name">find_deferred</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'find_deferred_old', module: 'caesars', html: '<a href="classes/Caesars.html#M000013"><span class="method_name">find_deferred_old</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'forced_array', module: 'caesars', html: '<a href="classes/Caesars.html#M000025"><span class="method_name">forced_array</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'forced_array?', module: 'caesars', html: '<a href="classes/Caesars.html#M000005"><span class="method_name">forced_array?</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'forced_hash', module: 'caesars', html: '<a href="classes/Caesars.html#M000023"><span class="method_name">forced_hash</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'forced_ignore', module: 'caesars', html: '<a href="classes/Caesars.html#M000026"><span class="method_name">forced_ignore</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'forced_ignore?', module: 'caesars', html: '<a href="classes/Caesars.html#M000006"><span class="method_name">forced_ignore?</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'glass', module: 'caesars', html: '<a href="classes/Caesars.html#M000020"><span class="method_name">glass</span> <span class="module_name">(Caesars)</span></a>' },
           { method: 'glass', module: 'caesars', html: '<a href="classes/Caesars.html#M000021"><span class="method_name">glass</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'has_key?', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000039"><span class="method_name">has_key?</span> <span class="module_name">(Caesars::Config)</span></a>' },
-          { method: 'inherited', module: 'caesars', html: '<a href="classes/Caesars.html#M000028"><span class="method_name">inherited</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'inspect', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000075"><span class="method_name">inspect</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'invert', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000065"><span class="method_name">invert</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'keys', module: 'caesars', html: '<a href="classes/Caesars.html#M000012"><span class="method_name">keys</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'keys', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000062"><span class="method_name">keys</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'keys', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000038"><span class="method_name">keys</span> <span class="module_name">(Caesars::Config)</span></a>' },
-          { method: 'known_symbol?', module: 'caesars', html: '<a href="classes/Caesars.html#M000020"><span class="method_name">known_symbol?</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'known_symbol?', module: 'caesars', html: '<a href="classes/Caesars.html#M000009"><span class="method_name">known_symbol?</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'known_symbol_by_glass?', module: 'caesars', html: '<a href="classes/Caesars.html#M000010"><span class="method_name">known_symbol_by_glass?</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'last', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000064"><span class="method_name">last</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'merge', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000078"><span class="method_name">merge</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'merge!', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000077"><span class="method_name">merge!</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'message', module: 'caesars::config::forcerefresh', html: '<a href="classes/Caesars/Config/ForceRefresh.html#M000041"><span class="method_name">message</span> <span class="module_name">(Caesars::Config::ForceRefresh)</span></a>' },
-          { method: 'message', module: 'caesars::error', html: '<a href="classes/Caesars/Error.html#M000046"><span class="method_name">message</span> <span class="module_name">(Caesars::Error)</span></a>' },
-          { method: 'message', module: 'caesars::syntaxerror', html: '<a href="classes/Caesars/SyntaxError.html#M000044"><span class="method_name">message</span> <span class="module_name">(Caesars::SyntaxError)</span></a>' },
-          { method: 'method_missing', module: 'caesars::hash', html: '<a href="classes/Caesars/Hash.html#M000042"><span class="method_name">method_missing</span> <span class="module_name">(Caesars::Hash)</span></a>' },
-          { method: 'method_missing', module: 'caesars', html: '<a href="classes/Caesars.html#M000023"><span class="method_name">method_missing</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'new', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000029"><span class="method_name">new</span> <span class="module_name">(Caesars::Config)</span></a>' },
-          { method: 'new', module: 'caesars', html: '<a href="classes/Caesars.html#M000011"><span class="method_name">new</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'new', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000048"><span class="method_name">new</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'new', module: 'caesars::config::forcerefresh', html: '<a href="classes/Caesars/Config/ForceRefresh.html#M000040"><span class="method_name">new</span> <span class="module_name">(Caesars::Config::ForceRefresh)</span></a>' },
-          { method: 'new', module: 'caesars::error', html: '<a href="classes/Caesars/Error.html#M000045"><span class="method_name">new</span> <span class="module_name">(Caesars::Error)</span></a>' },
-          { method: 'orig_store', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000051"><span class="method_name">orig_store</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'pop', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000072"><span class="method_name">pop</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'postprocess', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000032"><span class="method_name">postprocess</span> <span class="module_name">(Caesars::Config)</span></a>' },
-          { method: 'push', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000071"><span class="method_name">push</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'refresh', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000033"><span class="method_name">refresh</span> <span class="module_name">(Caesars::Config)</span></a>' },
-          { method: 'reject', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000066"><span class="method_name">reject</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'reject!', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000067"><span class="method_name">reject!</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'replace', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000068"><span class="method_name">replace</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'select', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000079"><span class="method_name">select</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'shift', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000069"><span class="method_name">shift</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'store', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000050"><span class="method_name">store</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'store_only', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000049"><span class="method_name">store_only</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'to_a', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000073"><span class="method_name">to_a</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'to_hash', module: 'caesars::hash', html: '<a href="classes/Caesars/Hash.html#M000043"><span class="method_name">to_hash</span> <span class="module_name">(Caesars::Hash)</span></a>' },
-          { method: 'to_hash', module: 'caesars', html: '<a href="classes/Caesars.html#M000013"><span class="method_name">to_hash</span> <span class="module_name">(Caesars)</span></a>' },
-          { method: 'to_s', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000074"><span class="method_name">to_s</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'to_yaml', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000083"><span class="method_name">to_yaml</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'unshift', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000070"><span class="method_name">unshift</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'update', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000076"><span class="method_name">update</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'values', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000061"><span class="method_name">values</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'verbose=', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000030"><span class="method_name">verbose=</span> <span class="module_name">(Caesars::Config)</span></a>' },
-          { method: 'yaml_inline!', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000084"><span class="method_name">yaml_inline!</span> <span class="module_name">(OrderedHash)</span></a>' },
-          { method: 'yaml_inline=', module: 'orderedhash', html: '<a href="classes/OrderedHash.html#M000082"><span class="method_name">yaml_inline=</span> <span class="module_name">(OrderedHash)</span></a>' },
+          { method: 'has_key?', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000038"><span class="method_name">has_key?</span> <span class="module_name">(Caesars::Config)</span></a>' },
+          { method: 'inherited', module: 'caesars', html: '<a href="classes/Caesars.html#M000027"><span class="method_name">inherited</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'keys', module: 'caesars', html: '<a href="classes/Caesars.html#M000011"><span class="method_name">keys</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'keys', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000037"><span class="method_name">keys</span> <span class="module_name">(Caesars::Config)</span></a>' },
+          { method: 'known_symbol?', module: 'caesars', html: '<a href="classes/Caesars.html#M000019"><span class="method_name">known_symbol?</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'known_symbol?', module: 'caesars', html: '<a href="classes/Caesars.html#M000008"><span class="method_name">known_symbol?</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'known_symbol_by_glass?', module: 'caesars', html: '<a href="classes/Caesars.html#M000009"><span class="method_name">known_symbol_by_glass?</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'message', module: 'caesars::syntaxerror', html: '<a href="classes/Caesars/SyntaxError.html#M000043"><span class="method_name">message</span> <span class="module_name">(Caesars::SyntaxError)</span></a>' },
+          { method: 'message', module: 'caesars::config::forcerefresh', html: '<a href="classes/Caesars/Config/ForceRefresh.html#M000040"><span class="method_name">message</span> <span class="module_name">(Caesars::Config::ForceRefresh)</span></a>' },
+          { method: 'message', module: 'caesars::error', html: '<a href="classes/Caesars/Error.html#M000045"><span class="method_name">message</span> <span class="module_name">(Caesars::Error)</span></a>' },
+          { method: 'method_missing', module: 'caesars::hash', html: '<a href="classes/Caesars/Hash.html#M000041"><span class="method_name">method_missing</span> <span class="module_name">(Caesars::Hash)</span></a>' },
+          { method: 'method_missing', module: 'caesars', html: '<a href="classes/Caesars.html#M000022"><span class="method_name">method_missing</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'new', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000028"><span class="method_name">new</span> <span class="module_name">(Caesars::Config)</span></a>' },
+          { method: 'new', module: 'caesars::error', html: '<a href="classes/Caesars/Error.html#M000044"><span class="method_name">new</span> <span class="module_name">(Caesars::Error)</span></a>' },
+          { method: 'new', module: 'caesars::config::forcerefresh', html: '<a href="classes/Caesars/Config/ForceRefresh.html#M000039"><span class="method_name">new</span> <span class="module_name">(Caesars::Config::ForceRefresh)</span></a>' },
+          { method: 'new', module: 'caesars', html: '<a href="classes/Caesars.html#M000010"><span class="method_name">new</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'postprocess', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000031"><span class="method_name">postprocess</span> <span class="module_name">(Caesars::Config)</span></a>' },
+          { method: 'refresh', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000032"><span class="method_name">refresh</span> <span class="module_name">(Caesars::Config)</span></a>' },
+          { method: 'to_hash', module: 'caesars::hash', html: '<a href="classes/Caesars/Hash.html#M000042"><span class="method_name">to_hash</span> <span class="module_name">(Caesars::Hash)</span></a>' },
+          { method: 'to_hash', module: 'caesars', html: '<a href="classes/Caesars.html#M000012"><span class="method_name">to_hash</span> <span class="module_name">(Caesars)</span></a>' },
+          { method: 'verbose=', module: 'caesars::config', html: '<a href="classes/Caesars/Config.html#M000029"><span class="method_name">verbose=</span> <span class="module_name">(Caesars::Config)</span></a>' },
         ]
         $(document).observe('dom:loaded', function() {
         	// Setup search-during-typing.
@@ -4478,91 +4438,51 @@
       </form>
       <ol class='methods' id='search-results' style='display: none'></ol>
       <ol class='methods' id='index-entries'>
-        <li><a href="classes/OrderedHash.html#M000053"><span class="method_name">==</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="files/lib/orderedhash_rb.html#M000001"><span class="method_name">OrderedHash</span> <span class="module_name">(lib/orderedhash.rb)</span></a></li>
-        <li><a href="classes/Caesars.html#M000017"><span class="method_name">[]</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars/Config.html#M000037"><span class="method_name">[]</span> <span class="module_name">(Caesars::Config)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000047"><span class="method_name">[]</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000052"><span class="method_name">[]=</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars.html#M000018"><span class="method_name">[]=</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000081"><span class="method_name">__class__</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars.html#M000019"><span class="method_name">add_known_symbol</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000008"><span class="method_name">add_known_symbol</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars/Config.html#M000031"><span class="method_name">caesars_init</span> <span class="module_name">(Caesars::Config)</span></a></li>
-        <li><a href="classes/Caesars/Config.html#M000034"><span class="method_name">check_paths</span> <span class="module_name">(Caesars::Config)</span></a></li>
-        <li><a href="classes/Caesars.html#M000025"><span class="method_name">chill</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000005"><span class="method_name">chilled?</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000080"><span class="method_name">class</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000054"><span class="method_name">clear</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars.html#M000004"><span class="method_name">debug?</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000055"><span class="method_name">delete</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000060"><span class="method_name">delete_if</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars.html#M000003"><span class="method_name">disable_debug</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars/Config.html#M000036"><span class="method_name">dsl</span> <span class="module_name">(Caesars::Config)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000058"><span class="method_name">each</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000056"><span class="method_name">each_key</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000059"><span class="method_name">each_pair</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000057"><span class="method_name">each_value</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000085"><span class="method_name">each_with_index</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars/Config.html#M000035"><span class="method_name">empty?</span> <span class="module_name">(Caesars::Config)</span></a></li>
-        <li><a href="classes/Caesars.html#M000002"><span class="method_name">enable_debug</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000016"><span class="method_name">find</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000015"><span class="method_name">find_deferred</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000014"><span class="method_name">find_deferred_old</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000063"><span class="method_name">first</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars.html#M000026"><span class="method_name">forced_array</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000006"><span class="method_name">forced_array?</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000024"><span class="method_name">forced_hash</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000027"><span class="method_name">forced_ignore</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000007"><span class="method_name">forced_ignore?</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000022"><span class="method_name">glass</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000016"><span class="method_name">[]</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars/Config.html#M000036"><span class="method_name">[]</span> <span class="module_name">(Caesars::Config)</span></a></li>
+        <li><a href="classes/Caesars.html#M000017"><span class="method_name">[]=</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000018"><span class="method_name">add_known_symbol</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000007"><span class="method_name">add_known_symbol</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars/Config.html#M000030"><span class="method_name">caesars_init</span> <span class="module_name">(Caesars::Config)</span></a></li>
+        <li><a href="classes/Caesars/Config.html#M000033"><span class="method_name">check_paths</span> <span class="module_name">(Caesars::Config)</span></a></li>
+        <li><a href="classes/Caesars.html#M000024"><span class="method_name">chill</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000004"><span class="method_name">chilled?</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000003"><span class="method_name">debug?</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000002"><span class="method_name">disable_debug</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars/Config.html#M000035"><span class="method_name">dsl</span> <span class="module_name">(Caesars::Config)</span></a></li>
+        <li><a href="classes/Caesars/Config.html#M000034"><span class="method_name">empty?</span> <span class="module_name">(Caesars::Config)</span></a></li>
+        <li><a href="classes/Caesars.html#M000001"><span class="method_name">enable_debug</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000015"><span class="method_name">find</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000014"><span class="method_name">find_deferred</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000013"><span class="method_name">find_deferred_old</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000025"><span class="method_name">forced_array</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000005"><span class="method_name">forced_array?</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000023"><span class="method_name">forced_hash</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000026"><span class="method_name">forced_ignore</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000006"><span class="method_name">forced_ignore?</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000020"><span class="method_name">glass</span> <span class="module_name">(Caesars)</span></a></li>
         <li><a href="classes/Caesars.html#M000021"><span class="method_name">glass</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars/Config.html#M000039"><span class="method_name">has_key?</span> <span class="module_name">(Caesars::Config)</span></a></li>
-        <li><a href="classes/Caesars.html#M000028"><span class="method_name">inherited</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000075"><span class="method_name">inspect</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000065"><span class="method_name">invert</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars.html#M000012"><span class="method_name">keys</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000062"><span class="method_name">keys</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars/Config.html#M000038"><span class="method_name">keys</span> <span class="module_name">(Caesars::Config)</span></a></li>
-        <li><a href="classes/Caesars.html#M000020"><span class="method_name">known_symbol?</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000009"><span class="method_name">known_symbol?</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars.html#M000010"><span class="method_name">known_symbol_by_glass?</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000064"><span class="method_name">last</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000078"><span class="method_name">merge</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000077"><span class="method_name">merge!</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars/Config/ForceRefresh.html#M000041"><span class="method_name">message</span> <span class="module_name">(Caesars::Config::ForceRefresh)</span></a></li>
-        <li><a href="classes/Caesars/Error.html#M000046"><span class="method_name">message</span> <span class="module_name">(Caesars::Error)</span></a></li>
-        <li><a href="classes/Caesars/SyntaxError.html#M000044"><span class="method_name">message</span> <span class="module_name">(Caesars::SyntaxError)</span></a></li>
-        <li><a href="classes/Caesars/Hash.html#M000042"><span class="method_name">method_missing</span> <span class="module_name">(Caesars::Hash)</span></a></li>
-        <li><a href="classes/Caesars.html#M000023"><span class="method_name">method_missing</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/Caesars/Config.html#M000029"><span class="method_name">new</span> <span class="module_name">(Caesars::Config)</span></a></li>
-        <li><a href="classes/Caesars.html#M000011"><span class="method_name">new</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000048"><span class="method_name">new</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars/Config/ForceRefresh.html#M000040"><span class="method_name">new</span> <span class="module_name">(Caesars::Config::ForceRefresh)</span></a></li>
-        <li><a href="classes/Caesars/Error.html#M000045"><span class="method_name">new</span> <span class="module_name">(Caesars::Error)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000051"><span class="method_name">orig_store</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000072"><span class="method_name">pop</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars/Config.html#M000032"><span class="method_name">postprocess</span> <span class="module_name">(Caesars::Config)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000071"><span class="method_name">push</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars/Config.html#M000033"><span class="method_name">refresh</span> <span class="module_name">(Caesars::Config)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000066"><span class="method_name">reject</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000067"><span class="method_name">reject!</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000068"><span class="method_name">replace</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000079"><span class="method_name">select</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000069"><span class="method_name">shift</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000050"><span class="method_name">store</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000049"><span class="method_name">store_only</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000073"><span class="method_name">to_a</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars/Hash.html#M000043"><span class="method_name">to_hash</span> <span class="module_name">(Caesars::Hash)</span></a></li>
-        <li><a href="classes/Caesars.html#M000013"><span class="method_name">to_hash</span> <span class="module_name">(Caesars)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000074"><span class="method_name">to_s</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000083"><span class="method_name">to_yaml</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000070"><span class="method_name">unshift</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000076"><span class="method_name">update</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000061"><span class="method_name">values</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/Caesars/Config.html#M000030"><span class="method_name">verbose=</span> <span class="module_name">(Caesars::Config)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000084"><span class="method_name">yaml_inline!</span> <span class="module_name">(OrderedHash)</span></a></li>
-        <li><a href="classes/OrderedHash.html#M000082"><span class="method_name">yaml_inline=</span> <span class="module_name">(OrderedHash)</span></a></li>
+        <li><a href="classes/Caesars/Config.html#M000038"><span class="method_name">has_key?</span> <span class="module_name">(Caesars::Config)</span></a></li>
+        <li><a href="classes/Caesars.html#M000027"><span class="method_name">inherited</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000011"><span class="method_name">keys</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars/Config.html#M000037"><span class="method_name">keys</span> <span class="module_name">(Caesars::Config)</span></a></li>
+        <li><a href="classes/Caesars.html#M000019"><span class="method_name">known_symbol?</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000008"><span class="method_name">known_symbol?</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars.html#M000009"><span class="method_name">known_symbol_by_glass?</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars/SyntaxError.html#M000043"><span class="method_name">message</span> <span class="module_name">(Caesars::SyntaxError)</span></a></li>
+        <li><a href="classes/Caesars/Config/ForceRefresh.html#M000040"><span class="method_name">message</span> <span class="module_name">(Caesars::Config::ForceRefresh)</span></a></li>
+        <li><a href="classes/Caesars/Error.html#M000045"><span class="method_name">message</span> <span class="module_name">(Caesars::Error)</span></a></li>
+        <li><a href="classes/Caesars/Hash.html#M000041"><span class="method_name">method_missing</span> <span class="module_name">(Caesars::Hash)</span></a></li>
+        <li><a href="classes/Caesars.html#M000022"><span class="method_name">method_missing</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars/Config.html#M000028"><span class="method_name">new</span> <span class="module_name">(Caesars::Config)</span></a></li>
+        <li><a href="classes/Caesars/Error.html#M000044"><span class="method_name">new</span> <span class="module_name">(Caesars::Error)</span></a></li>
+        <li><a href="classes/Caesars/Config/ForceRefresh.html#M000039"><span class="method_name">new</span> <span class="module_name">(Caesars::Config::ForceRefresh)</span></a></li>
+        <li><a href="classes/Caesars.html#M000010"><span class="method_name">new</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars/Config.html#M000031"><span class="method_name">postprocess</span> <span class="module_name">(Caesars::Config)</span></a></li>
+        <li><a href="classes/Caesars/Config.html#M000032"><span class="method_name">refresh</span> <span class="module_name">(Caesars::Config)</span></a></li>
+        <li><a href="classes/Caesars/Hash.html#M000042"><span class="method_name">to_hash</span> <span class="module_name">(Caesars::Hash)</span></a></li>
+        <li><a href="classes/Caesars.html#M000012"><span class="method_name">to_hash</span> <span class="module_name">(Caesars)</span></a></li>
+        <li><a href="classes/Caesars/Config.html#M000029"><span class="method_name">verbose=</span> <span class="module_name">(Caesars::Config)</span></a></li>
       </ol>
     </div>
   </body>
