@@ -168,6 +168,11 @@ Or for GitHub fans:
 * Caleb Buxton (http://cpb.ca) for early feedback.
 * Solutious Inc (http://solutious.com)
 
+== Related Projects
+
+* DSLify[http://github.com/auser/dslify]
+
+
 == License
 
 See: LICENSE.txt
