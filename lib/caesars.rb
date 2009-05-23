@@ -277,10 +277,10 @@ class Caesars
   end
   
   # Returns the lowercase name of the class. i.e. Some::Taste  # => taste
-  def glass; @glass ||= (self.class.to_s.split(/::/))[-1].downcase.to_sym; end
+  def glass; @glass ||= (self.class.to_s.split(/::/)).last.downcase.to_sym; end
   
   # Returns the lowercase name of +klass+. i.e. Some::Taste  # => taste
-  def self.glass(klass); (klass.to_s.split(/::/))[-1].downcase.to_sym; end
+  def self.glass(klass); (klass.to_s.split(/::/)).last.downcase.to_sym; end
   
   # This method handles all of the attributes that are not forced hashes
   # It's used in the DSL for handling attributes dyanamically (that weren't defined
@@ -506,11 +506,19 @@ class Caesars
   #      end
   #
   def self.inherited(modname)
+    STDERR.puts "INHERITED: #{modname}" if Caesars.debug?
+    
     # NOTE: We may be able to replace this without an eval using Module.nesting
-    meth = (modname.to_s.split(/::/))[-1].downcase  # Some::HighBall => highball
+    meth = (modname.to_s.split(/::/)).last.downcase  # Some::HighBall => highball
+    
+    # The method name "meth" is now a known symbol 
+    # for the short class name (also "meth").
     Caesars.add_known_symbol(meth, meth)
-    module_eval %Q{
-      module #{modname}::DSL
+    
+    # We execute a module_eval form the namespace of the inherited class  
+    # so when we define the new module DSL it will be Some::HighBall::DSL.
+    modname.module_eval %Q{
+      module DSL
         def #{meth}(*args, &b)
           name = !args.empty? ? args.first.to_s : nil
           varname = "@#{meth.to_s}"
@@ -522,7 +530,8 @@ class Caesars
           return inst if b.nil?
           
           # Add to existing instance, if it exists. Otherwise create one anew.
-          inst = instance_variable_set(varname, inst || #{modname.to_s}.new(name))
+          # NOTE: Module.nesting[1] == modname (e.g. Some::HighBall)
+          inst = instance_variable_set(varname, inst || Module.nesting[1].new(name))
           inst.instance_eval(&b)
           inst
         end
