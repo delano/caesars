@@ -6,7 +6,7 @@ library :caesars, LIBRARY_PATH
 
 dreams File.join(GYMNASIUM_HOME, "baseline_dreams.rb")
 tryout "Common Usage", :api do
-  before do
+  setup do
     @@master = :fluff
   end
   
