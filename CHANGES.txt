@@ -1,6 +1,11 @@
 CAESARS -- CHANGES
 
 
+#### 0.6.8 (2009-06-01) ###############################
+
+* ADDED: forced_array elements now store blocks as Procs (they were previously ignored)
+* ADDED: drill to test the new forced_array functionality. 
+
 #### 0.6.7 (2009-05-23) ###############################
 
 * FIXED: Bug in inherited when calling from an anonymous class
