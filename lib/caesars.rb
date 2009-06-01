@@ -314,27 +314,43 @@ class Caesars
     end
     
     if b
-      # Use the name of the bloody method if no name is supplied. 
-      args << meth if args.empty?
-      
-      args.each do |name|
-        prev = @caesars_pointer
-        @caesars_pointer[name] ||= Caesars::Hash.new
-        if Caesars.chilled?(meth)
-          @caesars_pointer[name] = b
-        else
-          @caesars_pointer = @caesars_pointer[name]
-          begin
-            b.call if b
-          rescue ArgumentError, SyntaxError => ex
-            STDERR.puts "CAESARS: error in #{meth} (#{args.join(', ')})" 
-            raise ex
+      if Caesars.forced_array?(meth)
+        @caesars_pointer[meth] ||= []
+        args << b  # Forced array blocks are always chilled and at the end
+        @caesars_pointer[meth] << args
+      else
+        # We loop through each of the arguments sent to "meth". 
+        # Elements are added for each of the arguments and the
+        # contents of the block will be applied to each one. 
+        # This is an important feature for Rudy configs since
+        # it allows defining several environments, roles, etc
+        # at the same time.
+        #     env :dev, :stage, :prod do
+        #       ...
+        #     end
+        
+        # Use the name of the method if no name is supplied. 
+        args << meth if args.empty?
+        
+        args.each do |name|
+          prev = @caesars_pointer
+          @caesars_pointer[name] ||= Caesars::Hash.new
+          if Caesars.chilled?(meth)
+            @caesars_pointer[name] = b
+          else
+            @caesars_pointer = @caesars_pointer[name]
+            begin
+              b.call if b
+            rescue ArgumentError, SyntaxError => ex
+              STDERR.puts "CAESARS: error in #{meth} (#{args.join(', ')})" 
+              raise ex
+            end
+            @caesars_pointer = prev
           end
-          @caesars_pointer = prev
         end
       end
-    
-    # We've seen this attribute before, add the valued to the existing element    
+      
+    # We've seen this attribute before, add the value to the existing element    
     elsif @caesars_pointer.kind_of?(Hash) && @caesars_pointer[meth]
       
       if Caesars.forced_array?(meth)
@@ -466,6 +482,18 @@ class Caesars
   #      end
   #
   #      @food.sauce            # => [[:tabasco, :worcester], [:franks]]
+  #
+  # The blocks for elements that are specified as forced_array
+  # will be chilled (stored as Proc objects). The block is put
+  # at the end of the Array. e.g.
+  #
+  #     food do
+  #       sauce :arg1, :arg2 do
+  #         ...
+  #       end
+  #     end
+  #
+  #     @food.sauce             # => [[:inline_method, :arg1, :arg2, #<Proc:0x1fa552>]]
   #
   def self.forced_array(caesars_meth)
     STDERR.puts "forced_array: #{caesars_meth}" if Caesars.debug?
