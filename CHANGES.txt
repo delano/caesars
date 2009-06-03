@@ -1,6 +1,13 @@
 CAESARS -- CHANGES
 
 
+#### 0.7.0 (2009-06-03) ###############################
+
+* CHANGE: Post-processing for Caesars::Config classes now occurs
+  after all config files have been loaded and parsed. This may break
+  some sub-classes which is one of the reasons I incremented the
+  MINOR version. 
+
 #### 0.6.8 (2009-06-01) ###############################
 
 * ADDED: forced_array elements now store blocks as Procs (they were previously ignored)
@@ -14,7 +21,7 @@ CAESARS -- CHANGES
 #### 0.6.6 (2009-05-12) ###############################
 
 * CHANGE: Renamed OrderedHash to Caesars::OrderedHash to eliminate change of namespace conflicts
-* CHANGE: Caesars::VERSION is now a String an includes the TINY (0.6.6)
+* CHANGE: Caesars::VERSION is now a String and includes the TINY (0.6.6)
 * FIXED: OrderedHash.merge was making an inappropriate call to dup
 
 

@@ -10,7 +10,7 @@
 class Caesars
   require 'caesars/orderedhash'
   
-  VERSION = "0.6.6"
+  VERSION = "0.7.0"
   @@debug = false
   @@chilled = {}
   @@forced_array = {}
@@ -670,14 +670,15 @@ class Caesars::Config
         dsl = File.read path
         # eval so the DSL code can be executed in this namespace.
         eval dsl, binding, __FILE__, __LINE__
-        # Execute Caesars::Config.postprocesses every time a file is loaded
-        postprocess # Can raise ForceRefresh
       end
-    
+      
+      # Execute Caesars::Config.postprocesses after all files are loaded. 
+      postprocess # Can raise ForceRefresh
+      
     rescue Caesars::Config::ForceRefresh => ex
       @forced_refreshes += 1
       if @forced_refreshes > 3
-        STDERR.puts "Too many forced refreshed (#{@forced_refreshes})"
+        STDERR.puts "Too many forced refreshes (#{@forced_refreshes})"
         exit 9
       end
       STDERR.puts ex.message if @verbose || Caesars.debug?

@@ -1,6 +1,9 @@
-= Caesars - v0.6
+= Caesars - v0.7
 
 A simple class for rapid DSL prototyping in Ruby.
+
+NOTE: Post-processing of Caesars::Config subclasses changed in 0.7. In 0.6 and earlier, the post-processing hook (Caesars::Config#postprocess) was called after every file was loaded. In 0.7 it's called after all files have been loaded. This could break some highly dependent code in your subclasses of Caesars::Config so I apologize but I believe this is the right thing to do. If you are not satisfied with that apology, prepare yourself a caesar or bloody mary or any other beverage and send email me with the details!
+
 
 == Installation
 
