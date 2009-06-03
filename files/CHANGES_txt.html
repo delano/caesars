@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Mon Jun 01 10:44:56 -0400 2009</span>
+          <span class='datetime'>Wed Jun 03 16:34:02 -0400 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -40,6 +40,18 @@
             <p>
             CAESARS &#8212; CHANGES
             </p>
+            <p>
+            #### 0.7.0 (2009-06-03) ###############################
+            </p>
+            <ul>
+            <li>CHANGE: Post-processing for <a
+            href="../classes/Caesars/Config.html">Caesars::Config</a> classes now
+            occurs after all config files have been loaded and parsed. This may break
+            some sub-classes which is one of the reasons I incremented the MINOR
+            version.
+            
+            </li>
+            </ul>
             <p>
             #### 0.6.8 (2009-06-01) ###############################
             </p>
@@ -71,7 +83,7 @@
             namespace conflicts
             
             </li>
-            <li>CHANGE: Caesars::VERSION is now a String an includes the TINY (0.6.6)
+            <li>CHANGE: Caesars::VERSION is now a String and includes the TINY (0.6.6)
             
             </li>
             <li>FIXED: OrderedHash.merge was making an inappropriate call to dup
