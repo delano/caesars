@@ -8,11 +8,11 @@
 # See bin/example
 #
 class Caesars
+
   require 'caesars/orderedhash'
-  require 'caesars/hash'
   require 'caesars/exceptions'
   require 'caesars/config'
-  
+
   VERSION = "0.7.0"
   @@debug = false
   @@chilled = {}
@@ -21,7 +21,9 @@ class Caesars
   @@known_symbols = []
   @@known_symbols_by_glass = {}
   HASH_TYPE = (RUBY_VERSION =~ /1.9/) ? ::Hash : Caesars::OrderedHash
-  
+
+  require 'caesars/hash'
+    
   def Caesars.enable_debug; @@debug = true; end
   def Caesars.disable_debug; @@debug = false; end
   def Caesars.debug?; @@debug; end
