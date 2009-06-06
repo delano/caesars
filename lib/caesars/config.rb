@@ -7,7 +7,7 @@
 #      class StaffConfig < Caesars::Config
 #        dsl Staff::DSL
 #      end
-#      @config = StaffConfig.new(:path => '/path/2/staff_dsl.rb')
+#      @config = StaffConfig.new('/path/2/staff_dsl.rb')
 #      p @config.staff    # => <Staff:0x7ea450 ... >
 #
 class Caesars
