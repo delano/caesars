@@ -1,6 +1,13 @@
 CAESARS -- CHANGES
 
 
+#### 0.7.1 (2009-06-08) ###############################
+
+* FIXED: Updated file manifest in gemspec
+* FIXED: Correct mistake in rdocs for Caesars::Config.new
+* CHANGE: Caesars::** classes moved into separate files.
+
+
 #### 0.7.0 (2009-06-03) ###############################
 
 * CHANGE: Post-processing for Caesars::Config classes now occurs

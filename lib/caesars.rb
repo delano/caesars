@@ -13,7 +13,7 @@ class Caesars
   require 'caesars/exceptions'
   require 'caesars/config'
 
-  VERSION = "0.7.0"
+  VERSION = "0.7.1"
   @@debug = false
   @@chilled = {}
   @@forced_array = {}
