@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Wed Jun 03 16:34:02 -0400 2009</span>
+          <span class='datetime'>Mon Jun 08 10:07:55 -0400 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -41,14 +41,26 @@
             CAESARS &#8212; CHANGES
             </p>
             <p>
+            #### 0.7.1 (2009-06-08) ###############################
+            </p>
+            <ul>
+            <li>FIXED: Updated file manifest in gemspec
+            
+            </li>
+            <li>FIXED: Correct mistake in rdocs for Caesars::Config.new
+            
+            </li>
+            <li>CHANGE: Caesars::** classes moved into separate files.
+            
+            </li>
+            </ul>
+            <p>
             #### 0.7.0 (2009-06-03) ###############################
             </p>
             <ul>
-            <li>CHANGE: Post-processing for <a
-            href="../classes/Caesars/Config.html">Caesars::Config</a> classes now
-            occurs after all config files have been loaded and parsed. This may break
-            some sub-classes which is one of the reasons I incremented the MINOR
-            version.
+            <li>CHANGE: Post-processing for Caesars::Config classes now occurs after all
+            config files have been loaded and parsed. This may break some sub-classes
+            which is one of the reasons I incremented the MINOR version.
             
             </li>
             </ul>
@@ -129,8 +141,7 @@
             mode
             
             </li>
-            <li>ADDED: <a
-            href="../classes/Caesars/SyntaxError.html">Caesars::SyntaxError</a>
+            <li>ADDED: Caesars::SyntaxError
             
             </li>
             </ul>
@@ -146,9 +157,7 @@
             #### 0.6.0 (2009-04-30) ###############################
             </p>
             <ul>
-            <li>ADDED: Forced reloading for <a
-            href="../classes/Caesars/Config.html#M000032">Caesars::Config.refresh</a>.
-            This allows
+            <li>ADDED: Forced reloading for Caesars::Config.refresh. This allows
             
             </li>
             </ul>
@@ -159,8 +168,7 @@
             <li>ADDED: <a href="../classes/Caesars.html#M000026">Caesars.forced_ignore</a>
             
             </li>
-            <li>ADDED: Better docs for <a
-            href="../classes/Caesars/Config.html">Caesars::Config</a>
+            <li>ADDED: Better docs for Caesars::Config
             
             </li>
             <li>ADDED: Ceasars::Config.has_key?
@@ -193,8 +201,7 @@
             </li>
             <li>CHANGE: <a
             href="../classes/Caesars.html#M000022">Caesars.method_missing</a> now
-            stores and returns an empty <a
-            href="../classes/Caesars/Hash.html">Caesars::Hash</a>
+            stores and returns an empty Caesars::Hash
             
             </li>
             </ul>
@@ -256,8 +263,8 @@
             <li>FIXED: Caesars::Hash#refresh was setting @options to nil
             
             </li>
-            <li>UPDATED: docs and <a href="bin/example.html">bin/example</a> to reflect <a
-            href="../classes/Caesars/Hash.html">Caesars::Hash</a> changes.
+            <li>UPDATED: docs and <a href="bin/example.html">bin/example</a> to reflect
+            Caesars::Hash changes.
             
             </li>
             <li>FIXED: instance_variables in Ruby 1.9.1 returns Symbols
@@ -271,28 +278,22 @@
             <li>FIXED: find_deferred now gracefully handles nil errors
             
             </li>
-            <li>ADDED: empty? method in <a
-            href="../classes/Caesars/Config.html">Caesars::Config</a>
+            <li>ADDED: empty? method in Caesars::Config
             
             </li>
-            <li>ADDED: post processing hook in <a
-            href="../classes/Caesars/Config.html#M000032">Caesars::Config#refresh</a>
+            <li>ADDED: post processing hook in Caesars::Config#refresh
             
             </li>
-            <li>ADDED: <a
-            href="../classes/Caesars/Hash.html#M000042">Caesars::Hash#to_hash</a> now
-            recursively casts children to ::Hash.
+            <li>ADDED: Caesars::Hash#to_hash now recursively casts children to ::Hash.
             
             </li>
-            <li>FIXED: Added Array support to <a
-            href="../classes/Caesars/Hash.html">Caesars::Hash</a>
+            <li>FIXED: Added Array support to Caesars::Hash
             
             </li>
             <li>ADDED: Setters for <a href="../classes/Caesars.html">Caesars</a> attributes
             
             </li>
-            <li>ADDED: <a href="../classes/Caesars/Config.html">Caesars::Config</a>
-            supports multiple config files
+            <li>ADDED: Caesars::Config supports multiple config files
             
             </li>
             <li>ADDED: Top level methods used more than once now merges values
@@ -303,8 +304,7 @@
             rather than overwrites.
             </p>
             <ul>
-            <li>ADDED: <a href="../classes/Caesars/Config.html">Caesars::Config</a>
-            supports reloading config files on the fly
+            <li>ADDED: Caesars::Config supports reloading config files on the fly
             
             </li>
             </ul>
@@ -339,8 +339,7 @@
             <li>CHANGE: Renamed virgin method to chill.
             
             </li>
-            <li>ADDED: <a href="../classes/Caesars/Config.html">Caesars::Config</a> class
-            for loading DSLs as config files.
+            <li>ADDED: Caesars::Config class for loading DSLs as config files.
             
             </li>
             </ul>
