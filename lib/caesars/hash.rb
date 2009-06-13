@@ -6,8 +6,10 @@
 #
 class Caesars
   class Hash < HASH_TYPE
+    
     def method_missing(meth)
-      self[meth] if self.has_key?(meth)
+      STDERR.puts "Caesars::Hash.method_missing: #{meth}" if Caesars.debug?
+      self[meth] || self[meth.to_s]
     end
 
     # Returns a clone of itself and all children cast as ::Hash objects
@@ -26,6 +28,10 @@ class Caesars
       end
       target
     end
-
+    
+    def __class__
+      HASH_TYPE
+    end
+    
   end
 end
