@@ -158,9 +158,6 @@ class Caesars::OrderedHash < ::Hash
     def class
       Hash
     end
-    def __class__
-      Caesars::OrderedHash
-    end
 
     attr_accessor "to_yaml_style"
     def yaml_inline= bool

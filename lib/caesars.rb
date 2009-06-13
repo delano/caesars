@@ -249,6 +249,7 @@ class Caesars
   # previously) and also in subclasses of Caesars for returning the appropriate
   # attribute values. 
   def method_missing(meth, *args, &b)
+    STDERR.puts "Caesars.method_missing: #{meth}" if Caesars.debug?
     add_known_symbol(meth)
     if Caesars.forced_ignore?(meth)
       STDERR.puts "Forced ignore: #{meth}" if Caesars.debug?
@@ -355,6 +356,7 @@ class Caesars
     module_eval %Q{
       def #{caesars_meth}(*caesars_names,&b)
         this_meth = :'#{caesars_meth}'
+        
         add_known_symbol(this_meth)
         if Caesars.forced_ignore?(this_meth)
           STDERR.puts "Forced ignore: \#{this_meth}" if Caesars.debug?
@@ -368,11 +370,12 @@ class Caesars
         return nil if caesars_names.empty? && b.nil?
         return method_missing(this_meth, *caesars_names, &b) if caesars_names.empty?
         
-        # TODO: This should be a loop
+        # Take the first argument in the list provided to "caesars_meth"
         caesars_name = caesars_names.shift
         
         prev = @caesars_pointer
         @caesars_pointer[this_meth] ||= Caesars::Hash.new
+        
         hash = Caesars::Hash.new
         if @caesars_pointer[this_meth].has_key?(caesars_name)
           STDERR.puts "duplicate key ignored: \#{caesars_name}"
@@ -400,8 +403,14 @@ class Caesars
            @caesars_pointer = prev
            @caesars_pointer[this_meth][caesars_name] = hash
         end
-        
-        @caesars_pointer = prev   
+
+        # All other arguments provided to "caesars_meth" 
+        # will reference the value for the first argument. 
+        caesars_names.each do |name|
+          @caesars_pointer[this_meth][name] = @caesars_pointer[this_meth][caesars_name]
+        end
+         
+        @caesars_pointer = prev   # Make sure we're back up one level
       end
     }
     nil
