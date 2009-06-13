@@ -11,6 +11,7 @@ CAESARS -- CHANGES
   the value of the first argument. They were previously 
   ignored but now mimic the default behavior.
 
+
 #### 0.7.1 (2009-06-08) ###############################
 
 * FIXED: Updated file manifest in gemspec
