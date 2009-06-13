@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Mon Jun 08 10:07:55 -0400 2009</span>
+          <span class='datetime'>Sat Jun 13 11:54:44 -0400 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -40,6 +40,24 @@
             <p>
             CAESARS &#8212; CHANGES
             </p>
+            <p>
+            #### 0.7.2 (2009-06-13) ###############################
+            </p>
+            <ul>
+            <li>FIXED: Caesars::Hash method missing now correctly returns hash values for
+            element keys which are Strings.
+            
+            </li>
+            <li>ADDED: Caesars::Hash.<em>class</em> method which returns one of: Hash (Ruby
+            1.9) or Caesars::OrderedHash (Ruby 1.8)
+            
+            </li>
+            <li>CHANGE: All arguments to forced_hash methods now reference the value of the
+            first argument. They were previously ignored but now mimic the default
+            behavior.
+            
+            </li>
+            </ul>
             <p>
             #### 0.7.1 (2009-06-08) ###############################
             </p>
