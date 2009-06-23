@@ -93,7 +93,7 @@ class Caesars
           puts "Loading config from #{path}" if @verbose || Caesars.debug?
           dsl = File.read path
           # eval so the DSL code can be executed in this namespace.
-          eval dsl, binding, __FILE__, __LINE__
+          eval dsl, binding, path
         end
     
         # Execute Caesars::Config.postprocesses after all files are loaded. 
