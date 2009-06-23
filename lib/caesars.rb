@@ -13,15 +13,18 @@ class Caesars
   require 'caesars/exceptions'
   require 'caesars/config'
 
-  VERSION = "0.7.2"
+  VERSION = "0.7.3"
+
   @@debug = false
   @@chilled = {}
   @@forced_array = {}
   @@forced_ignore = {}
   @@known_symbols = []
   @@known_symbols_by_glass = {}
+  
   HASH_TYPE = (RUBY_VERSION =~ /1.9/) ? ::Hash : Caesars::OrderedHash
-
+  DIGEST_TYPE = Digest::SHA1
+  
   require 'caesars/hash'
     
   def Caesars.enable_debug; @@debug = true; end

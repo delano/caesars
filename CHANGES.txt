@@ -1,6 +1,10 @@
 CAESARS -- CHANGES
 
 
+#### 0.7.3 (2009-06-23) ###############################
+
+* FIXED: Caesars::Config now correctly reports the config file in exceptions
+
 #### 0.7.2 (2009-06-13) ###############################
 
 * FIXED: Caesars::Hash method missing now correctly returns 

@@ -1,7 +1,11 @@
 @spec = Gem::Specification.new do |s|
   s.name = "caesars"
   s.rubyforge_project = "caesars"
+<<<<<<< HEAD:caesars.gemspec
   s.version = "0.7.2"
+=======
+  s.version = "0.7.3"
+>>>>>>> master:caesars.gemspec
   s.specification_version = 1 if s.respond_to? :specification_version=
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
 
