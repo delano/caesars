@@ -155,9 +155,6 @@ class Caesars::OrderedHash < ::Hash
         each { |k,v| ary << [k,v] if yield k,v }
         ary
     end
-    def class
-      Hash
-    end
 
     attr_accessor "to_yaml_style"
     def yaml_inline= bool
