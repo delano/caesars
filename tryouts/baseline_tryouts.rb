@@ -1,10 +1,8 @@
-LIBRARY_PATH = File.expand_path(File.join(File.dirname(__FILE__), "..", "lib"))
 
 group "baseline"
 
-library :caesars, LIBRARY_PATH
+library :caesars, 'lib'
 
-dreams File.join(GYMNASIUM_HOME, "baseline_dreams.rb")
 tryout "Common Usage", :api do
   setup do
     #Caesars.enable_debug
@@ -17,8 +15,7 @@ tryout "Common Usage", :api do
     end
   end
   
-  drill "Create a simple DSL" do
-    dream :true
+  drill "Create a simple DSL", :true do
     extend Master::DSL
     master do
       works :true
@@ -26,8 +23,8 @@ tryout "Common Usage", :api do
     @master.works
   end
   
+  dream :class, Proc 
   drill "Store Block" do
-    dream Proc, :class
     extend Master::DSL
     master do
       calc do; end
@@ -35,8 +32,8 @@ tryout "Common Usage", :api do
     @master.calc
   end
   
+  dream :class, Proc
   drill "Forced Array blocks are always chilled" do
-    dream Proc, :class
     extend Master::DSL
     master do 
       fluff :ignore
@@ -47,8 +44,9 @@ tryout "Common Usage", :api do
     @master.fluff.last.last
   end
   
+  dream ['box', 'pot']
   drill "can force hash" do
-    dream ['box', 'pot']
+    
     extend Master::DSL
     master do
       fhashion 'box' do
@@ -59,8 +57,9 @@ tryout "Common Usage", :api do
     @master.fhashion.keys.sort  # => box, pot
   end
   
+  dream [9, 9]
   drill "forced hash methods take multiple arguments" do
-    dream [9, 9]
+    
     extend Master::DSL
     master do
       fhashion 'box', 'pot' do
