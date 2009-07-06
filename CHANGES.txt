@@ -1,5 +1,13 @@
 CAESARS -- CHANGES
 
+#### 0.8.0 (2009-07-??) ###############################
+
+NOTE: 0.8 is a complete re-write from 0.7 and earlier releases. The 
+definition syntax is entirely different and some methods have been
+removed. 
+
+* CHANGE: New definition syntax
+* CHANGE: Removed Caesars#find_old
 
 #### 0.7.3 (2009-06-23) ###############################
 
@@ -76,7 +84,7 @@ CAESARS -- CHANGES
 #### 0.6.0 (2009-04-30) ###############################
 
 * ADDED: Forced reloading for Caesars::Config.refresh. This allows
-one DSL to affect the parsing of another. 
+  one DSL to affect the parsing of another. 
 * ADDED: Caesars.forced_ignore
 * ADDED: Better docs for Caesars::Config
 * ADDED: Ceasars::Config.has_key?
@@ -92,13 +100,13 @@ one DSL to affect the parsing of another.
 * ADDED: Print error to STDERR when a duplicate key found for forced_hash keys
 * ADDED: Caesars.forced_array
 * CHANGE: Caesars.method_missing now stores and returns an empty Caesars::Hash
-for known methods that are called (currently only ones defined by forced_array)
+  for known methods that are called (currently only ones defined by forced_array)
 
 
 #### 0.5.4 (2009-04-11) ###############################
 
 * FIXED: find_deferred would abort early because the safety limit
-to prevent endless loops wasn't being reset between calls. 
+  to prevent endless loops wasn't being reset between calls. 
 
 
 #### 0.5.3 (2009-04-10) ###############################
@@ -112,10 +120,10 @@ to prevent endless loops wasn't being reset between calls.
 * ADDED: Caesars.debug?, Caesars.enable_debug, Caesars.disable_debug
 * CHANGED: find_deferred now supports nested Arrays. See rdocs. 
 * BUG: Found bug related to string/symbol ambiguity when using find.
-It's not fixed yet so for now be mindful of which attributes are 
-strings and which are symbols. String attributes are stored as 
-strings but find and find_deferred look for symbols. The hash syntax
-and method accessors are not affected. 
+  It's not fixed yet so for now be mindful of which attributes are 
+  strings and which are symbols. String attributes are stored as 
+  strings but find and find_deferred look for symbols. The hash syntax
+  and method accessors are not affected. 
 
 
 #### 0.5.1 (2009-03-11) ###############################
@@ -136,7 +144,7 @@ and method accessors are not affected.
 * ADDED: Setters for Caesars attributes
 * ADDED: Caesars::Config supports multiple config files
 * ADDED: Top level methods used more than once now merges values
-rather than overwrites. 
+  rather than overwrites. 
 * ADDED: Caesars::Config supports reloading config files on the fly
 
 
@@ -146,7 +154,7 @@ rather than overwrites.
 * FIXED: Now works with Ruby 1.8+
 * ADDED: Cleaner rdocs. 
 * TODO: Fix support for top level methods with names:
-food :extra do; end; # => food_extra
+  food :extra do; end; # => food_extra
 
 
 #### 0.4.0 (2009-03-05) ###############################
@@ -154,11 +162,11 @@ food :extra do; end; # => food_extra
 * CHANGE: Removed bloody method. We now parse blocks immediately.
 * CHANGE: Renamed virgin method to chill.
 * ADDED: Caesars::Config class for loading DSLs as config files. 
-See Example 3. 
+   See Example 3. 
 * ADDED: Added find_deferred method to automatically jump up the
 heirarchy when looking for a specific attribute. 
 * ADDED: Added to_hash and [] methods to Caesars to make it 
-more hashlike. 
+  more hashlike. 
 * FIXED: "chilled" attributes weren't available by method name
 
 
@@ -166,10 +174,10 @@ more hashlike.
 
 * FIXED: Added file and line info for eval code (better debugging).
 * CHANGE: The top level DSL method names are now determined by
-by the class name. Some::ClassName becomes classname. 
-This is less confusing than allowing it to be anything
-and makes it possible to use several DSLs in the same
-namespace. 
+  by the class name. Some::ClassName becomes classname. 
+  This is less confusing than allowing it to be anything
+  and makes it possible to use several DSLs in the same
+  namespace. 
 
 
 #### 0.3.1 (2009-03-04) ###############################
@@ -177,7 +185,6 @@ namespace.
 * ADDED: Accept instances without a name
 * CHANGE: Updated examples. 
 * ADDED: More rdocs. 
-
 
 
 #### 0.3 (2009-03-04) ###############################

@@ -18,6 +18,7 @@ class Caesars
     # Returns a clone of itself and all children cast as ::Hash objects
     def to_hash(hash=self)
       return hash unless hash.is_a?(Caesars::Hash) # nothing to do
+      target = ::Hash[dup]
       target = (Caesars::HASH_TYPE)[dup]
       hash.keys.each do |key|
         if hash[key].is_a? Caesars::Hash
