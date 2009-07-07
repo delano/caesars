@@ -9,6 +9,8 @@ class Caesars
   #     puts ch.tabasco  # => lots!
   #
   class Hash < HASH_TYPE
+    ALLOW_BLOCK = true
+    STORE_BLOCK = false
     
     def method_missing(meth)
       STDERR.puts "Caesars::Hash.method_missing: #{meth}" if Caesars.debug?
@@ -31,6 +33,12 @@ class Caesars
         target[key] = hash[key]
       end
       target
+    end
+    
+    def self.method_handler
+      Proc.new do |*args|
+        p [:inside, args]
+      end
     end
     
     def __class__
