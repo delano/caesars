@@ -5,7 +5,7 @@ class Caesars
   # = Caesars::Glass
   # 
   # These methods are intended to be included in the top-level 
-  # DSL class. In the following examples, "Machines" is the glass. 
+  # DSL class. In the following example, "Machines" is the glass. 
   # 
   #     class Machines < Caesars
   #       

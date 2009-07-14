@@ -7,7 +7,7 @@ tryouts "New syntax" do
     Caesars.enable_debug
     
     # Define a Caesars class for all drills to use. Each drill needs to extend
-    # this class since each drill runs in its own DrillContext instance. 
+    # this class because each drill runs in its own DrillContext instance. 
     class ::Machines < Caesars
       region do
         environment do
@@ -31,7 +31,7 @@ tryouts "New syntax" do
   end
   
   drill "Create a simple DSL", :celery do
-    extend ::Machines::DSL
+    extend Machines::DSL
     machines do
       region :'us-east-1' do
         environment :stage do
@@ -48,7 +48,7 @@ tryouts "New syntax" do
     #stash Caesars.caesars_flat
     #@machines.celery
     #@master.ingredient
-    @machines
+    @machines.users
   end
   
   

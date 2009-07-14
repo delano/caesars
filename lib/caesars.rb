@@ -130,6 +130,10 @@ class Caesars
       full_meth = caesars_parser_depth_name meth
     end
     
+    
+    # http://whytheluckystiff.net/articles/seeingMetaclassesClearly.html
+    # You can probably store stuff in the metaclass', metaclass. 
+    
     ld "#{self}: #{full_meth}: #{klass}: #{modifiers}"
     
     @@caesars_tree[meth] ||= Caesars::Hash.new

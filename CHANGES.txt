@@ -9,6 +9,7 @@ removed.
 * CHANGE: New definition syntax
 * CHANGE: Removed Caesars#find_old
 
+
 #### 0.7.3 (2009-06-23) ###############################
 
 * FIXED: Caesars::Config now correctly reports the config file in exceptions
