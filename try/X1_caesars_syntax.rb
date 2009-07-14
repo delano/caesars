@@ -26,29 +26,31 @@ tryouts "New syntax" do
       
       ami Proc
       users Array
-      nuthin Ignore, :global
+      #nuthin Ignore, :global
     end
   end
   
   drill "Create a simple DSL", :celery do
     extend Machines::DSL
-    machines do
-      region :'us-east-1' do
-        environment :stage do
-          ami :abcd
-        end
-        hihi 900
-      end
-      ami do
-        :poop
-      end
-      users :a, :b
-      users [:c, :d]
+    machines :name do
+      
+      p 2
+      #region :'us-east-1' do
+      #  environment :stage do
+      #    ami :abcd
+      #  end
+      #  hihi 900
+      #end
+      #ami do
+      #  :poop
+      #end
+      #users :a, :b
+      #users [:c, :d]
     end
     #stash Caesars.caesars_flat
     #@machines.celery
     #@master.ingredient
-    @machines.users
+    @machines
   end
   
   
