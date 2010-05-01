@@ -12,6 +12,7 @@ tryout "Common Usage", :api do
       chill :calc
       forced_array :fluff
       forced_hash :fhashion
+      forced_hash :fhashion2
     end
   end
   
@@ -62,10 +63,10 @@ tryout "Common Usage", :api do
     
     extend Master::DSL
     master do
-      fhashion 'box', 'pot' do
+      fhashion2 'box', 'pot' do
         oranges 9
       end
     end
-    [@master.fhashion.box.oranges, @master.fhashion.pot.oranges]
+    [@master.fhashion2.box.oranges, @master.fhashion2.box.oranges]
   end
 end

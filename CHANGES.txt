@@ -1,5 +1,9 @@
 CAESARS -- CHANGES
 
+#### 0.7.5 (2010-05-??) ###############################
+
+* FIXED: Broken tryout was broken
+
 #### 0.7.4 (2010-02-15) ###############################
 
 * CHANGE: Remove hanna dependency [Diego Elio 'Flameeyes' Pettenò]
